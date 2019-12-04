@@ -17,6 +17,7 @@ public class Todo {
   @NonNull
   private String title;  
 
+
   private Boolean completed = false;
   
     
