@@ -18,5 +18,6 @@ public class Todo {
   private String title;  
 
   private Boolean completed = false;
-      
+  
+    
 }
