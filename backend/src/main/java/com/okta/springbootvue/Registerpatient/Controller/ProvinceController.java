@@ -1,11 +1,9 @@
-package com.okta.springbootvue.Regiterpatient.Controller;
-
+package com.okta.springbootvue.Registerpatient.Controller;
 import java.util.Collection;
 import java.util.Optional;
 import java.util.stream.Collectors;
-
-import com.okta.springbootvue.Regiterpatient.Repository.*;
-import com.okta.springbootvue.Regiterpatient.Entity.*;
+import com.okta.springbootvue.Registerpatient.Repository.*;
+import com.okta.springbootvue.Registerpatient.Entity.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
