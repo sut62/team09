@@ -1,10 +1,10 @@
-package com.okta.springbootvue.Regiterpatient.Controller;
+package com.okta.springbootvue.Registerpatient.Controller;
 
 import java.util.Collection;
 import java.util.stream.Collectors;
 
-import com.okta.springbootvue.Regiterpatient.Repository.*;
-import com.okta.springbootvue.Regiterpatient.Entity.*;
+import com.okta.springbootvue.Registerpatient.Repository.*;
+import com.okta.springbootvue.Registerpatient.Entity.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -14,10 +14,10 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @CrossOrigin(origins = "http://localhost:8080")
-public class RegiterpatientController {
+public class RegisterpatientController {
 
     @Autowired
-    private RegiterpatientRepository regiterpatientRepository;
+    private RegisterpatientRepository registerpatientRepository;
     @Autowired
     private GenderRepository genderRepository;
     @Autowired
@@ -26,23 +26,23 @@ public class RegiterpatientController {
     private ProvinceRepository provinceRepository;
 
     @Autowired
-    public RegiterpatientController(RegiterpatientRepository regiterpatientRepository) {
-        this.regiterpatientRepository = regiterpatientRepository;
+    public RegisterpatientController(RegisterpatientRepository registerpatientRepository) {
+        this.registerpatientRepository = registerpatientRepository;
 
     }
 
-    @GetMapping("/regiterpatients")
-    public Collection<Regiterpatient> regiterpatients() {
-        return regiterpatientRepository.findAll().stream().collect(Collectors.toList());
+    @GetMapping("/registerpatients")
+    public Collection<Registerpatient> registerpatients() {
+        return registerpatientRepository.findAll().stream().collect(Collectors.toList());
     }
 
-    @PostMapping("/regiterpatient/{idCardnumber}/{firstName}/{lastName}/{age}/{buddhist}/{addressDetail}/{fathername}/{mothername}/{mobilePhone}/{email}/{provinceId}/{nameTitileId}/{genderId}")
-    public Regiterpatient newRegiterpatient(@PathVariable int idCardnumber,@PathVariable String firstName, @PathVariable String lastName,
+    @PostMapping("/registerpatient/{idCardnumber}/{firstName}/{lastName}/{age}/{buddhist}/{addressDetail}/{fathername}/{mothername}/{mobilePhone}/{email}/{provinceId}/{nameTitileId}/{genderId}")
+    public Registerpatient newRegiterpatient(@PathVariable int idCardnumber,@PathVariable String firstName, @PathVariable String lastName,
            @PathVariable int age,@PathVariable int buddhist,@PathVariable String addressDetail,
            @PathVariable String fathername,@PathVariable String mothername,@PathVariable String mobilePhone,
             @PathVariable String email, @PathVariable long provinceId, @PathVariable long nameTitileId,
             @PathVariable long genderId, @PathVariable long birthdayId, @PathVariable long monthId) {
-        Regiterpatient newRegiterpatient = new Regiterpatient();
+        Registerpatient newRegiterpatient = new Registerpatient();
         System.out.println("Name = " + firstName);
         
         Province p = provinceRepository.findById(provinceId);
@@ -65,7 +65,7 @@ public class RegiterpatientController {
         newRegiterpatient.setGender(g);
         newRegiterpatient.setNameTitle(n);
 
-        return regiterpatientRepository.save(newRegiterpatient);
+        return registerpatientRepository.save(newRegiterpatient);
     }
 
 }
