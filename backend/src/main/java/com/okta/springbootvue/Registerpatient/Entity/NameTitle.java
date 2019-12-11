@@ -1,4 +1,4 @@
-package com.okta.springbootvue.Regiterpatient.Entity;
+package com.okta.springbootvue.Registerpatient.Entity;
 import javax.persistence.*;
 import lombok.Data;
 import lombok.NoArgsConstructor;

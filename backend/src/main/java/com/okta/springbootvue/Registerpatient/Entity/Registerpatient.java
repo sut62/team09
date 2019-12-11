@@ -1,4 +1,4 @@
-package com.okta.springbootvue.Regiterpatient.Entity;
+package com.okta.springbootvue.Registerpatient.Entity;
 
 import javax.persistence.*;
 import lombok.Data;
@@ -8,13 +8,13 @@ import lombok.NonNull;
 @Data
 @Entity
 @NoArgsConstructor
-@Table(name="REGITERPATIENT")
-public class Regiterpatient {
+@Table(name="REGISTERPATIENT")
+public class Registerpatient {
 	@Id
-	@SequenceGenerator(name="REGITERPATIENT_seq",sequenceName="REGITERPATIENT_seq")
-    @GeneratedValue(strategy=GenerationType.SEQUENCE, generator="REGITERPATIENT_seq")
-	@Column(name="REGITERPATIENT_ID",unique = true, nullable = true)
-    private @NonNull Long regiterId;
+	@SequenceGenerator(name="REGISTERPATIENT_seq",sequenceName="REGISTERPATIENT_seq")
+    @GeneratedValue(strategy=GenerationType.SEQUENCE, generator="REGISTERPATIENT_seq")
+	@Column(name="REGISTERPATIENT_ID",unique = true, nullable = true)
+    private @NonNull Long registerId;
     private @NonNull Integer idCardnumber;
 	private @NonNull String firstName;
     private @NonNull String lastName;
@@ -38,12 +38,12 @@ public class Regiterpatient {
     @JoinColumn(name = "NAMETITLE_ID", insertable = true)
     private NameTitle nameTitle;    
 
-    public Long getRegiterId() {
-        return regiterId;
+    public Long getRegisterId() {
+        return registerId;
     }
 
-    public void setRegiterId(Long regiterId) {
-        this.regiterId = regiterId;
+    public void setRegisterId(Long registerId) {
+        this.registerId = registerId;
     }
 
     public Integer getIdCardnumber() {
