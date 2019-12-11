@@ -1,6 +1,6 @@
-package com.okta.springbootvue.Regiterpatient.Repository;
+package com.okta.springbootvue.Registerpatient.Repository;
 
-import com.okta.springbootvue.Regiterpatient.Entity.Province;
+import com.okta.springbootvue.Registerpatient.Entity.Province;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.rest.core.annotation.RepositoryRestResource;
