@@ -1,6 +1,20 @@
 package com.okta.springbootvue.Diagnose.entity;
-import javax.persistence.*;
-//import com.okta.backend.Booking.entity.Booking;
+
+//import java.util.Date;
+
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.SequenceGenerator;
+import javax.persistence.Table;
+
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.NonNull;
@@ -12,52 +26,61 @@ import lombok.NonNull;
 public class Diagnose {
 
     @Id
-    @SequenceGenerator(name="diagnose_seq",sequenceName="diagnose_seq") 
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator="diagnose_seq") //เอามาสร้างเป็นค่าที่จะเก็บเป็นตัวแปรid
+    @SequenceGenerator(name="diagnose_seq",sequenceName="diagnose_seq")
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator="diagnose_seq")
     @Column(name = "DIAGNOSE_ID", unique = true, nullable = true)
     private @NonNull Long DiagnoseId;
+
 
     @ManyToOne(fetch = FetchType.EAGER, targetEntity = Disease.class)
     @JoinColumn(name = "Disease_ID", insertable = true)
     private Disease disease;
+
+    @ManyToOne()
+    @JsonBackReference
+    @JoinColumn(name = "Query_ID")
+    private Query query;
     
+
     @ManyToOne(fetch = FetchType.EAGER, targetEntity = Doctor.class)
     @JoinColumn(name = "Doctor_ID", insertable = true)
     private Doctor doctor;
 
-    @ManyToOne(fetch = FetchType.EAGER, targetEntity = Query.class)
-    @JoinColumn(name = "Query_ID", insertable = true)
-    private Query query;
+    @ManyToOne(fetch = FetchType.EAGER, targetEntity = Doctor.class)
+    @JoinColumn(name = "Doctor_Name", insertable = true)
+    private Doctor doctor_name;
 
-    public void setDiagnoseId(Long diagnoseId){
-      DiagnoseId = diagnoseId;
-    }
-
-    public Long getDiagnoseId(){
+    public Long getDiagnoseId() {
       return DiagnoseId;
     }
-
-    public void setDoctor(Long doctor){
-      doctor = doctor;
+  
+    public void setDiagnoseId(Long diagnoseId) {
+      DiagnoseId = diagnoseId;
     }
-
-    public Doctor getDoctor(){
-      return doctor;
-    }
-
-    public void setDisease(Long disease){
-      disease = disease;
-    }
-
-    public Disease getDisease(){
+  
+    public Disease getDisease() {
       return disease;
     }
-
-    public void setQuery(Long query){
-      query = query;
+  
+    public void setDisease(Disease disease) {
+      this.disease = disease;
     }
-
-    public Query getQuery(){
+  
+    public Query getQuery() {
       return query;
     }
+  
+    public void setQuery(Query query) {
+      this.query = query;
+    }
+  
+    public Doctor getDoctor() {
+      return doctor;
+    }
+  
+    public void setDoctor(Doctor doctor) {
+      this.doctor = doctor;
+    }
+
+
 }
