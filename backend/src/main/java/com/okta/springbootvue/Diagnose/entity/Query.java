@@ -3,42 +3,35 @@ package com.okta.springbootvue.Diagnose.entity;
 import lombok.*;
 
 import javax.persistence.Id;
-
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
-import javax.persistence.Column;
-import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
+
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+
 
 @Data
 @Entity
 @NoArgsConstructor
-@Table(name="QUERY")
+@Table(name="Query")
 public class Query {
+
     @Id
-    @SequenceGenerator(name="QUERY_SEQ",sequenceName="QUERY_SEQ")
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator="QUERY_SEQ")
-    @Column(name="QUERY_ID",unique = true, nullable = true)
+    @SequenceGenerator(name="Query_seq",sequenceName="Query_seq")               
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator="Query_seq")  
+    @Column(name = "Query_ID", unique = true, nullable = true)
     private @NonNull Long queryId;
 
-    private @NonNull String name;
+    @ManyToOne(fetch = FetchType.EAGER, targetEntity = Symptom.class)
+    @JoinColumn(name = "Symptom_ID", insertable = true)
+    private Symptom symptom;
 
-    public Long getQueryId() {
-        return queryId;
-    }
-
-    public void setQueryId(Long queryId) {
-        this.queryId = queryId;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-
+    @ManyToOne(fetch = FetchType.EAGER, targetEntity = Member.class)
+    @JoinColumn(name = "member_ID", insertable = true)
+    private Member member;
 }
