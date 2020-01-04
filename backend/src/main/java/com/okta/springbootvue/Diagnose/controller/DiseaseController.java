@@ -1,7 +1,7 @@
 package com.okta.springbootvue.Diagnose.controller;
 
-import com.okta.springbootvue.Diagnose.entity.*;
-import com.okta.springbootvue.Diagnose.repository.*;
+import com.okta.springbootvue.Diagnose.entity.Disease;
+import com.okta.springbootvue.Diagnose.repository.DiseaseRepository;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -24,7 +24,7 @@ public class DiseaseController {
     }
 
     @GetMapping("/disease")
-    public Collection<Disease> diseaseRepository() {
+    public Collection<Disease> disease() {
         return diseaseRepository.findAll().stream().collect(Collectors.toList());
     }
 
