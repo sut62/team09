@@ -15,16 +15,13 @@ public class Registerpatient {
     @GeneratedValue(strategy=GenerationType.SEQUENCE, generator="REGISTERPATIENT_seq")
 	@Column(name="REGISTERPATIENT_ID",unique = true, nullable = true)
     private @NonNull Long registerId;
-    private @NonNull Integer idCardnumber;
 	private @NonNull String firstName;
     private @NonNull String lastName;
     private @NonNull Integer age;
-    private @NonNull Integer buddhist;
+    private @NonNull Integer weight;
+    private @NonNull Integer height;
     private @NonNull String addressDetail;
-    private @NonNull String fatherName;
-	private @NonNull String motherName;
 	private @NonNull String mobilePhone;
-	private @NonNull String email;
 
     @ManyToOne(fetch = FetchType.EAGER, targetEntity = Gender.class)
     @JoinColumn(name = "GENDER_ID", insertable = true)
@@ -44,14 +41,6 @@ public class Registerpatient {
 
     public void setRegisterId(Long registerId) {
         this.registerId = registerId;
-    }
-
-    public Integer getIdCardnumber() {
-        return idCardnumber;
-    }
-
-    public void setIdCardnumber(Integer idCardnumber) {
-        this.idCardnumber = idCardnumber;
     }
 
     public String getFirstName() {
@@ -78,13 +67,22 @@ public class Registerpatient {
         this.age = age;
     }
 
-    public Integer getBuddhist() {
-        return buddhist;
+    public Integer getWeight() {
+        return weight;
     }
 
-    public void setBuddhist(Integer buddhist) {
-        this.buddhist = buddhist;
+    public void setWeight(Integer weight) {
+        this.weight = weight;
     }
+
+    public Integer getHeight() {
+        return height;
+    }
+
+    public void setHeight(Integer height) {
+        this.height = height;
+    }
+
 
     public String getAddressDetail() {
         return addressDetail;
@@ -94,22 +92,6 @@ public class Registerpatient {
         this.addressDetail = addressDetail;
     }
 
-    public String getFatherName() {
-        return fatherName;
-    }
-
-    public void setFatherName(String fatherName) {
-        this.fatherName = fatherName;
-    }
-
-    public String getMotherName() {
-        return motherName;
-    }
-
-    public void setMotherName(String motherName) {
-        this.motherName = motherName;
-    }
-
     public String getMobilePhone() {
         return mobilePhone;
     }
@@ -117,15 +99,6 @@ public class Registerpatient {
     public void setMobilePhone(String mobilePhone) {
         this.mobilePhone = mobilePhone;
     }
-
-    public String getEmail() {
-        return email;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
-    }
-
 
     public Gender getGender() {
         return gender;
