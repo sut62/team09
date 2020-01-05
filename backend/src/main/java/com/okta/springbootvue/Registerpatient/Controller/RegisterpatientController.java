@@ -36,30 +36,24 @@ public class RegisterpatientController {
         return registerpatientRepository.findAll().stream().collect(Collectors.toList());
     }
 
-    @PostMapping("/registerpatient/{idCardnumber}/{firstName}/{lastName}/{age}/{buddhist}/{addressDetail}/{fathername}/{mothername}/{mobilePhone}/{email}/{provinceId}/{nameTitileId}/{genderId}")
-    public Registerpatient newRegiterpatient(@PathVariable int idCardnumber,@PathVariable String firstName, @PathVariable String lastName,
-           @PathVariable int age,@PathVariable int buddhist,@PathVariable String addressDetail,
-           @PathVariable String fathername,@PathVariable String mothername,@PathVariable String mobilePhone,
-            @PathVariable String email, @PathVariable long provinceId, @PathVariable long nameTitileId,
-            @PathVariable long genderId, @PathVariable long birthdayId, @PathVariable long monthId) {
+    @PostMapping("/registerpatient/{firstName}/{lastName}/{age}/{weight}/{height}/{addressDetail}/{mobilePhone}/{provinceId}/{nameTitileId}/{genderId}")
+    public Registerpatient newRegiterpatient(@PathVariable String firstName, @PathVariable String lastName,
+           @PathVariable int age,@PathVariable int weight,@PathVariable int height,@PathVariable String addressDetail,@PathVariable String mobilePhone,
+           @PathVariable long provinceId, @PathVariable long nameTitileId,
+            @PathVariable long genderId) {
         Registerpatient newRegiterpatient = new Registerpatient();
-        System.out.println("Name = " + firstName);
         
         Province p = provinceRepository.findById(provinceId);
         NameTitle n = nameTitleRepository.findById(nameTitileId);
         Gender g = genderRepository.findById(genderId);
 
-        newRegiterpatient.setIdCardnumber(idCardnumber);
         newRegiterpatient.setFirstName(firstName);
         newRegiterpatient.setLastName(lastName);
         newRegiterpatient.setAge(age);
-        newRegiterpatient.setBuddhist(buddhist);
-        newRegiterpatient.setAddressDetail(addressDetail);
-        newRegiterpatient.setFatherName(fathername);
-        newRegiterpatient.setMotherName(mothername);       
+        newRegiterpatient.setWeight(weight);
+        newRegiterpatient.setHeight(height);
+        newRegiterpatient.setAddressDetail(addressDetail);    
         newRegiterpatient.setMobilePhone(mobilePhone);
-        newRegiterpatient.setEmail(email);
-
 
         newRegiterpatient.setProvince(p);
         newRegiterpatient.setGender(g);
@@ -67,5 +61,5 @@ public class RegisterpatientController {
 
         return registerpatientRepository.save(newRegiterpatient);
     }
-
+    
 }
