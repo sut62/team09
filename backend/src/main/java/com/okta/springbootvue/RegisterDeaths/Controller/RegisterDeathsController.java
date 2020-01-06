@@ -22,7 +22,9 @@ public class RegisterDeathsController {
     @Autowired
     private CauseofDeathRepository causeofDeathRepository;
     @Autowired
-    private RegiterpatientRepository regiterpatientRepository;
+    private GenderRepository genderRepository;
+    @Autowired
+    private NameTitleRepository nameTitleRepository;
 
 
 
@@ -41,16 +43,36 @@ public class RegisterDeathsController {
     public  Optional<RegisterDeaths> RegisterDeaths(@PathVariable Long registerdeathID){
         return registerDeathsRepository.findById(registerdeathID);
     }
-    @PostMapping("/RegisterDeaths/{registerId}/{causeofDeathId}/{placeId}")
-    public RegisterDeaths newRegisterDeaths(@PathVariable long registerId,
-    @PathVariable long causeofDeathId, @PathVariable long placeId) {
+    @PostMapping("/RegisterDeaths{idCardnumber}/{firstName}/{lastName}/{age}/{buddhist}/{addressDetail}/{fathername}/{mothername}/{mobilePhone}/{email}/{provinceId}/{nameTitileId}/{genderId}/{CauseofDeath}/{Place}")
+    public RegisterDeaths newRegisterDeaths(@PathVariable int idCardnumber,@PathVariable String firstName, @PathVariable String lastName,
+    @PathVariable int age,@PathVariable int buddhist,@PathVariable String addressDetail,
+    @PathVariable String fathername,@PathVariable String mothername,@PathVariable String mobilePhone,
+     @PathVariable String email, @PathVariable long provinceId, @PathVariable long nameTitileId,
+     @PathVariable long genderId, @PathVariable long birthdayId, @PathVariable long monthId,@PathVariable long causeofDeathId ,@PathVariable long placeId) {
         RegisterDeaths registerDeaths = new RegisterDeaths();
+        System.out.println("Name = " + firstName);
 
-        Regiterpatient r = regiterpatientRepository.findById(registerId);
+
         CauseofDeath c = causeofDeathRepository.findById(causeofDeathId);        
         Place p = placeRepository.findById(placeId);
-        
-        registerDeaths.setRegiterpatient(r);
+        NameTitle n = nameTitleRepository.findById(nameTitileId);
+        Gender g = genderRepository.findById(genderId);
+
+        registerDeaths.setIdCardnumber(idCardnumber);
+        registerDeaths.setFirstName(firstName);
+        registerDeaths.setLastName(lastName);
+        registerDeaths.setAge(age);
+        registerDeaths.setBuddhist(buddhist);
+        registerDeaths.setAddressDetail(addressDetail);
+        registerDeaths.setFatherName(fathername);
+        registerDeaths.setMotherName(mothername);       
+        registerDeaths.setMobilePhone(mobilePhone);
+        registerDeaths.setEmail(email);
+
+
+        registerDeaths.setGender(g);
+        registerDeaths.setNameTitle(n);
+
         registerDeaths.setCauseofDeath(c);
         registerDeaths.setPlace(p);
        
