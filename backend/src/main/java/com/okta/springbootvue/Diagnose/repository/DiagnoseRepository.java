@@ -1,6 +1,6 @@
-package com.okta.springbootvue.Diagnose.repository;
+package com.okta.springbootvue.Diagnose.Repository;
 
-import com.okta.springbootvue.Diagnose.entity.Diagnose;
+import com.okta.springbootvue.Diagnose.Entity.Diagnose;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.rest.core.annotation.RepositoryRestResource;

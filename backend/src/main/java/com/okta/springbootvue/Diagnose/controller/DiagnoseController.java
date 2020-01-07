@@ -1,25 +1,22 @@
-package com.okta.springbootvue.Diagnose.controller;
-
-import java.util.Map;
+package com.okta.springbootvue.Diagnose.Controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
-
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.Collection;
 import java.util.stream.Collectors;
 
-import com.okta.springbootvue.Diagnose.entity.Query;
-import com.okta.springbootvue.Diagnose.entity.Doctor;
-import com.okta.springbootvue.Diagnose.entity.Disease;
-import com.okta.springbootvue.Diagnose.entity.Diagnose;
-import com.okta.springbootvue.Diagnose.repository.DiseaseRepository;
-import com.okta.springbootvue.Diagnose.repository.DoctorRepository;
-import com.okta.springbootvue.Diagnose.repository.QueryRepository;
-import com.okta.springbootvue.Diagnose.repository.DiagnoseRepository;
+import com.okta.springbootvue.Diagnose.Entity.Query;
+import com.okta.springbootvue.Diagnose.Entity.Doctor;
+import com.okta.springbootvue.Diagnose.Entity.Disease;
+import com.okta.springbootvue.Diagnose.Entity.Diagnose;
+import com.okta.springbootvue.Diagnose.Repository.DiseaseRepository;
+import com.okta.springbootvue.Diagnose.Repository.DoctorRepository;
+import com.okta.springbootvue.Diagnose.Repository.QueryRepository;
+import com.okta.springbootvue.Diagnose.Repository.DiagnoseRepository;
 
 import org.springframework.web.bind.annotation.CrossOrigin;
 
@@ -45,22 +42,21 @@ public class DiagnoseController {
         return diagnoseRepository.findAll().stream().collect(Collectors.toList());
     }
 
-    @PostMapping("/diagnose")
-    public Diagnose newDiagnose(@RequestBody Map<String, String> body) {
+    @PostMapping("/diagnose/{queryId}/{doctorId}/{diseaseId}")
+    public Diagnose newDiagnose(@PathVariable long queryId,
+    @PathVariable long doctorId, @PathVariable long diseaseId) {
         Diagnose diagnose = new Diagnose();
+
+        Query query = queryRepository.findById(queryId);  
+        Doctor doctor = doctorRepository.findById(doctorId);        
+        Disease disease = diseaseRepository.findById(diseaseId);
         
- 
-        Long queryId = Long.valueOf(body.get("queryId").toString());
-        Query query = queryRepository.findById(queryId).get();
         diagnose.setQuery(query);
-
-        Long doctorId = Long.valueOf(body.get("doctorId").toString());
-        Doctor doctor = doctorRepository.findById(doctorId).get();
         diagnose.setDoctor(doctor);
-
-        Long diseaseId = Long.valueOf(body.get("diseaseId").toString());
-        Disease disease = diseaseRepository.findById(diseaseId).get();
         diagnose.setDisease(disease);
+        // domitoryrental.setNameMember(booking.getMember().getFirstName());
+        // domitoryrental.setNameOwner(owner.getName());
+        //domitoryrental.setNameTypeagreement(typeagreement.getName());
 
         return diagnoseRepository.save(diagnose);
     }

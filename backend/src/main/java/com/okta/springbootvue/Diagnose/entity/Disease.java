@@ -1,4 +1,4 @@
-package com.okta.springbootvue.Diagnose.entity;
+package com.okta.springbootvue.Diagnose.Entity;
 
 import lombok.*;
 

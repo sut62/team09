@@ -1,4 +1,4 @@
-package com.okta.springbootvue.Diagnose.entity;
+package com.okta.springbootvue.Diagnose.Entity;
 
 //import java.util.Date;
 
@@ -46,9 +46,9 @@ public class Diagnose {
     @JoinColumn(name = "Doctor_ID", insertable = true)
     private Doctor doctor;
 
-    @ManyToOne(fetch = FetchType.EAGER, targetEntity = Doctor.class)
-    @JoinColumn(name = "Doctor_Name", insertable = true)
-    private Doctor doctor_name;
+    // @ManyToOne(fetch = FetchType.EAGER, targetEntity = Doctor.class)
+    // @JoinColumn(name = "Doctor_Name", insertable = true)
+    // private Doctor doctor_name;
 
     public Long getDiagnoseId() {
       return DiagnoseId;
