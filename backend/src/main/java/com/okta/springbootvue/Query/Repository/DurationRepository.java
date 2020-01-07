@@ -1,7 +1,7 @@
-package com.cpe.springboot.Query.Repository;
+package com.okta.springbootvue.Query.Repository;
 
-import com.cpe.springboot.Query.Entity.CongenitalDisease;
-import com.cpe.springboot.Query.Entity.Duration;
+import com.okta.springbootvue.Query.Entity.CongenitalDisease;
+import com.okta.springbootvue.Query.Entity.Duration;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.rest.core.annotation.RepositoryRestResource;
