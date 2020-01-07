@@ -1,6 +1,6 @@
-package com.cpe.backend.Referral.repository;
+package com.cpe.springbootvue.Referral.Repository;
 
-import com.cpe.backend.Referral.entity.ForwardTo;
+import com.cpe.springbootvue.Referral.Entity.ForwardTo;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.rest.core.annotation.RepositoryRestResource;
@@ -8,5 +8,5 @@ import org.springframework.data.rest.core.annotation.RepositoryRestResource;
 @RepositoryRestResource
 public
 interface ForwardToRepository extends JpaRepository<ForwardTo, Long> {
-	ForwardTo findById(long id);
+    ForwardTo findById(long id);
 }
