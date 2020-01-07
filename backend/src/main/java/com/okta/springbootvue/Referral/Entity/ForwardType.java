@@ -1,37 +1,20 @@
-package com.cpe.backend.Referral.entity;
+package com.cpe.springbootvue.Referral.Entity;
 
-import lombok.*;
-
-import javax.persistence.Id;
-
-import javax.persistence.OneToMany;
-import javax.persistence.SequenceGenerator;
-import javax.persistence.Table;
-
-import java.util.Collection;
-
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.FetchType;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
+import javax.persistence.*;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+import lombok.NonNull;
 
 @Data
 @Entity
-@NoArgsConstructor
-@Table(name="FORWARDTYPE")
+@NoArgsConstructor 
 public class ForwardType {
     @Id
     @SequenceGenerator(name="FORWARDTYPE_SEQ",sequenceName="FORWARDTYPE_SEQ")
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator="FORWARDTYPE_SEQ")
-    @Column(name="FORWARDTYPE_ID",unique = true, nullable = true)
+    @GeneratedValue(strategy=GenerationType.SEQUENCE, generator="FORWARDTYPE_SEQ")
+    @Column(name="FORWARDTYPE_ID",unique = true, nullable = false)
     private @NonNull Long forwardTypeId;
-
     private @NonNull String forwardType;
-
-    @OneToMany(fetch = FetchType.EAGER)
-    // mappedBy  = "ForwardType"
-    private Collection<Referral> referral;
 
     public Long getForwardTypeId() {
         return forwardTypeId;
@@ -48,14 +31,5 @@ public class ForwardType {
     public void setForwardType(String forwardType) {
         this.forwardType = forwardType;
     }
-
-    public Collection<Referral> getReferral() {
-        return referral;
-    }
-
-    public void setReferral(Collection<Referral> referral) {
-        this.referral = referral;
-    }
-
 
 }
