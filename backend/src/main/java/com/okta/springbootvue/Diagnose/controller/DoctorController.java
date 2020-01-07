@@ -1,4 +1,4 @@
-package com.okta.springbootvue.Diagnose.controller;
+package com.okta.springbootvue.Diagnose.Controller;
 
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -8,8 +8,8 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.Collection;
 import java.util.stream.Collectors;
 
-import com.okta.springbootvue.Diagnose.entity.Doctor;
-import com.okta.springbootvue.Diagnose.repository.DoctorRepository;
+import com.okta.springbootvue.Diagnose.Entity.Doctor;
+import com.okta.springbootvue.Diagnose.Repository.DoctorRepository;
 
 import org.springframework.web.bind.annotation.CrossOrigin;
 

@@ -1,7 +1,7 @@
-package com.okta.springbootvue.Diagnose.controller;
+package com.okta.springbootvue.Diagnose.Controller;
 
-import com.okta.springbootvue.Diagnose.entity.Disease;
-import com.okta.springbootvue.Diagnose.repository.DiseaseRepository;
+import com.okta.springbootvue.Diagnose.Entity.Disease;
+import com.okta.springbootvue.Diagnose.Repository.DiseaseRepository;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
