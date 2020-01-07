@@ -1,8 +1,8 @@
-package com.cpe.springboot.Query.Controller;
+package com.okta.springbootvue.Query.Controller;
 
-import com.cpe.springboot.Query.Entity.*;
+import com.okta.springbootvue.Query.Entity.*;
 //import com.cpe.backend.Register.Entity.*;
-import com.cpe.springboot.Query.Repository.*;
+import com.okta.springbootvue.Query.Repository.*;
 //import com.cpe.backend.Register.Repository.*;
 
 import org.springframework.web.bind.annotation.*;
@@ -28,38 +28,37 @@ public class QueryController {
     private CongenitalDiseaseRepository  congenitalDiseaseRepository;
  
 
-    public QueryController(QueryRepository queryRepository,
-    CongenitalDiseaseRepository congenitalDiseaseRepository,
-    DurationRepository durationRepository){
+    public QueryController(QueryRepository queryRepository){
         this.queryRepository = queryRepository;
-        this.congenitalDiseaseRepository = congenitalDiseaseRepository;
-        this.durationRepository = durationRepository;
     }
 
     @GetMapping("/querys") 
-    public  Collection<Query> Query(){  
+    public  Collection<Query> querys(){  
         return queryRepository.findAll().stream().collect(Collectors.toList());  
     }
 
-    @PostMapping("/query/durationId}/{congenitalDiseaseId}") 
-    public Query newQuery(@PathVariable long durationId, @PathVariable long congenitalDiseaseId) {
+    @PostMapping("/query/{temperature}/{pressureSYS}/{pressureDIA}/{symptom}/{durationId}/{congenitalDiseaseId}") 
+    public Query newQuery(@PathVariable long durationId, @PathVariable long congenitalDiseaseId
+    , @PathVariable Float temperature, @PathVariable Integer pressureSYS
+    , @PathVariable Integer pressureDIA, @PathVariable String symptom) {
+
+       Query newquery = new Query(); 
 
        Duration d = durationRepository.findById(durationId);
        CongenitalDisease c = congenitalDiseaseRepository.findById(congenitalDiseaseId);
        
-       Query query = new Query(); 
 
-       query.setCongenitalDisease(c); 
-       query.setDuration(d);
+       newquery.setCongenitalDisease(c); 
+       newquery.setDuration(d);
+
+       newquery.setTemperature(temperature);
+       newquery.setPressureSYS(pressureSYS);
+       newquery.setPressureDIA(pressureDIA);
+       newquery.setSymptom(symptom);
+
        
         
-        return queryRepository.save(query); 
-    }
-    @GetMapping("/query/{id}") 
-    public QueryRepository bookingByUser(@PathVariable Long id) {
-       
-        
-        return queryRepository;
+        return queryRepository.save(newquery); 
     }
   
 }
