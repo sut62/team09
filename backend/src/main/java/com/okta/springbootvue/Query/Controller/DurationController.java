@@ -1,10 +1,10 @@
-package com.cpe.springboot.Query.Controller;
+package com.okta.springbootvue.Query.Controller;
 
 import java.util.Collection;
 import java.util.stream.Collectors;
 
-import com.cpe.springboot.Query.Repository.*;
-import com.cpe.springboot.Query.Entity.*;
+import com.okta.springbootvue.Query.Repository.*;
+import com.okta.springbootvue.Query.Entity.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -25,8 +25,8 @@ public class DurationController {
         this.durationRepository = durationRepository;
     }
 
-    @GetMapping("/durations") 
-    public Collection<Duration> Statuses() {   
+    @GetMapping("/duration") 
+    public Collection<Duration> durations() {   
         return durationRepository.findAll().stream().collect(Collectors.toList());
     }
 
