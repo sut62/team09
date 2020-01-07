@@ -3,6 +3,9 @@ package com.okta.springbootvue;
 import com.okta.springbootvue.Registerpatient.Entity.*;
 import com.okta.springbootvue.Registerpatient.Repository.*;
 
+import com.okta.springbootvue.Query.Repository.QueryRepository;
+import com.okta.springbootvue.Query.Repository.DurationRepository;
+import com.okta.springbootvue.Query.Repository.CongenitalDiseaseRepository;
 import java.util.stream.Stream;
 import org.springframework.context.annotation.Bean;
 import org.springframework.boot.ApplicationRunner;
@@ -18,7 +21,8 @@ public class SpringBootVueApplication {
 
 	@Bean
 	ApplicationRunner init(final RegisterpatientRepository registerpatient, final GenderRepository genderRepository,
-			final ProvinceRepository provinceRepository, final NameTitleRepository nameTitleRepository) {
+			final ProvinceRepository provinceRepository, final NameTitleRepository nameTitleRepository ,QueryRepository queryRepository, DurationRepository durationRepository,
+			CongenitalDiseaseRepository congenitalDiseaseRepository) {
 		return args -> {
 			// ===================================================================
 			final Gender gen1 = new Gender();
@@ -63,6 +67,24 @@ public class SpringBootVueApplication {
 			nameTitleRepository.findAll().forEach(System.out::println);
 
 			// ======================================================
+			
+			Stream.of("โรคหัวใจ", "โรคความดันโลหิตสูง", "โรคความดันโลหิต่ำ", "โรคความดันโลหิตสูง", "โรคเบาหวาน", 
+						"โรคอ้วน", "โรคเลือดจาง", "โรคไมเกรน", "โรคไต", "โรคไขมันในเลือดสูง", "โรคหืดหอบ", "โรคภูมิแพ้").forEach(CongenitalDisease -> {
+				CongenitalDisease c = new CongenitalDisease();
+			    c.setCongenitalDisease(CongenitalDisease);
+				congenitalDiseaseRepository.save(c);
+			});
+
+
+            Stream.of("1 วัน", "3-5 วัน", "1 สัปดาห์", "1 เดือน", "3 เดือน", "1 ปี").forEach(duration -> {
+			Duration d = new Duration();
+			d.setDuration(duration);
+			durationRepository.save(d);
+			});
+
+			durationRepository.findAll().forEach(System.out::println);
+			congenitalDiseaseRepository.findAll().forEach(System.out::println);
+
 	};
 	}
 }
