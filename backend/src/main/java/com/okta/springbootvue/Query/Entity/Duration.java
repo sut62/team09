@@ -1,4 +1,4 @@
-package com.cpe.springboot.Query.Entity;
+package com.okta.springbootvue.Query.Entity;
 
 import lombok.*;
 import javax.persistence.*;
@@ -14,16 +14,16 @@ public class Duration {
 	@SequenceGenerator(name="Duration_seq",sequenceName="Duration_seq")
     @GeneratedValue(strategy=GenerationType.SEQUENCE, generator="Duration_seq")
 	@Column(name="DURATION_ID",unique = true, nullable = false) 
-  private @NonNull Long DurationId;
+  private @NonNull Long durationId;
   
   private @NonNull String Duration;
 
     public Long getDurationId() {  
-        return DurationId;
+        return durationId;
     }
 
     public void setDurationId(Long DurationId) {  
-        this.DurationId = DurationId;
+        this.durationId = DurationId;
     }
 
     public String getDuration() { 

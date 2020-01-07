@@ -1,4 +1,4 @@
-package com.cpe.springboot.Query.Entity;
+package com.okta.springbootvue.Query.Entity;
 
 import lombok.*;
 import javax.persistence.*;
@@ -14,16 +14,16 @@ public class CongenitalDisease {
 	@SequenceGenerator(name="CongenitalDisease_seq",sequenceName="CongenitalDisease_seq")
     @GeneratedValue(strategy=GenerationType.SEQUENCE, generator="CongenitalDisease_seq")
 	@Column(name="CONGENITALDISEASE_ID",unique = true, nullable = false) 
-  private @NonNull Long CongenitalDiseaseId;
+  private @NonNull Long congenitalDiseaseId;
   
   private @NonNull String CongenitalDisease;
 
     public Long getCongenitalDiseaseId() {  
-        return CongenitalDiseaseId;
+        return congenitalDiseaseId;
     }
 
     public void setCongenitalDiseaseId(Long CongenitalDiseaseId) {  
-        this.CongenitalDiseaseId = CongenitalDiseaseId;
+        this.congenitalDiseaseId = CongenitalDiseaseId;
     }
 
     public String getCongenitalDisease() { 

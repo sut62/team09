@@ -1,6 +1,5 @@
-package com.cpe.springboot.Query.Entity;
+package com.okta.springbootvue.Query.Entity;
 
-import java.util.Date;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -13,7 +12,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
-import com.cpe.springboot.Query.Entity.Query;
+import com.okta.springbootvue.Query.Entity.Query;
 import com.fasterxml.jackson.annotation.JsonBackReference;
 
 import lombok.Data;
@@ -30,58 +29,60 @@ public class Query {
     @SequenceGenerator(name="query_seq",sequenceName="queryl_seq")
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator="queryl_seq")
     @Column(name = "QUERY_ID", unique = true, nullable = true)
-    private @NonNull Long id;
-    
-    private @NonNull Date forwardDate;
-
-
-    @Column(name="NOTE")
-    private @NonNull String note;
-
+    private @NonNull Long queryid;
+    private @NonNull Float temperature;
+    private @NonNull Integer pressureSYS;
+    private @NonNull Integer pressureDIA;
+    private @NonNull String symptom;
 
 
     @ManyToOne(fetch = FetchType.EAGER, targetEntity = Duration.class)
-    @JoinColumn(name = "Duration_ID", insertable = true)
+    @JoinColumn(name = "DURATION_ID", insertable = true)
     private Duration duration;
 
     @ManyToOne(fetch = FetchType.EAGER, targetEntity = CongenitalDisease.class)
-    @JoinColumn(name = "ForwardTo_ID", insertable = true)
+    @JoinColumn(name = "CONGENITALDISEASE_ID", insertable = true)
     private CongenitalDisease congenitalDisease;
 
     @ManyToOne()
     @JsonBackReference
-    // @JoinColumn(name = "RegisterPatient_ID")
-    //  private RegisterPatient registerPatient;
 
-    public Long getId() {
-        return id;
+    public Long getQueryid() {
+        return queryid;
     }
 
-    public void setId(Long id) {
-        this.id = id;
+    public void setQueryid(Long queryid) {
+        this.queryid = queryid;
     }
 
-    public Duration getDuration() {
-        return duration;
+    public Float getTemperature() {
+        return temperature;
     }
 
-    public void setDuration(Duration duration) {
-        this.duration = duration;
+    public void setTemperature(Float temperature) {
+        this.temperature = temperature;
     }
 
-    public CongenitalDisease getCongenitalDisease() {
-        return congenitalDisease;
+    public Integer getPressureSYS() {
+        return pressureSYS;
     }
 
-    public void setCongenitalDisease(CongenitalDisease congenitalDisease) {
-        this.congenitalDisease = congenitalDisease;
+    public void setPressureSYS(Integer pressureSYS) {
+        this.pressureSYS = pressureSYS;
     }
 
-    public String getNote() {
-        return note;
+    public Integer getPressureDIA() {
+        return pressureDIA;
     }
 
-    public void setNote(String note) {
-        this.note = note;
+    public void setPressureDIA(Integer pressureDIA) {
+        this.pressureDIA = pressureDIA;
+    }
+    public String getSymptom() {
+        return symptom;
+    }
+
+    public void setSymptom(String symptom) {
+        this.symptom = symptom;
     }
 }
