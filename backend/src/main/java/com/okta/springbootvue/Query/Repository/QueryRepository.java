@@ -1,6 +1,6 @@
-package com.cpe.springboot.Query.Repository;
+package com.okta.springbootvue.Query.Repository;
 
-import com.cpe.springboot.Query.Entity.Query;
+import com.okta.springbootvue.Query.Entity.Query;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.rest.core.annotation.RepositoryRestResource;
