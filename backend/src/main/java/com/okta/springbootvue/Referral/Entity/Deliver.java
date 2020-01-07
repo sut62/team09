@@ -1,37 +1,20 @@
-package com.cpe.backend.Referral.entity;
+package com.cpe.springbootvue.Referral.Entity;
 
-import lombok.*;
-
-import javax.persistence.Id;
-
-import javax.persistence.OneToMany;
-import javax.persistence.SequenceGenerator;
-import javax.persistence.Table;
-
-import java.util.Collection;
-
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.FetchType;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
+import javax.persistence.*;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+import lombok.NonNull;
 
 @Data
 @Entity
-@NoArgsConstructor
-@Table(name="DELIVER")
+@NoArgsConstructor 
 public class Deliver {
     @Id
     @SequenceGenerator(name="DELIVER_SEQ",sequenceName="DELIVER_SEQ")
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator="DELIVER_SEQ")
-    @Column(name="DELIVER_ID",unique = true, nullable = true)
+    @GeneratedValue(strategy=GenerationType.SEQUENCE, generator="DELIVER_SEQ")
+    @Column(name="DELIVER_ID",unique = true, nullable = false)
     private @NonNull Long deliverId;
-
     private @NonNull String deliver;
-
-    @OneToMany(fetch = FetchType.EAGER)
-    // mappedBy  = "Deliver"
-    private Collection<Referral> referral;
 
     public Long getDeliverId() {
         return deliverId;
@@ -48,14 +31,5 @@ public class Deliver {
     public void setDeliver(String deliver) {
         this.deliver = deliver;
     }
-
-    public Collection<Referral> getReferral() {
-        return referral;
-    }
-
-    public void setReferral(Collection<Referral> referral) {
-        this.referral = referral;
-    }
-
 
 }
