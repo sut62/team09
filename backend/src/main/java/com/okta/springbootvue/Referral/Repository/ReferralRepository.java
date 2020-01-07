@@ -1,13 +1,13 @@
-package com.cpe.backend.Referral.repository;
+package com.cpe.springbootvue.Referral.Repository;
 
-import com.cpe.backend.Referral.entity.Referral;
-
+import com.cpe.springbootvue.Referral.Entity.Referral;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.rest.core.annotation.RepositoryRestResource;
-import org.springframework.web.bind.annotation.CrossOrigin;
-
-@RepositoryRestResource
-@CrossOrigin(origins = "http://localhost:8080")
-public
-interface ReferralRepository extends JpaRepository<Referral, Long> {
+  
+@RepositoryRestResource  
+public interface ReferralRepository extends JpaRepository<Referral, Long> {
+    @Query("SELECT t from Referral t WHERE t.referralId = :referralId")
+    Referral findReferralById(Long referralId);
+    Referral findById(long id);
 }
