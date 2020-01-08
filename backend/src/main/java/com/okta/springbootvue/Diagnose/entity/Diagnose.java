@@ -31,11 +31,15 @@ public class Diagnose {
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator="diagnose_seq")
     @Column(name = "DIAGNOSE_ID", unique = true, nullable = true)
     private @NonNull Long DiagnoseId;
+    
+    private String nameRegister;
+    
 
 
     @ManyToOne(fetch = FetchType.EAGER, targetEntity = Disease.class)
     @JoinColumn(name = "Disease_ID", insertable = true)
     private Disease disease;
+    private String nameDisease;
 
     @ManyToOne()
     @JsonBackReference
@@ -46,10 +50,8 @@ public class Diagnose {
     @ManyToOne(fetch = FetchType.EAGER, targetEntity = Doctor.class)
     @JoinColumn(name = "Doctor_ID", insertable = true)
     private Doctor doctor;
+    private String nameDoctor;
 
-    // @ManyToOne(fetch = FetchType.EAGER, targetEntity = Doctor.class)
-    // @JoinColumn(name = "Doctor_Name", insertable = true)
-    // private Doctor doctor_name;
 
     public Long getDiagnoseId() {
       return DiagnoseId;
@@ -74,7 +76,7 @@ public class Diagnose {
     public void setQuery(Query query) {
       this.query = query;
     }
-  
+
     public Doctor getDoctor() {
       return doctor;
     }
@@ -83,5 +85,20 @@ public class Diagnose {
       this.doctor = doctor;
     }
 
+    public void setNameDisease(String name){
+      this.nameDisease = name;
+    }
+
+    public void setNameRegister(String name){
+      this.nameRegister = name;
+    }
+
+    public void setNameDoctor(String name){
+      this.nameDoctor = name ;
+  }
+
+  
+
+ 
 
 }
