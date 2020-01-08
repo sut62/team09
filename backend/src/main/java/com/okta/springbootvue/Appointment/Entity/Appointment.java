@@ -13,10 +13,6 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 
-import java.util.Date;
-
-import com.okta.springbootvue.Diagnose.Entity.Diagnose;
-import com.okta.springbootvue.Diagnose.Entity.Doctor;
 
 @Getter
 @Setter
@@ -32,9 +28,9 @@ public class Appointment {
 	@Column(name="APPOINTMENT_ID",unique = true, nullable = true)
     private @NonNull Long appointmentId;
     
-    private @NonNull Date appointDate;
+    private @NonNull String appointDate;
 
-    private @NonNull Date time;
+    private @NonNull String appointTime;
 
     @ManyToOne(fetch = FetchType.EAGER, targetEntity = Clinic.class)
     @JoinColumn(name = "CLINIC_ID", insertable = true)
@@ -48,32 +44,45 @@ public class Appointment {
     @JoinColumn(name = "REASON_ID", insertable = true)
     private Reason reason;
 
-    @ManyToOne(fetch = FetchType.EAGER, targetEntity = Doctor.class)
-    @JoinColumn(name = "DOCTOR_ID", insertable = true)
-    private Doctor doctor;
-
-    @ManyToOne(fetch = FetchType.EAGER, targetEntity = Diagnose.class)
-    @JoinColumn(name = "DIAGNOSE_ID", insertable = true)
-    private Diagnose diagnose;
-
     public Long getAppointmentId() {
         return appointmentId;
     }
     public void setAppointmentId(Long appointmentId) {
         this.appointmentId = appointmentId;
     }
+    public void setClinic(Clinic clinic) {
+        this.clinic = clinic;
+    }
+    public Clinic getClinic() {
+        return clinic;
+    }
+    public void setDemeanor(Demeanor demeanor) {
+        this.demeanor = demeanor;
+    }
 
-    public Date getAppointDate() {
+    public Demeanor getDemeanor() {
+        return demeanor;
+    }
+    public void setReason(Reason reason) {
+        this.reason = reason;
+    }
+
+    public Reason getReason() {
+        return reason;
+    }
+  
+    public String getAppointDate() {
         return appointDate;
     }
-    public void setAppointDate(Date appointDate) {
+    public void setAppointDate(String appointDate) {
         this.appointDate = appointDate;
     }
 
-    public Date getTime() {
-        return time;
+    public String getAppointTime() {
+        return appointTime;
     }
-    public void setTime(Date time) {
-        this.time = time;
+
+    public void setAppointTime(String appointTime) {
+        this.appointTime = appointTime;
     }
 }

@@ -23,7 +23,7 @@ public class Clinic {
 	@Column(name="CLINIC_ID",unique = true, nullable = true)
     private @NonNull Long clinicId;
     
-    private @NonNull String clinicName;
+    private @NonNull String clinic;
 
     public Long getClinicId() {
         return clinicId;
@@ -32,10 +32,10 @@ public class Clinic {
         this.clinicId = clinicId;
     }
 
-    public String getClinicName() {
-        return clinicName;
+    public String getClinic() {
+        return clinic;
     }
-    public void setClinicName(String clinicName) {
-        this.clinicName = clinicName;
+    public void setClinic(String clinic) {
+        this.clinic = clinic;
     }
 }
