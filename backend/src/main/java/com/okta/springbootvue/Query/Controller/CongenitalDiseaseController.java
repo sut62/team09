@@ -31,7 +31,7 @@ public class CongenitalDiseaseController {
     }
 
     @GetMapping("/congenitalDisease/{congenitalDisease}")
-    public CongenitalDisease addStatus(@PathVariable String CongenitalDisease){
+    public CongenitalDisease addCongenitalDisease(@PathVariable String CongenitalDisease){
         CongenitalDisease c = new CongenitalDisease();
         c.setDuration(CongenitalDisease);
         congenitalDiseaseRepository.save(c);

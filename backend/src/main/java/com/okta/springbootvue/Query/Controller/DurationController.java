@@ -31,7 +31,7 @@ public class DurationController {
     }
 
     @GetMapping("/duration/{duration}")
-    public Duration addStatus(@PathVariable String Duration){
+    public Duration addDuration(@PathVariable String Duration){
         Duration d = new Duration();
         d.setDuration(Duration);
         durationRepository.save(d);
