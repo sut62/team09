@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.bind.annotation.CrossOrigin;
 
 import java.util.Collection;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 import com.okta.springbootvue.Appointment.Entity.*;
@@ -17,7 +18,7 @@ import com.okta.springbootvue.Appointment.Repository.*;
 public class ReasonController {
 
     @Autowired
-    private final ReasonRepository reasonRepository;
+    private ReasonRepository reasonRepository;
     
     public ReasonController(ReasonRepository reasonRepository) {
         this.reasonRepository = reasonRepository;
@@ -28,11 +29,16 @@ public class ReasonController {
         return reasonRepository.findAll().stream().collect(Collectors.toList());
     }
 
+    @GetMapping("/reason/{reasonID}")
+    public Optional<Reason> Reason(@PathVariable Long reasonID) {
+        return reasonRepository.findById(reasonID);
+
+    }
+
     @GetMapping("/Reason/{name}")
     public Reason addReason(@PathVariable String name) {
         Reason r = new Reason();
-        r.setReasonName(name);
+        r.setReason(name);
         return reasonRepository.save(r);
-
     }
 }
