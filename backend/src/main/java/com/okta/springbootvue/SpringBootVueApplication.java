@@ -26,7 +26,7 @@ public class SpringBootVueApplication {
 	}
 
 	@Bean
-	ApplicationRunner init(final RegisterpatientRepository registerpatient, final GenderRepository genderRepository,
+	ApplicationRunner init(final RegisterpatientRepository registerpatientRepository, final GenderRepository genderRepository,
 			final ProvinceRepository provinceRepository, final NameTitleRepository nameTitleRepository ,QueryRepository queryRepository, DurationRepository durationRepository,
 			CongenitalDiseaseRepository congenitalDiseaseRepository,final CauseofDeathRepository causeofDeathRepository ,final PlaceRepository placeRepository) {
 		return args -> {
