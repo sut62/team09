@@ -23,8 +23,7 @@ public class CauseofDeath {
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator="CAUSEOFDEATH_seq")
     @Column(name="CAUSEOFDEATH_ID",unique = true, nullable = true)
     private @NonNull Long causeofdeathId;
-
-    private @NonNull String causeofdeathname;
+    private @NonNull String causeofdeath;
 
     public Long getCauseofDeathId() {
         return causeofdeathId;
@@ -33,10 +32,10 @@ public class CauseofDeath {
         this.causeofdeathId = causeofdeathId;
     }
 
-    public String getCauseofDeathName() {
-        return causeofdeathname;
+    public String getCauseofDeath() {
+        return causeofdeath;
     }
-    public void setCauseofDeathName(String causeofdeathname) {
-        this.causeofdeathname = causeofdeathname;
+    public void setCauseofDeath(String causeofdeath) {
+        this.causeofdeath = causeofdeath;
     }
 }

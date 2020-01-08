@@ -13,11 +13,11 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 
-import java.util.Date;
+// import java.util.Date;
 
-import com.okta.springbootvue.Regiterpatient.Entity.Gender;
-import com.okta.springbootvue.Regiterpatient.Entity.NameTitle;
-import com.okta.springbootvue.Regiterpatient.Entity.Regiterpatient;
+import com.okta.springbootvue.Registerpatient.Entity.Gender;
+import com.okta.springbootvue.Registerpatient.Entity.NameTitle;
+import com.okta.springbootvue.Registerpatient.Entity.Registerpatient;
 
 @Getter
 @Setter
@@ -32,16 +32,13 @@ public class RegisterDeaths {
     @GeneratedValue(strategy=GenerationType.SEQUENCE, generator="REGISTERDEATHS_seq")
 	@Column(name="REGISTERDEATHS_ID",unique = true, nullable = true)
     private @NonNull Long registerdeathId;
-    private @NonNull Integer idCardnumber;
 	private @NonNull String firstName;
     private @NonNull String lastName;
     private @NonNull Integer age;
-    private @NonNull Integer buddhist;
+    private @NonNull Integer born;
+    private @NonNull Integer death;
     private @NonNull String addressDetail;
-    private @NonNull String fatherName;
-	private @NonNull String motherName;
 	private @NonNull String mobilePhone;
-    private @NonNull String email;
     
     
     @ManyToOne(fetch = FetchType.EAGER, targetEntity = CauseofDeath.class)
@@ -52,10 +49,12 @@ public class RegisterDeaths {
     @JoinColumn(name = "PLACE_ID", insertable = true)
     private Place Place;
 
-    @ManyToOne(fetch = FetchType.EAGER, targetEntity = Regiterpatient.class)
-    @JoinColumn(name = "REGITERPATIENT_ID", insertable = true)
-    private Regiterpatient Regiterpatient;
+    @ManyToOne(fetch = FetchType.EAGER, targetEntity = Gender.class)
+    @JoinColumn(name = "GENDER_ID", insertable = true)
     private Gender gender;
+
+    @ManyToOne(fetch = FetchType.EAGER, targetEntity = NameTitle.class)
+    @JoinColumn(name = "NAMETITLE", insertable = true)    
     private NameTitle nameTitle;
 
     public void setPlace(Place place){
@@ -75,13 +74,6 @@ public class RegisterDeaths {
     }
     public void setRegisterDeathsId(Long registerdeathId) {
         this.registerdeathId = registerdeathId;
-    }
-    public Integer getIdCardnumber() {
-        return idCardnumber;
-    }
-
-    public void setIdCardnumber(Integer idCardnumber) {
-        this.idCardnumber = idCardnumber;
     }
 
     public String getFirstName() {
@@ -108,12 +100,20 @@ public class RegisterDeaths {
         this.age = age;
     }
 
-    public Integer getBuddhist() {
-        return buddhist;
+    public Integer getBorn() {
+        return born;
     }
 
-    public void setBuddhist(Integer buddhist) {
-        this.buddhist = buddhist;
+    public void setBorn(Integer born) {
+        this.born = born;
+    }
+
+    public Integer getDeath() {
+        return death;
+    }
+
+    public void setDeath(Integer death) {
+        this.death = death;
     }
 
     public String getAddressDetail() {
@@ -124,22 +124,6 @@ public class RegisterDeaths {
         this.addressDetail = addressDetail;
     }
 
-    public String getFatherName() {
-        return fatherName;
-    }
-
-    public void setFatherName(String fatherName) {
-        this.fatherName = fatherName;
-    }
-
-    public String getMotherName() {
-        return motherName;
-    }
-
-    public void setMotherName(String motherName) {
-        this.motherName = motherName;
-    }
-
     public String getMobilePhone() {
         return mobilePhone;
     }
@@ -147,15 +131,6 @@ public class RegisterDeaths {
     public void setMobilePhone(String mobilePhone) {
         this.mobilePhone = mobilePhone;
     }
-
-    public String getEmail() {
-        return email;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
-    }
-
     public Gender getGender() {
         return gender;
     }
@@ -171,10 +146,4 @@ public class RegisterDeaths {
         this.nameTitle = nameTitle;
     }
 
-	public void setRegiterpatient(Regiterpatient Regiterpatient) {
-        this.Regiterpatient = Regiterpatient;
-	}
-    public Regiterpatient gRegiterpatient(){
-        return Regiterpatient;
-    }
 }

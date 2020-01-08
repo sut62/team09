@@ -1,10 +1,9 @@
 package com.okta.springbootvue.RegisterDeaths.Controller;
 
 import java.util.Collection;
-import java.util.Optional;
 import java.util.stream.Collectors;
-import com.okta.springbootvue.Regiterpatient.Repository.*;
-import com.okta.springbootvue.Regiterpatient.Entity.*;
+import com.okta.springbootvue.Registerpatient.Repository.*;
+import com.okta.springbootvue.Registerpatient.Entity.*;
 import com.okta.springbootvue.RegisterDeaths.Repository.*;
 import com.okta.springbootvue.RegisterDeaths.Entity.*;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -35,20 +34,15 @@ public class RegisterDeathsController {
         this.registerDeathsRepository = registerDeathsRepository;
     }
 
-    @GetMapping("/RegisterDeaths")
-    public  Collection<RegisterDeaths> Place(){
+    @GetMapping("/RegisterDeath")
+    public  Collection<RegisterDeaths> RegisterDeath(){
         return registerDeathsRepository.findAll().stream().collect(Collectors.toList());
     }
-    @GetMapping("/RegisterDeaths/{registerdeathID}")
-    public  Optional<RegisterDeaths> RegisterDeaths(@PathVariable Long registerdeathID){
-        return registerDeathsRepository.findById(registerdeathID);
-    }
-    @PostMapping("/RegisterDeaths{idCardnumber}/{firstName}/{lastName}/{age}/{buddhist}/{addressDetail}/{fathername}/{mothername}/{mobilePhone}/{email}/{provinceId}/{nameTitileId}/{genderId}/{CauseofDeath}/{Place}")
-    public RegisterDeaths newRegisterDeaths(@PathVariable int idCardnumber,@PathVariable String firstName, @PathVariable String lastName,
-    @PathVariable int age,@PathVariable int buddhist,@PathVariable String addressDetail,
-    @PathVariable String fathername,@PathVariable String mothername,@PathVariable String mobilePhone,
-     @PathVariable String email, @PathVariable long provinceId, @PathVariable long nameTitileId,
-     @PathVariable long genderId, @PathVariable long birthdayId, @PathVariable long monthId,@PathVariable long causeofDeathId ,@PathVariable long placeId) {
+    
+    @PostMapping("/RegisterDeaths/{firstName}/{lastName}/{age}/{born}/{death}/{addressDetail}/{mobilePhone}/{provinceId}/{nameTitileId}/{genderId}/{causeofDeathId}/{placeId}")
+    public RegisterDeaths newRegisterDeaths(@PathVariable String firstName, @PathVariable String lastName,
+    @PathVariable int age,@PathVariable int born,@PathVariable int death,@PathVariable String addressDetail,@PathVariable String mobilePhone,@PathVariable long provinceId, @PathVariable long nameTitileId,
+     @PathVariable long genderId,@PathVariable long causeofDeathId ,@PathVariable long placeId) {
         RegisterDeaths registerDeaths = new RegisterDeaths();
         System.out.println("Name = " + firstName);
 
@@ -57,22 +51,17 @@ public class RegisterDeathsController {
         Place p = placeRepository.findById(placeId);
         NameTitle n = nameTitleRepository.findById(nameTitileId);
         Gender g = genderRepository.findById(genderId);
-
-        registerDeaths.setIdCardnumber(idCardnumber);
         registerDeaths.setFirstName(firstName);
         registerDeaths.setLastName(lastName);
         registerDeaths.setAge(age);
-        registerDeaths.setBuddhist(buddhist);
-        registerDeaths.setAddressDetail(addressDetail);
-        registerDeaths.setFatherName(fathername);
-        registerDeaths.setMotherName(mothername);       
+        registerDeaths.setBorn(born);
+        registerDeaths.setDeath(death);
+        registerDeaths.setAddressDetail(addressDetail);    
         registerDeaths.setMobilePhone(mobilePhone);
-        registerDeaths.setEmail(email);
 
 
         registerDeaths.setGender(g);
         registerDeaths.setNameTitle(n);
-
         registerDeaths.setCauseofDeath(c);
         registerDeaths.setPlace(p);
        
