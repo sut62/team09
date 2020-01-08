@@ -11,8 +11,10 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
+import com.okta.springbootvue.Registerpatient.Repository.*;
 
 import com.okta.springbootvue.Query.Entity.Query;
+import com.okta.springbootvue.Registerpatient.Entity.*;
 import com.fasterxml.jackson.annotation.JsonBackReference;
 
 import lombok.Data;
@@ -35,7 +37,14 @@ public class Query {
     private @NonNull Integer pressureDIA;
     private @NonNull String symptom;
 
+    private @NonNull Long registerId;
+	private @NonNull String firstName;
+    private @NonNull String lastName;
 
+    @ManyToOne(fetch = FetchType.EAGER, targetEntity = Duration.class)
+    @JoinColumn(name = "REGISTERPATIENT_ID", insertable = true)
+    private Registerpatient  registerpatient;
+    
     @ManyToOne(fetch = FetchType.EAGER, targetEntity = Duration.class)
     @JoinColumn(name = "DURATION_ID", insertable = true)
     private Duration duration;
@@ -47,11 +56,11 @@ public class Query {
     @ManyToOne()
     @JsonBackReference
 
-    public Long getQueryid() {
+    public Long getQueryIdx() {
         return queryid;
     }
 
-    public void setQueryid(Long queryid) {
+    public void setQueryIdx(Long queryid) {
         this.queryid = queryid;
     }
 
