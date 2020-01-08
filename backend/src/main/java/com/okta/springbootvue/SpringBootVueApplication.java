@@ -5,10 +5,15 @@ import com.okta.springbootvue.Registerpatient.Repository.*;
 
 import com.okta.springbootvue.Referral.Entity.*;
 import com.okta.springbootvue.Referral.Repository.*;
-
+import com.okta.springbootvue.Appointment.Entity.Clinic;
+import com.okta.springbootvue.Appointment.Entity.Demeanor;
+import com.okta.springbootvue.Appointment.Entity.Reason;
+import com.okta.springbootvue.Appointment.Repository.ClinicRepository;
+import com.okta.springbootvue.Appointment.Repository.DemeanorRepository;
+import com.okta.springbootvue.Appointment.Repository.ReasonRepository;
 import com.okta.springbootvue.Diagnose.Entity.*;
 import com.okta.springbootvue.Diagnose.Repository.*;
-
+import com.okta.springbootvue.Diagnose.Repository.DoctorRepository;
 import com.okta.springbootvue.Query.Repository.*;
 import com.okta.springbootvue.Query.Entity.*;
 import com.okta.springbootvue.RegisterDeaths.Entity.CauseofDeath;
@@ -37,7 +42,8 @@ public class SpringBootVueApplication {
 			final ProvinceRepository provinceRepository, final NameTitleRepository nameTitleRepository ,QueryRepository queryRepository, DurationRepository durationRepository,
 			CongenitalDiseaseRepository congenitalDiseaseRepository,final CauseofDeathRepository causeofDeathRepository ,final PlaceRepository placeRepository,
 			ReferralRepository referralRepository, DeliverRepository deliverRepository, ForwardTypeRepository forwardTypeRepository, ForwardToRepository forwardToRepository
-			, final DiseaseRepository diseaseRepository, final DoctorRepository doctorRepository) {
+			, final DiseaseRepository diseaseRepository, final DoctorRepository doctorRepository, final ClinicRepository clinicRepository
+			, final DemeanorRepository demeanorRepository, final ReasonRepository reasonRepository) {
 		return args -> {
 			// ===================================================================
 			final Gender gen1 = new Gender();
@@ -164,7 +170,23 @@ public class SpringBootVueApplication {
 			registerpatient.setFirstName(name); // set ชื่อ (name) ให้ Object ชื่อ Member
 			registerpatientRepository.save(registerpatient); // บันทึก Objcet ชื่อ Member
 		});
+		Stream.of("โรคหัวใจ", "โรคกระดูก", "โรคผิวหนัง", "อายุรกรรมทั่วไป").forEach(clinic -> {
+			Clinic c = new Clinic();
+			c.setClinicName(clinic);
+			clinicRepository.save(c);
+		});
 
+		Stream.of("งดเครื่องดื่ม งดอาหาร อย่างน้อย 8-10 ชั่วโมงก่อนการตรวจ", "งดดื่มแอลกอฮอล์ อย่างน้อย 24 ชั่วโมงก่อนการตรวจ", "นำผลการตรวจหรือรายงานจากแพทย์มาด้วย", "เก็บตัวอย่างอุจจาระ").forEach(demeanor -> {
+			Demeanor d = new Demeanor();
+			d.setDemeanorName(demeanor);
+			demeanorRepository.save(d);
+		});
+
+		Stream.of("ติดตามอาการ", "ตรวจโรค", "ตรวจครรภ์", "เจาะเลือด", "ฉีดวัคซีน", "ผ่าตัด").forEach(reason -> {
+			Reason r = new Reason();
+			r.setReasonName(reason);
+			reasonRepository.save(r);
+		});
 		CongenitalDisease t1 = new CongenitalDisease();
 		t1.setCongenitalDisease("เจ็บจี๊ดๆที่อก");
 		congenitalDiseaseRepository.save(t1);
@@ -185,6 +207,7 @@ public class SpringBootVueApplication {
 
 		diseaseRepository.findAll().forEach(System.out::println);
 		doctorRepository.findAll().forEach(System.out::println);
+
 	};
 	}
 }
