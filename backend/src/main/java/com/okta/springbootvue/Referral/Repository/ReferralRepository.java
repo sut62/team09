@@ -1,6 +1,6 @@
-package com.cpe.springbootvue.Referral.Repository;
+package com.okta.springbootvue.Referral.Repository;
 
-import com.cpe.springbootvue.Referral.Entity.Referral;
+import com.okta.springbootvue.Referral.Entity.Referral;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.rest.core.annotation.RepositoryRestResource;
