@@ -4,7 +4,13 @@ import com.okta.springbootvue.Registerpatient.Entity.*;
 import com.okta.springbootvue.Registerpatient.Repository.*;
 
 import com.okta.springbootvue.Query.Repository.QueryRepository;
+import com.okta.springbootvue.RegisterDeaths.Entity.CauseofDeath;
+import com.okta.springbootvue.RegisterDeaths.Entity.Place;
+import com.okta.springbootvue.RegisterDeaths.Repository.CauseofDeathRepository;
+import com.okta.springbootvue.RegisterDeaths.Repository.PlaceRepository;
 import com.okta.springbootvue.Query.Repository.DurationRepository;
+import com.okta.springbootvue.Query.Entity.CongenitalDisease;
+import com.okta.springbootvue.Query.Entity.Duration;
 import com.okta.springbootvue.Query.Repository.CongenitalDiseaseRepository;
 import java.util.stream.Stream;
 import org.springframework.context.annotation.Bean;
@@ -22,7 +28,7 @@ public class SpringBootVueApplication {
 	@Bean
 	ApplicationRunner init(final RegisterpatientRepository registerpatient, final GenderRepository genderRepository,
 			final ProvinceRepository provinceRepository, final NameTitleRepository nameTitleRepository ,QueryRepository queryRepository, DurationRepository durationRepository,
-			CongenitalDiseaseRepository congenitalDiseaseRepository) {
+			CongenitalDiseaseRepository congenitalDiseaseRepository,final CauseofDeathRepository causeofDeathRepository ,final PlaceRepository placeRepository) {
 		return args -> {
 			// ===================================================================
 			final Gender gen1 = new Gender();
@@ -84,6 +90,20 @@ public class SpringBootVueApplication {
 
 			durationRepository.findAll().forEach(System.out::println);
 			congenitalDiseaseRepository.findAll().forEach(System.out::println);
+
+			Stream.of("โรคประจำตัว","อุบัติเหตุ","ฆาตกรรม","โรคติดต่อ","ไม่ทราบสาเหตุ").forEach(causeofdeath -> {
+				final CauseofDeath c = new CauseofDeath();
+				c.setCauseofDeath(causeofdeath);
+				causeofDeathRepository.save(c);
+			});
+			causeofDeathRepository.findAll().forEach(System.out::println);
+
+	Stream.of("โรงพยาบาล","บ้าน","บนท้องถนน","แม่น้ำ","สถานที่สาธารณะ").forEach(place -> {
+				final Place pp = new Place();
+				pp.setPlace(place);
+				placeRepository.save(pp);
+			});
+			placeRepository.findAll().forEach(System.out::println);
 
 	};
 	}
