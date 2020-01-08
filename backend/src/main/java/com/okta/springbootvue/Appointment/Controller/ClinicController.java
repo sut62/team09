@@ -7,7 +7,9 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.bind.annotation.CrossOrigin;
 
 import java.util.Collection;
+import java.util.Optional;
 import java.util.stream.Collectors;
+
 
 import com.okta.springbootvue.Appointment.Entity.*;
 import com.okta.springbootvue.Appointment.Repository.*;
@@ -17,7 +19,7 @@ import com.okta.springbootvue.Appointment.Repository.*;
 public class ClinicController {
 
     @Autowired
-    private final ClinicRepository clinicRepository;
+    private ClinicRepository clinicRepository;
     
     public ClinicController(ClinicRepository clinicRepository) {
         this.clinicRepository = clinicRepository;
@@ -28,10 +30,16 @@ public class ClinicController {
         return clinicRepository.findAll().stream().collect(Collectors.toList());
     }
 
+    @GetMapping("/clinic/{clinicId}")
+    public Optional<Clinic>Clinic(@PathVariable Long clinicId) {
+        return clinicRepository.findById(clinicId);
+
+    }
+
     @GetMapping("/clinic/{name}")
     public Clinic addClinic(@PathVariable String name) {
         Clinic c = new Clinic();
-        c.setClinicName(name);
+        c.setClinic(name);
         return clinicRepository.save(c);
 
     }

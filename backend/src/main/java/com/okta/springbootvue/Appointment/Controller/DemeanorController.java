@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.bind.annotation.CrossOrigin;
 
 import java.util.Collection;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 import com.okta.springbootvue.Appointment.Entity.*;
@@ -17,7 +18,7 @@ import com.okta.springbootvue.Appointment.Repository.*;
 public class DemeanorController {
 
     @Autowired
-    private final DemeanorRepository demeanorRepository;
+    private DemeanorRepository demeanorRepository;
     
     public DemeanorController(DemeanorRepository demeanorRepository) {
         this.demeanorRepository = demeanorRepository;
@@ -28,11 +29,16 @@ public class DemeanorController {
         return demeanorRepository.findAll().stream().collect(Collectors.toList());
     }
 
+    @GetMapping("/demeanor/{demeanorID}")
+    public Optional<Demeanor> Demeanor(@PathVariable Long demeanorID) {
+        return demeanorRepository.findById(demeanorID);
+
+    }
+
     @GetMapping("/demeanor/{name}")
     public Demeanor addDemeanor(@PathVariable String name) {
         Demeanor d = new Demeanor();
-        d.setDemeanorName(name);
+        d.setDemeanor(name);
         return demeanorRepository.save(d);
-
     }
 }

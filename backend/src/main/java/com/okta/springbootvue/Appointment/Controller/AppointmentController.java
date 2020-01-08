@@ -7,9 +7,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.bind.annotation.CrossOrigin;
 
-import java.sql.Time;
 import java.util.Collection;
-import java.util.Date;
 import java.util.stream.Collectors;
 
 import com.okta.springbootvue.Appointment.Entity.*;
@@ -19,7 +17,6 @@ import com.okta.springbootvue.Diagnose.Repository.DiagnoseRepository;
 import com.okta.springbootvue.Diagnose.Entity.Doctor;
 import com.okta.springbootvue.Diagnose.Repository.DoctorRepository;
 
-
 @RestController
 @CrossOrigin(origins = "http://localhost:8080")
 public class AppointmentController {
@@ -27,53 +24,51 @@ public class AppointmentController {
     @Autowired
     private final AppointmentRepository appointmentRepository;
     @Autowired
-    private DiagnoseRepository diagnoseRepository;
-    @Autowired
     private ClinicRepository clinicRepository;
     @Autowired
     private DemeanorRepository demeanorRepository;
     @Autowired
     private ReasonRepository reasonRepository;
+    
+    
     @Autowired
-    private DoctorRepository doctorRepository;
-    
-    
-
     AppointmentController(AppointmentRepository appointmentRepository) {
         this.appointmentRepository = appointmentRepository;
     }
 
-    @GetMapping("/appointment")
+    @GetMapping("/appointments")
     public Collection<Appointment> Appointments() {
         return appointmentRepository.findAll().stream().collect(Collectors.toList());
     }
 
-    @PostMapping("/appointment/{diagnoseId}/{clinicId}/{demeanorId}/{reasonId}/{doctorId}/{appointDate}/{time}")
+    @PostMapping("/appointment/{diagnoseId}/{clinicId}/{demeanorId}/{reasonId}/{doctorId}/{appointDate}/{appointTime}")
     public Appointment newAppointment(
     @PathVariable final long diagnoseId,
     @PathVariable final long clinicId,
     @PathVariable final long demeanorId,
     @PathVariable final long reasonId, 
     @PathVariable final long doctorId,
-    @PathVariable final Date appointDate,
-    @PathVariable final Time time) {
+    @PathVariable final String appointDate,
+    @PathVariable final String appointTime) {
+    
+    Appointment newAppointment = new Appointment();
 
     //findById
     Diagnose diagnose = diagnoseRepository.findById(diagnoseId);
-    Clinic clinic = clinicRepository.findById(clinicId);
-    Demeanor demeanor = demeanorRepository.findById(demeanorId);
-    Reason reason = reasonRepository.findById(reasonId);
+    Clinic c = clinicRepository.findById(clinicId);
+    Demeanor d = demeanorRepository.findById(demeanorId);
+    Reason r = reasonRepository.findById(reasonId);
     Doctor doctor = doctorRepository.findById(doctorId);
-    Appointment newAppointment = new Appointment();
+    
 
     //set
     newAppointment.setDiagnose(diagnose);
-    newAppointment.setClinic(clinic);
-    newAppointment.setDemeanor(demeanor);
-    newAppointment.setReason(reason);
+    newAppointment.setClinic(c);
+    newAppointment.setDemeanor(d);
+    newAppointment.setReason(r);
     newAppointment.setDoctor(doctor);
     newAppointment.setAppointDate(appointDate);
-    newAppointment.setTime(time);
+    newAppointment.setAppointTime(appointTime);
 
     return appointmentRepository.save(newAppointment); //save
     
