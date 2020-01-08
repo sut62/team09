@@ -1,4 +1,4 @@
-package com.cpe.springbootvue.Referral.Entity;
+package com.okta.springbootvue.Referral.Entity;
 
 import javax.persistence.*;
 import lombok.*;
