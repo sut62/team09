@@ -7,5 +7,5 @@ import org.springframework.data.rest.core.annotation.RepositoryRestResource;
 
 @RepositoryRestResource  
 public interface ClinicRepository extends JpaRepository<Clinic, Long> {
-    Clinic findById(long id);
+    Clinic findById(long clinicId);
 }

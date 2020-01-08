@@ -7,5 +7,5 @@ import org.springframework.data.rest.core.annotation.RepositoryRestResource;
 
 @RepositoryRestResource  
 public interface ReasonRepository extends JpaRepository<Reason, Long> {
-    Reason findById(long id);
+    Reason findById(long reasonId);
 }

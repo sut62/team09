@@ -7,5 +7,5 @@ import org.springframework.data.rest.core.annotation.RepositoryRestResource;
 
 @RepositoryRestResource  
 public interface DemeanorRepository extends JpaRepository<Demeanor, Long> {
-    Demeanor findById(long id);
+    Demeanor findById(long demeanorId);
 }
