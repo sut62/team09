@@ -6,7 +6,11 @@ import com.okta.springbootvue.Registerpatient.Repository.*;
 import com.okta.springbootvue.Referral.Entity.*;
 import com.okta.springbootvue.Referral.Repository.*;
 
-import com.okta.springbootvue.Query.Repository.QueryRepository;
+import com.okta.springbootvue.Diagnose.Entity.*;
+import com.okta.springbootvue.Diagnose.Repository.*;
+
+import com.okta.springbootvue.Query.Repository.*;
+import com.okta.springbootvue.Query.Entity.*;
 import com.okta.springbootvue.RegisterDeaths.Entity.CauseofDeath;
 import com.okta.springbootvue.RegisterDeaths.Entity.Place;
 import com.okta.springbootvue.RegisterDeaths.Repository.CauseofDeathRepository;
@@ -32,7 +36,8 @@ public class SpringBootVueApplication {
 	ApplicationRunner init(final RegisterpatientRepository registerpatientRepository, final GenderRepository genderRepository,
 			final ProvinceRepository provinceRepository, final NameTitleRepository nameTitleRepository ,QueryRepository queryRepository, DurationRepository durationRepository,
 			CongenitalDiseaseRepository congenitalDiseaseRepository,final CauseofDeathRepository causeofDeathRepository ,final PlaceRepository placeRepository,
-			ReferralRepository referralRepository, DeliverRepository deliverRepository, ForwardTypeRepository forwardTypeRepository, ForwardToRepository forwardToRepository) {
+			ReferralRepository referralRepository, DeliverRepository deliverRepository, ForwardTypeRepository forwardTypeRepository, ForwardToRepository forwardToRepository
+			, final DiseaseRepository diseaseRepository, final DoctorRepository doctorRepository) {
 		return args -> {
 			// ===================================================================
 			final Gender gen1 = new Gender();
@@ -138,6 +143,48 @@ public class SpringBootVueApplication {
 	deliverRepository.findAll().forEach(System.out::println);
 	// ===================================================================
 
+		Stream.of("กรดไหลย้อน", "โรคเบาหวาน", "โรคความดันโลหิตสูง", "ไขมันในเลือดสูง", "โรคหลอดเลือดหัวใจ", "ถุงลมโป่งพอง" ,"ธาลัสซีเมีย",
+		"กรวยไตอักเสบ", "มะเร็งปากมดลูก", "มะเร็งเต้านม", "โรคภูมิแพ้", "โรคหืด (หอบหืด)" , "โรคอ้วน/น้ำหนักตัวเกิน" , "วัณโรค", 
+		"ไข้หวัดใหญ่", "ไข้เลือดออก", "ปอดอักเสบ (ปอดบวม)", "โรคมือเท้าปาก", "อีสุกอีใส", "อาหารเป็นพิษ", "พิษสุนัขบ้า", "ซิฟิลิส"
+		).forEach(name -> {
+		final Disease disease = new Disease(); // สร้าง Object Disease
+		disease.setName(name); // set ชื่อ (name) ให้ Object ชื่อ Disease
+		diseaseRepository.save(disease); // บันทึก Objcet ชื่อ Disease
+		});
+
+		Stream.of("อดทน พากเพียร", "ดวงกมล เริงร่า", "นอนน้อย นอนนะ", "งามสี ยามเช้า").forEach(name -> {
+		final Doctor doctor = new Doctor(); // สร้าง Object Doctor
+		doctor.setName(name); // set ชื่อ (name) ให้ Object ชื่อ Doctor
+		doctorRepository.save(doctor); // บันทึก Objcet ชื่อ Doctor
+		});
+
+
+		Stream.of("มานี หนีมา", "ปราณา รสดี", "ทรงไท ไตรรัก", "ฝักใฝ่ ขาวสะอาด").forEach(name -> {
+			Registerpatient registerpatient = new Registerpatient(); // สร้าง Object Member
+			registerpatient.setFirstName(name); // set ชื่อ (name) ให้ Object ชื่อ Member
+			registerpatientRepository.save(registerpatient); // บันทึก Objcet ชื่อ Member
+		});
+
+		CongenitalDisease t1 = new CongenitalDisease();
+		t1.setCongenitalDisease("เจ็บจี๊ดๆที่อก");
+		congenitalDiseaseRepository.save(t1);
+
+		CongenitalDisease t2 = new CongenitalDisease();
+		t2.setCongenitalDisease("จามไม่หยุด คัดจมูก");
+		congenitalDiseaseRepository.save(t2);
+
+		Query query1 = new Query();
+		query1.setRegisterpatient(registerpatientRepository.findById(1));
+		query1.setCongenitalDisease(t1);
+		queryRepository.save(query1);
+
+		Query query2 = new Query();
+		query2.setRegisterpatient(registerpatientRepository.findById(2));
+		query2.setCongenitalDisease(t2);
+		queryRepository.save(query2);
+
+		diseaseRepository.findAll().forEach(System.out::println);
+		doctorRepository.findAll().forEach(System.out::println);
 	};
 	}
 }
