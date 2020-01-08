@@ -3,6 +3,9 @@ package com.okta.springbootvue;
 import com.okta.springbootvue.Registerpatient.Entity.*;
 import com.okta.springbootvue.Registerpatient.Repository.*;
 
+import com.okta.springbootvue.Referral.Entity.*;
+import com.okta.springbootvue.Referral.Repository.*;
+
 import com.okta.springbootvue.Query.Repository.QueryRepository;
 import com.okta.springbootvue.RegisterDeaths.Entity.CauseofDeath;
 import com.okta.springbootvue.RegisterDeaths.Entity.Place;
@@ -28,7 +31,8 @@ public class SpringBootVueApplication {
 	@Bean
 	ApplicationRunner init(final RegisterpatientRepository registerpatientRepository, final GenderRepository genderRepository,
 			final ProvinceRepository provinceRepository, final NameTitleRepository nameTitleRepository ,QueryRepository queryRepository, DurationRepository durationRepository,
-			CongenitalDiseaseRepository congenitalDiseaseRepository,final CauseofDeathRepository causeofDeathRepository ,final PlaceRepository placeRepository) {
+			CongenitalDiseaseRepository congenitalDiseaseRepository,final CauseofDeathRepository causeofDeathRepository ,final PlaceRepository placeRepository,
+			ReferralRepository referralRepository, DeliverRepository deliverRepository, ForwardTypeRepository forwardTypeRepository, ForwardToRepository forwardToRepository) {
 		return args -> {
 			// ===================================================================
 			final Gender gen1 = new Gender();
@@ -104,6 +108,35 @@ public class SpringBootVueApplication {
 				placeRepository.save(pp);
 			});
 			placeRepository.findAll().forEach(System.out::println);
+			// ===================================================================
+			Stream.of("ส่งจาก CUP", "ส่งในจังหวัด", "ส่งนอกจังหวัด").forEach(forwardType -> {
+				ForwardType f = new ForwardType();
+				f.setForwardType(forwardType);
+				forwardTypeRepository.save(f);
+			});
+	forwardTypeRepository.findAll().forEach(System.out::println);
+
+
+				Stream.of("โรงพยาบาลเทคโนโลยีสุรนารี", "โรงพยาบาลมหาราชนครราชสีมา", "โรงพยาบาลค่ายสุรนารี", "โรงพยาบาลป.แพทย์2", "โรงพยาบาลกรุงเทพราชสีมา", "โรงพยาบาลกรุงเทพปากช่อง", "โรงพยาบาลเทพรัตน์นครราชสีมา", "โรงพยาบาลเซนต์เมรี่", "โรงพยาบาลแก้งสนามนาง",
+						  "โรงพยาบาลขามทะเลสอ", "โรงพยาบาลขามสะแกแสง", "โรงพยาบาลคง", "โรงพยาบาลครบุรี", "โรงพยาบาลจักราช", "โรงพยาบาลเฉลิมพระเกียรติ", "โรงพยาบาลโชคชัย", "โรงพยาบาลชุมพวง", "โรงพยาบาลด่านขุนทด", "โรงพยาบาลเทพารักษ์", "โรงพยาบาลโนนไทย",
+						  "โรงพยาบาลโนนสูง", "โรงพยาบาลโนนแดง", "โรงพยาบาลบัวลาย", "โรงพยาบาลบัวใหญ่", "โรงพยาบาลบ้านเหลื่อม", "โรงพยาบาลประทาย", "โรงพยาบาลปักธงชัย", "โรงพยาบาลปากช่องนานา", "โรงพยาบาลพระทองคำ", "โรงพยาบาลพิมาย", "โรงพยาบาลเมืองยาง",
+						  "โรงพยาบาลลำทะเมนชัย", "โรงพยาบาลวังน้ำเขียว", "โรงพยาบาลเสิงสาง", "โรงพยาบาลสีคิ้ว", "โรงพยาบาลสีดา", "โรงพยาบาลสูงเนิน", "โรงพยาบาลหนองบุญมาก", "โรงพยาบาลห้วยแถลง", "โรงพยาบาลบุรีรัมย์", "โรงพยาบาลเอกชนบุรีรัมย์", "โรงพยาบาลชัยภูมิ",
+						  "โรงพยาบาลขอนแก่น", "โรงพยาบาลขอนแก่น ราม", "โรงพยาบาลศรีนครินทร์", "โรงพยาบาลรวมแพทย์", "โรงพยาบาลศรีสะเกษ", "โรงพยาบาลกาฬสินธุ์", "โรงพยาบาลค่ายจักรพงษ์", "โรงพยาบาลเจ้าพระยาอภัยภูเบศร", "โรงพยาบาลเมืองฉะเชิงเทรา", "โรงพยาบาลเกษมราษฎร์",
+						  "โรงพยาบาลสระบุรี").forEach(forwardTo -> {
+				ForwardTo t = new ForwardTo();
+				t.setForwardTo(forwardTo);
+				forwardToRepository.save(t);
+			});
+	forwardToRepository.findAll().forEach(System.out::println);
+
+
+				Stream.of("รับไว้รักษาต่อ", "เกิดภาวะแทรกซ้อน", "ไม่สามารถรักษาได้", "การวินิจฉัย/รักษา", "ขาดเครื่องมือทางการแพทย์", "ขาดผู้เชี่ยวชาญเฉพาะด้าน", "ส่งต่อตามสิทธิการรักษา", "ความประสงค์ของผู้ป่วย/ญาติ").forEach(deliver -> {
+				Deliver d = new Deliver();
+				d.setDeliver(deliver);
+				deliverRepository.save(d);
+			});
+	deliverRepository.findAll().forEach(System.out::println);
+	// ===================================================================
 
 	};
 	}
