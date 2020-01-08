@@ -23,7 +23,7 @@ public class Reason {
 	@Column(name="REASON_ID",unique = true, nullable = true)
     private @NonNull Long reasonId;
     
-    private @NonNull String reasonName;
+    private @NonNull String reason;
 
     public Long getReasonId() {
         return reasonId;
@@ -32,10 +32,10 @@ public class Reason {
         this.reasonId = reasonId;
     }
 
-    public String getReasonName() {
-        return reasonName;
+    public String getReason() {
+        return reason;
     }
-    public void setReasonName(String reasonName) {
-        this.reasonName = reasonName;
+    public void setReason(String reason) {
+        this.reason = reason;
     }
 }

@@ -23,7 +23,7 @@ public class Demeanor {
 	@Column(name="DEMEANOR_ID",unique = true, nullable = true)
     private @NonNull Long demeanorId;
     
-    private @NonNull String demeanorName;
+    private @NonNull String demeanor;
 
     public Long getDemeanorId() {
         return demeanorId;
@@ -32,10 +32,10 @@ public class Demeanor {
         this.demeanorId = demeanorId;
     }
 
-    public String getDemeanorName() {
-        return demeanorName;
+    public String getDemeanor() {
+        return demeanor;
     }
-    public void setDemeanorName(String demeanorName) {
-        this.demeanorName = demeanorName;
+    public void setDemeanor(String demeanor) {
+        this.demeanor = demeanor;
     }
 }
