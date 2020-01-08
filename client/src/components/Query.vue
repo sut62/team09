@@ -5,6 +5,17 @@
         class="font-weight-black text-uppercase display-3 light-blue accent-3 text-center">สอบถามอาการ</h2>
     </v-flex>
 
+       <v-col cols="12" >
+      <v-select 
+            :items="registerpatients"
+             v-model="selectregisterpatient"
+             label="ชื่อผู้ป่วย" 
+             item-text="name"
+             item-value="id"
+             prepend-icon="person"
+             required>
+          </v-select> 
+      </v-col>
 
     <v-row centered>
       <v-col cols="4" >
