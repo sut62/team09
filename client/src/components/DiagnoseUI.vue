@@ -23,7 +23,7 @@
                 disabled
                 prepend-icon="local_pharmacy" 
                 label="โรคประจำตัว"
-                v-model="addsymptom"
+                v-model="congenitalDisease"
                 >
                 </v-text-field>
 
@@ -95,7 +95,7 @@ export default {
       selectquery: "",
       selectdisease: "",
       selectdoctor: "",
-      addsymptom: "",
+      congenitalDisease: "",
      
     };
   }, 
@@ -132,7 +132,7 @@ export default {
           alert("สำเร็จ")
           let blankDate = {
             queryId: "",
-            addsymptom: "",
+            congenitalDisease: "",
             diseaseId: "",
             doctorId: ""
           };
@@ -155,7 +155,7 @@ export default {
         console.log(this.querys[i].id);
         if(this.selectquery == this.querys[i].id){
         //console.log(this.querys[i].addsymptom)
-          this.addsymptom = this.querys[i].addsymptom;
+          this.congenitalDisease = this.querys[i].congenitalDisease;
         }
       }
       
@@ -198,14 +198,14 @@ axios.get(`http://localhost:9000/query`)
       console.log(  
         response.data[i].queryId, 
         response.data[i].registerpatient.firstName , 
-        response.data[i].symptom.addSymptom 
+        response.data[i].congenitalDisease.CongenitalDisease 
         );
       itemquery.push({
         id: response.data[i].queryId,
         idregisterpatient : response.data[i].registerpatient.registerId ,
         name : response.data[i].registerpatient.firstName ,
-        idsymptom : response.data[i].symptom.symptomId ,
-        addsymptom :  response.data[i].symptom.addSymptom
+        idcongenitalDisease : response.data[i].congenitalDisease.congenitalDiseaseId ,
+        addCongenitalDisease :  response.data[i].congenitalDisease.CongenitalDisease
         
       })
     }
