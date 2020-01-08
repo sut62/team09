@@ -22,7 +22,7 @@ public class Place {
     @Column(name="PLACE_ID",unique = true, nullable = true)
     private @NonNull Long placeId;
 
-    private @NonNull String placename;
+    private @NonNull String place;
 
 
     public Long getPlaceId() {
@@ -32,11 +32,11 @@ public class Place {
         this.placeId = placeId;
     }
 
-    public String getPlaceName() {
-        return placename;
+    public String getPlace() {
+        return place;
     }
-    public void setPlaceName(String placename) {
-        this.placename = placename;
+    public void setPlace(String place) {
+        this.place = place;
     }
 
 }
