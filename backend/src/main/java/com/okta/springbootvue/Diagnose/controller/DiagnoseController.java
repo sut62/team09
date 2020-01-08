@@ -9,13 +9,13 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.Collection;
 import java.util.stream.Collectors;
 
-import com.okta.springbootvue.Diagnose.Entity.Query;
+import com.okta.springbootvue.Query.Entity.Query;
 import com.okta.springbootvue.Diagnose.Entity.Doctor;
 import com.okta.springbootvue.Diagnose.Entity.Disease;
 import com.okta.springbootvue.Diagnose.Entity.Diagnose;
 import com.okta.springbootvue.Diagnose.Repository.DiseaseRepository;
 import com.okta.springbootvue.Diagnose.Repository.DoctorRepository;
-import com.okta.springbootvue.Diagnose.Repository.QueryRepository;
+import com.okta.springbootvue.Query.Repository.QueryRepository;
 import com.okta.springbootvue.Diagnose.Repository.DiagnoseRepository;
 
 import org.springframework.web.bind.annotation.CrossOrigin;
