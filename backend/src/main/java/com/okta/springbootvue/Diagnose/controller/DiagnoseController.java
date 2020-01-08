@@ -54,9 +54,9 @@ public class DiagnoseController {
         diagnose.setQuery(query);
         diagnose.setDoctor(doctor);
         diagnose.setDisease(disease);
-        // domitoryrental.setNameMember(booking.getMember().getFirstName());
-        // domitoryrental.setNameOwner(owner.getName());
-        //domitoryrental.setNameTypeagreement(typeagreement.getName());
+        diagnose.setNameRegister(query.getRegisterpatient().getFirstName());
+        diagnose.setNameDoctor(doctor.getName());
+        diagnose.setNameDisease(disease.getName());
 
         return diagnoseRepository.save(diagnose);
     }
