@@ -1,4 +1,4 @@
-package com.okta.springbootvue;
+﻿package com.okta.springbootvue;
 
 import com.okta.springbootvue.Registerpatient.Entity.*;
 import com.okta.springbootvue.Registerpatient.Repository.*;
@@ -24,6 +24,7 @@ import com.okta.springbootvue.Query.Repository.DurationRepository;
 import com.okta.springbootvue.Query.Entity.CongenitalDisease;
 import com.okta.springbootvue.Query.Entity.Duration;
 import com.okta.springbootvue.Query.Repository.CongenitalDiseaseRepository;
+
 import java.util.stream.Stream;
 import org.springframework.context.annotation.Bean;
 import org.springframework.boot.ApplicationRunner;
