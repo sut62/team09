@@ -41,7 +41,7 @@ public class RegisterDeathsController {
     
     @PostMapping("/RegisterDeaths/{firstName}/{lastName}/{age}/{born}/{death}/{addressDetail}/{mobilePhone}/{provinceId}/{nameTitileId}/{genderId}/{causeofDeathId}/{placeId}")
     public RegisterDeaths newRegisterDeaths(@PathVariable String firstName, @PathVariable String lastName,
-    @PathVariable int age,@PathVariable int born,@PathVariable int death,@PathVariable String addressDetail,@PathVariable String mobilePhone,@PathVariable long provinceId, @PathVariable long nameTitileId,
+    @PathVariable int age,@PathVariable String born,@PathVariable String death,@PathVariable String addressDetail,@PathVariable String mobilePhone,@PathVariable long provinceId, @PathVariable long nameTitileId,
      @PathVariable long genderId,@PathVariable long causeofDeathId ,@PathVariable long placeId) {
         RegisterDeaths registerDeaths = new RegisterDeaths();
         System.out.println("Name = " + firstName);
