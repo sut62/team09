@@ -18,6 +18,14 @@ public class CongenitalDisease {
   
   private @NonNull String CongenitalDisease;
 
+    public String getCongenitalDisease() {
+        return this.CongenitalDisease;
+    }
+
+    public void setCongenitalDisease(String CongenitalDisease) {
+        this.CongenitalDisease = CongenitalDisease;
+    }
+
     public Long getCongenitalDiseaseId() {  
         return congenitalDiseaseId;
     }
@@ -26,9 +34,6 @@ public class CongenitalDisease {
         this.congenitalDiseaseId = CongenitalDiseaseId;
     }
 
-    public String getCongenitalDisease() { 
-        return CongenitalDisease;
-    }
 
     public void setDuration(String CongenitalDisease) { 
         this.CongenitalDisease = CongenitalDisease;
