@@ -35,8 +35,8 @@ public class RegisterDeaths {
 	private @NonNull String firstName;
     private @NonNull String lastName;
     private @NonNull Integer age;
-    private @NonNull Integer born;
-    private @NonNull Integer death;
+    private @NonNull String born;
+    private @NonNull String death;
     private @NonNull String addressDetail;
 	private @NonNull String mobilePhone;
     
@@ -100,19 +100,19 @@ public class RegisterDeaths {
         this.age = age;
     }
 
-    public Integer getBorn() {
+    public String getBorn() {
         return born;
     }
 
-    public void setBorn(Integer born) {
+    public void setBorn(String born) {
         this.born = born;
     }
 
-    public Integer getDeath() {
+    public String getDeath() {
         return death;
     }
 
-    public void setDeath(Integer death) {
+    public void setDeath(String death) {
         this.death = death;
     }
 
