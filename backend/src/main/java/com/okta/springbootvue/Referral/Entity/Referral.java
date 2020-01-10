@@ -1,6 +1,9 @@
 package com.okta.springbootvue.Referral.Entity;
 
 import javax.persistence.*;
+
+import com.okta.springbootvue.Diagnose.entity.Diagnose;
+
 import lombok.*;
 
 
@@ -15,8 +18,6 @@ public class Referral {
     @Column(name="REFERRAL_ID",unique = true, nullable = true)
 	private @NonNull Long referralId;
     private @NonNull String note;
-    private @NonNull String firstName;
-    private @NonNull String a;
 
 
     @ManyToOne(fetch = FetchType.EAGER, targetEntity = ForwardTo.class)
@@ -32,6 +33,18 @@ public class Referral {
     @JoinColumn(name = "FORWARDTYPE_ID", insertable = true)
     private ForwardType forwardType;
 
+    @ManyToOne(fetch = FetchType.EAGER, targetEntity = Diagnose.class)
+    @JoinColumn(name = "DIAGNOSE_ID", insertable = true)
+    private Diagnose diagnose;
+
+    public Diagnose getDiagnose() {
+        return this.diagnose;
+    }
+
+    public void setDiagnose(Diagnose diagnose) {
+        this.diagnose = diagnose;
+    }
+
     public Long getReferralId() {
 		return referralId;
 	}
@@ -39,13 +52,7 @@ public class Referral {
     public void setReferralId(Long referralId) {
 		this.referralId = referralId;
 	}
-    public String getA() {
-		return a;
-	}
 
-    public void setA(String a) {
-        this.a = a;
-    }
     public String getNote() {
 		return note;
 	}
