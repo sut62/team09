@@ -41,6 +41,7 @@ public class RegisterpatientController {
            @PathVariable int age,@PathVariable int weight,@PathVariable int height,@PathVariable String addressDetail,@PathVariable String mobilePhone,
            @PathVariable long provinceId, @PathVariable long nameTitileId,
             @PathVariable long genderId) {
+
         Registerpatient newRegiterpatient = new Registerpatient();
         
         Province p = provinceRepository.findById(provinceId);
@@ -54,7 +55,6 @@ public class RegisterpatientController {
         newRegiterpatient.setHeight(height);
         newRegiterpatient.setAddressDetail(addressDetail);    
         newRegiterpatient.setMobilePhone(mobilePhone);
-
         newRegiterpatient.setProvince(p);
         newRegiterpatient.setGender(g);
         newRegiterpatient.setNameTitle(n);
