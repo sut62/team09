@@ -1,19 +1,14 @@
 <template>
   <v-app>
-      <Query/>
+    <router-view />
   </v-app>
 </template>
 
 <script>
-import Query from './components/Query';
-
 export default {
-  name: 'App',
-  components: {
-    Query,
-  },
-  data: () => ({
-    //
-  }),
-};
+  name: "App",
+  data() {
+    return {}
+  }
+}
 </script>
