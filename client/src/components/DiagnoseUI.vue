@@ -1,7 +1,7 @@
 <template>
   <v-container>
     <v-flex>
-      <h2 class="font-weight-black text-uppercase display-3 lime accent-1 text-center">Diagnose</h2>
+      <h2 class="font-weight-black text-uppercase display-3 lime accent-1 text-center">วินิจฉัยโรค</h2>
     </v-flex>
 
     <v-row justify="center">
@@ -9,7 +9,7 @@
         <v-select
           :items="querys"
           v-model="selectquery"
-          label="ชื่อ-สกุล"
+          label="ชื่อผู้ป่วย"
           item-text="firstName"
           item-value="queryid"
           prepend-icon="local_hospital"
@@ -17,6 +17,7 @@
           required
           @input="selectque"
           @change="getCongenitalDisease"
+          
 
         ></v-select>
 
@@ -28,19 +29,18 @@
           v-model="congenitalDisease"
         ></v-text-field>
 
-        <!-- <v-text-field 
-                block 
-                disabled
-                prepend-icon="hotel" 
-                label="Type bed - Price"
-                v-model="roomnumber"
-                >
-        </v-text-field>-->
+        <v-text-field
+          block
+          disabled
+          prepend-icon="watch_later"
+          label="ระยะเวลา"
+          v-model="duration"
+        ></v-text-field>
 
         <v-select
           :items="disease"
           v-model="selectdisease"
-          label="Disease"
+          label="รายชื่อโรค"
           item-text="name"
           item-value="diseaseId"
           prepend-icon="menu_book"
@@ -51,7 +51,7 @@
         <v-select
           :items="doctor"
           v-model="selectdoctor"
-          label="Doctor"
+          label="รายชื่อแพทย์ที่วินิจฉัยโรค"
           item-text="name"
           item-value="doctorId"
           prepend-icon="face"
@@ -91,7 +91,8 @@ export default {
       selectquery: "",
       selectdisease: "",
       selectdoctor: "",
-      congenitalDisease: ""
+      congenitalDisease: "",
+      duration: ""
     }
   },
   methods: {
@@ -132,6 +133,7 @@ export default {
           let blankDate = {
             queryId: "",
             congenitalDisease: "",
+            duration: "",
             diseaseId: "",
             doctorId: ""
           }
@@ -154,6 +156,7 @@ export default {
         if (this.selectquery == this.querys[i].id) {
           //console.log(this.querys[i].addsymptom)
           this.congenitalDisease = this.querys[i].congenitalDisease
+          this.duration = this.querys[i].duration
         }
       }
 
@@ -163,6 +166,7 @@ export default {
       this.querys.forEach(query => {
         if(query.queryid === this.selectquery) {
           this.congenitalDisease = query.congenitalDisease.congenitalDisease
+          this.duration = query.duration.duration
         }
       });
       }
