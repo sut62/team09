@@ -1,15 +1,15 @@
-package com.okta.springbootvue.Diagnose.Controller;
-
-import com.okta.springbootvue.Diagnose.Entity.Disease;
-import com.okta.springbootvue.Diagnose.Repository.DiseaseRepository;
+package com.okta.springbootvue.Diagnose.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-
 import java.util.Collection;
 import java.util.stream.Collectors;
+
+import com.okta.springbootvue.Diagnose.entity.Disease;
+import com.okta.springbootvue.Diagnose.repository.DiseaseRepository;
+
 import org.springframework.web.bind.annotation.CrossOrigin;
 
 @CrossOrigin(origins = "http://localhost:8080")
@@ -17,7 +17,7 @@ import org.springframework.web.bind.annotation.CrossOrigin;
 public class DiseaseController {
 
     @Autowired
-    private final DiseaseRepository diseaseRepository;
+    private DiseaseRepository diseaseRepository;
 
     public DiseaseController(DiseaseRepository diseaseRepository) {
         this.diseaseRepository = diseaseRepository;
