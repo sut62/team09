@@ -7,6 +7,10 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
+
+import com.okta.springbootvue.Diagnose.entity.Diagnose;
+import com.okta.springbootvue.Diagnose.entity.Doctor;
+
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Column;
@@ -27,9 +31,7 @@ public class Appointment {
     @GeneratedValue(strategy=GenerationType.SEQUENCE, generator="APPOINTMENT_seq")
 	@Column(name="APPOINTMENT_ID",unique = true, nullable = true)
     private @NonNull Long appointmentId;
-    
     private @NonNull String appointDate;
-
     private @NonNull String appointTime;
 
     @ManyToOne(fetch = FetchType.EAGER, targetEntity = Clinic.class)
@@ -43,6 +45,30 @@ public class Appointment {
     @ManyToOne(fetch = FetchType.EAGER, targetEntity = Reason.class)
     @JoinColumn(name = "REASON_ID", insertable = true)
     private Reason reason;
+
+    @ManyToOne(fetch = FetchType.EAGER, targetEntity = Diagnose.class)
+    @JoinColumn(name = "DIAGNOSE_ID", insertable = true)
+    private Diagnose diagnose;
+
+    @ManyToOne(fetch = FetchType.EAGER, targetEntity = Doctor.class)
+    @JoinColumn(name = "DOCTOR_ID", insertable = true)
+    private Doctor doctor;
+
+    public Doctor getDoctor() {
+        return this.doctor;
+    }
+
+    public void setDoctor(Doctor doctor) {
+        this.doctor = doctor;
+    }
+
+    public Diagnose getDiagnose() {
+        return this.diagnose;
+    }
+
+    public void setDiagnose(Diagnose diagnose) {
+        this.diagnose = diagnose;
+    }
 
     public Long getAppointmentId() {
         return appointmentId;
