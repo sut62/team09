@@ -21,7 +21,6 @@
               prepend-icon="people_alt"
               :rules="[(v) => !!v || 'กรุณาเลือกชื่อผู้ป่วย']"
               required
-              @change="getDoctor"
             ></v-select>
           </v-col>
         </v-row>
@@ -32,14 +31,14 @@
           <v-col cols="5">
             <v-text-field prepend-icon="event_note" label="วันที่นัด" v-model="myform.appointDate"></v-text-field>
           </v-col>
-          <!-- ///////////End Text elecMeters  -->
+          <!-- ///////////End Text วันที่นัด  -->
 
           <!-- Text เวลาที่นัด  -->
           <v-col cols="5">
             <v-text-field prepend-icon="watch" label="เวลาที่นัด" v-model="myform.appointTime"></v-text-field>
           </v-col>
         </v-row>
-        <!-- ///////////End Text elecMeters  -->
+        <!-- ///////////End Text เวลาที่นัด  -->
 
         <!-- Select Clinic Combobox -->
         <v-row justify="center">
@@ -142,14 +141,7 @@ export default {
     }
   },
   methods: {
-    getDoctor() {
-      this.diagnose.forEach(dia => {
-        if(dia.diagnoseId === this.selectdiagnose) {
-          this.selectDoctor = dia.doctor.doctorId
-
-        }
-      });
-    },
+    
     cancel() {
       this.$router.push("/home")
     },
