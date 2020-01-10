@@ -1,5 +1,4 @@
-package com.okta.springbootvue.Diagnose.Entity;
-
+package com.okta.springbootvue.Diagnose.entity;
 //import java.util.Date;
 
 import javax.persistence.Column;

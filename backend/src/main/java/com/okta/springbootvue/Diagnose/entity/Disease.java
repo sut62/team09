@@ -1,5 +1,4 @@
-package com.okta.springbootvue.Diagnose.Entity;
-
+package com.okta.springbootvue.Diagnose.entity;
 import lombok.*;
 
 import javax.persistence.Id;
