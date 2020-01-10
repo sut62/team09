@@ -4,6 +4,7 @@ import lombok.*;
 
 import javax.persistence.Id;
 import javax.persistence.SequenceGenerator;
+
 import javax.persistence.Table;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
