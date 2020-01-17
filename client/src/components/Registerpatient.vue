@@ -118,6 +118,13 @@
               tile color="indigo" 
               dark v-on:click="cancel">ยกเลิก</v-btn>
   </div>
+
+  <div class="text-center">
+            <v-btn class="ma-5" 
+              tile color="indigo" 
+              dark v-on:click="show">แสดงผลข้อมูล</v-btn>
+  </div>
+
   
   </v-container>
 </template>
@@ -156,6 +163,9 @@ export default {
   methods: {
     cancel() {
       this.$router.push('/home');
+    },
+    show(){
+      this.$router.push('/showregisterpatient');
     },
     save(){
     //@PostMapping("/registerpatient/{firstName}/{lastName}/{age}/{weight}/{height}/{addressDetail}/{mobilePhone}/{provinceId}/{nameTitileId}/{genderId}")
