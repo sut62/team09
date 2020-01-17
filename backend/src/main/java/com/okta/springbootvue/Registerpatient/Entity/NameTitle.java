@@ -30,5 +30,8 @@ public class NameTitle {
     public void setNametitle(String nametitle) {
         this.nametitle = nametitle;
     }
+    public NameTitle(String nameTitle) {
+        this.nametitle = nameTitle;
+    }
 
 }

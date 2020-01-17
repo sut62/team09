@@ -32,4 +32,7 @@ public class Gender {
         this.gender = gender;
     }
     
+    public Gender(String gender){
+        this.gender = gender;
+    }
 }
