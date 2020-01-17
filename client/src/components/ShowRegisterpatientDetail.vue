@@ -10,6 +10,7 @@
       <v-card-text>
         <div class="text--primary">คนที่ {{this.item.registerId}}</div>
         <div class="text--primary">
+          
           {{this.item.nameTitle.nametitle}} ชื่อ {{this.item.firstName}} นามสกุล {{this.item.lastName}}
           <br />
           เพศ {{this.item.gender.gender}}
