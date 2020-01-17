@@ -1,9 +1,14 @@
 package com.okta.springbootvue.Registerpatient.Entity;
 
 import javax.persistence.*;
+import javax.validation.constraints.Max;
+import javax.validation.constraints.Min;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Pattern;
+import javax.validation.constraints.Size;
+
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import lombok.NonNull;
 
 @Data
 @Entity
@@ -14,14 +19,31 @@ public class Registerpatient {
 	@SequenceGenerator(name="REGISTERPATIENT_seq",sequenceName="REGISTERPATIENT_seq")
     @GeneratedValue(strategy=GenerationType.SEQUENCE, generator="REGISTERPATIENT_seq")
 	@Column(name="REGISTERPATIENT_ID",unique = true, nullable = true)
-    private @NonNull Long registerId;
-	private @NonNull String firstName;
-    private @NonNull String lastName;
-    private @NonNull Integer age;
-    private @NonNull Integer weight;
-    private @NonNull Integer height;
-    private @NonNull String addressDetail;
-	private @NonNull String mobilePhone;
+    private Long registerId;
+
+    @Size(max=30,min=5)
+    private @NotNull String firstName;
+    
+    @Size(max=30,min=5)
+    private @NotNull String lastName;
+
+    @Min(15)
+    @Max(150)
+    private @NotNull Integer age;
+    
+    @Min(1)
+    @Max(200)
+    private @NotNull Integer weight;
+
+    @Min(1)
+    @Max(200)
+    private @NotNull Integer height;
+
+    @Size(max=50,min=5)
+    private @NotNull String addressDetail;
+
+    @Pattern(regexp = "\\d{10}")
+	private @NotNull String mobilePhone;
 
     @ManyToOne(fetch = FetchType.EAGER, targetEntity = Gender.class)
     @JoinColumn(name = "GENDER_ID", insertable = true)
