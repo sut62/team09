@@ -9,12 +9,14 @@
       <v-col v-for="item in items" :key="item.registerId" cols="12" sm="4" class="my-2">
         <v-card  max-width="344">
           <v-card-text>
+            
             <div class="text--primary">คนที่ {{item.registerId}}</div>
             <div class="text--primary">
               ชื่อ: {{item.firstName}}
               <br />
               นามสกุล:{{item.lastName}}
             </div>
+
           </v-card-text>
           <v-card-actions>
             <v-btn text color="deep-purple accent-4" v-on:click="showDetail(item)">แสดง</v-btn>
@@ -25,7 +27,6 @@
     </v-row>
   </v-container>
 </template>
-
 
 <script>
 import axios from "axios";
