@@ -6,6 +6,8 @@ import Diagnose from "../components/DiagnoseUI";
 import Query from "../components/Query";
 import Referral from "../components/Referral";
 import RegisterDeaths from "../components/RegisterDeaths";
+import ShowRegisterpatient from "../components/ShowRegisterpatient"
+import ShowRegisterpatientDetail from '../components/ShowRegisterpatientDetail'
 import Login from "../components/Login";
 import Home from "../components/Home"
 Vue.use(Router);
@@ -33,6 +35,16 @@ export default new Router({
       path: "/registerpatient",
       name: "registerpatient",
       component: RegisterPatient
+    },
+    {
+      path: "/showregisterpatient",
+      name: "showregisterpatient",
+      component: ShowRegisterpatient
+    },
+    {
+      path: "/showregisterpatientDetail",
+      name: "showregisterpatientDetail",
+      component: ShowRegisterpatientDetail
     },
     {
       path: "/appointment",
