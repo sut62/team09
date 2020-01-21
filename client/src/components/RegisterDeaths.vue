@@ -77,7 +77,6 @@
       </v-col>
 
       <v-col cols="4">
-        <!-- Select Gender Combobox -->
         <v-select
           label="จังหวัด"
           :items="provinces"
@@ -87,7 +86,6 @@
           prepend-icon="location_city"
           required
         ></v-select>
-        <!-- ///////////End Select Gender Combobox -->
       </v-col>
 
       <v-col cols="4">

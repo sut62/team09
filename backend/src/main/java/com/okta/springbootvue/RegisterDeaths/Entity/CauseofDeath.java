@@ -8,6 +8,9 @@ import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
+
+import java.util.Optional;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 
@@ -39,4 +42,8 @@ public class CauseofDeath {
     public void setCauseofDeath(String causeofdeath) {
         this.causeofdeath = causeofdeath;
     }
+    public CauseofDeath (String causeofdeath) {
+        this.causeofdeath = causeofdeath;
+}
+
 }
