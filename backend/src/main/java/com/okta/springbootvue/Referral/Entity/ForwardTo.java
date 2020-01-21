@@ -1,6 +1,8 @@
 package com.okta.springbootvue.Referral.Entity;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
+
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.NonNull;
@@ -13,8 +15,8 @@ public class ForwardTo {
     @SequenceGenerator(name="FORWARDTO_SEQ",sequenceName="FORWARDTO_SEQ")
     @GeneratedValue(strategy=GenerationType.SEQUENCE, generator="FORWARDTO_SEQ")
     @Column(name="FORWARDTO_ID",unique = true, nullable = false)
-    private @NonNull Long forwardToId;
-    private @NonNull String forwardTo;
+    private @NotNull Long forwardToId;
+    private @NotNull String forwardTo;
 
     public Long getForwardToId() {
         return forwardToId;
