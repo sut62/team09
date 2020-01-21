@@ -1,4 +1,4 @@
-package com.okta.springbootvue;
+package com.okta.springbootvue.Registerpatient;
 
 import com.okta.springbootvue.Registerpatient.Entity.Gender;
 import com.okta.springbootvue.Registerpatient.Entity.NameTitle;
