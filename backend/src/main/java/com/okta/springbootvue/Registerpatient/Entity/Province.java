@@ -33,7 +33,7 @@ public class Province {
         this.province = province;
     }
 
-public Province (String province) {
-    this.province = province;
+    public Province (String province) {
+        this.province = province;
 }
 }

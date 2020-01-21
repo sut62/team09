@@ -4,6 +4,7 @@ import java.util.Collection;
 import java.util.stream.Collectors;
 import com.okta.springbootvue.Registerpatient.Repository.*;
 import com.okta.springbootvue.Registerpatient.Entity.*;
+import com.okta.springbootvue.Registerpatient.Entity.Province;
 import com.okta.springbootvue.RegisterDeaths.Repository.*;
 import com.okta.springbootvue.RegisterDeaths.Entity.*;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,6 +25,8 @@ public class RegisterDeathsController {
     private GenderRepository genderRepository;
     @Autowired
     private NameTitleRepository nameTitleRepository;
+    @Autowired
+    private ProvinceRepository provinceRepository;
 
 
 
@@ -44,13 +47,16 @@ public class RegisterDeathsController {
     @PathVariable int age,@PathVariable String born,@PathVariable String death,@PathVariable String addressDetail,@PathVariable String mobilePhone,@PathVariable long provinceId, @PathVariable long nameTitileId,
      @PathVariable long genderId,@PathVariable long causeofDeathId ,@PathVariable long placeId) {
         RegisterDeaths registerDeaths = new RegisterDeaths();
+
         System.out.println("Name = " + firstName);
 
 
+        Province pp = provinceRepository.findById(provinceId);
         CauseofDeath c = causeofDeathRepository.findById(causeofDeathId);        
         Place p = placeRepository.findById(placeId);
         NameTitle n = nameTitleRepository.findById(nameTitileId);
         Gender g = genderRepository.findById(genderId);
+
         registerDeaths.setFirstName(firstName);
         registerDeaths.setLastName(lastName);
         registerDeaths.setAge(age);
@@ -58,6 +64,7 @@ public class RegisterDeathsController {
         registerDeaths.setDeath(death);
         registerDeaths.setAddressDetail(addressDetail);    
         registerDeaths.setMobilePhone(mobilePhone);
+        registerDeaths.setProvince(pp);
 
 
         registerDeaths.setGender(g);

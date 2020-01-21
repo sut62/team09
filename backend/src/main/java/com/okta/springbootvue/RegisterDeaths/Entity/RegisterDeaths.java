@@ -7,6 +7,10 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
+import javax.validation.constraints.Max;
+import javax.validation.constraints.Min;
+import javax.validation.constraints.Pattern;
+import javax.validation.constraints.Size;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Column;
@@ -17,10 +21,9 @@ import javax.persistence.FetchType;
 
 import com.okta.springbootvue.Registerpatient.Entity.Gender;
 import com.okta.springbootvue.Registerpatient.Entity.NameTitle;
-import com.okta.springbootvue.Registerpatient.Entity.Registerpatient;
+import com.okta.springbootvue.Registerpatient.Entity.Province;
 
-@Getter
-@Setter
+
 @Data
 @Entity
 @NoArgsConstructor
@@ -32,18 +35,34 @@ public class RegisterDeaths {
     @GeneratedValue(strategy=GenerationType.SEQUENCE, generator="REGISTERDEATHS_seq")
 	@Column(name="REGISTERDEATHS_ID",unique = true, nullable = true)
     private @NonNull Long registerdeathId;
-	private @NonNull String firstName;
+
+    @Size(max=30,min=5)
+    private @NonNull String firstName;
+
+    @Size(max=30,min=5)
     private @NonNull String lastName;
+
+    @Min(1)
+    @Max(150)
     private @NonNull Integer age;
+
     private @NonNull String born;
     private @NonNull String death;
+
+    @Size(max=50,min=5)
     private @NonNull String addressDetail;
+
+    @Pattern(regexp = "\\d{10}")
 	private @NonNull String mobilePhone;
     
     
     @ManyToOne(fetch = FetchType.EAGER, targetEntity = CauseofDeath.class)
     @JoinColumn(name = "CAUSEOFDEATH_ID", insertable = true)
     private CauseofDeath CauseofDeath;
+
+    @ManyToOne(fetch = FetchType.EAGER, targetEntity = Province.class)
+    @JoinColumn(name = "PROVINCE_ID", insertable = true)
+    private Province province;
 
     @ManyToOne(fetch = FetchType.EAGER, targetEntity = Place.class)
     @JoinColumn(name = "PLACE_ID", insertable = true)
@@ -56,6 +75,15 @@ public class RegisterDeaths {
     @ManyToOne(fetch = FetchType.EAGER, targetEntity = NameTitle.class)
     @JoinColumn(name = "NAMETITLE", insertable = true)    
     private NameTitle nameTitle;
+
+
+    public Province getProvince() {
+        return province;
+    }
+
+    public void setProvince(Province province) {
+        this.province = province;
+    }
 
     public void setPlace(Place place){
         this.Place = place;

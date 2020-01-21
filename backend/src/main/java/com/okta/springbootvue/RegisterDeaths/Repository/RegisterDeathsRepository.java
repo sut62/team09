@@ -7,5 +7,5 @@ import org.springframework.data.rest.core.annotation.RepositoryRestResource;
 
 @RepositoryRestResource
 public interface RegisterDeathsRepository extends JpaRepository<RegisterDeaths, Long> {
-    RegisterDeaths findById(long id);
+    RegisterDeaths findById(long registerDeathsId);
 }
