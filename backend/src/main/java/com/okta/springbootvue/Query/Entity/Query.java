@@ -10,6 +10,9 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Pattern;
+import javax.validation.constraints.Size;
 
 import com.okta.springbootvue.Query.Entity.Query;
 import com.okta.springbootvue.Registerpatient.Entity.*;
@@ -17,7 +20,6 @@ import com.fasterxml.jackson.annotation.JsonBackReference;
 
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import lombok.NonNull;
 
 @Data
 @Entity
@@ -29,15 +31,18 @@ public class Query {
     @SequenceGenerator(name = "query_seq", sequenceName = "queryl_seq")
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "queryl_seq")
     @Column(name = "QUERY_ID", unique = true, nullable = true)
-    private @NonNull Long queryid;
-    private @NonNull Float temperature;
-    private @NonNull Integer pressureSYS;
-    private @NonNull Integer pressureDIA;
-    private @NonNull String symptom;
+    private @NotNull Long queryid;
+    private @NotNull Float temperature;
+    private @NotNull Integer pressureSYS;
+    private @NotNull Integer pressureDIA;
+    private @NotNull String symptom;
 
-    private @NonNull String firstName;
-
-    private @NonNull String lastName;
+    @Size(min = 2, max = 20)
+    @Pattern(regexp =  "^[A-Za-zก-์\\s]+$")
+    private @NotNull String firstName;
+    @Size(min = 2, max = 20)
+    @Pattern(regexp =  "^[A-Za-zก-์\\s]+$")
+    private @NotNull String lastName;
 
     @ManyToOne(fetch = FetchType.EAGER, targetEntity = Registerpatient.class)
     @JoinColumn(name = "REGISTERPATIENT_ID", insertable = true)

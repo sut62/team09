@@ -2,6 +2,7 @@ package com.okta.springbootvue.Query.Entity;
 
 import lombok.*;
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 
 @Data 
 @Entity 
@@ -14,9 +15,9 @@ public class CongenitalDisease {
 	@SequenceGenerator(name="CongenitalDisease_seq",sequenceName="CongenitalDisease_seq")
     @GeneratedValue(strategy=GenerationType.SEQUENCE, generator="CongenitalDisease_seq")
 	@Column(name="CONGENITALDISEASE_ID",unique = true, nullable = false) 
-  private @NonNull Long congenitalDiseaseId;
+  private @NotNull  Long congenitalDiseaseId;
   
-  private @NonNull String CongenitalDisease;
+  private @NotNull String CongenitalDisease;
 
     public String getCongenitalDisease() {
         return this.CongenitalDisease;
