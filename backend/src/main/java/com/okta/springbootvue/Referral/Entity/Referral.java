@@ -1,6 +1,9 @@
 package com.okta.springbootvue.Referral.Entity;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Pattern;
+import javax.validation.constraints.Size;
 
 import com.okta.springbootvue.Diagnose.entity.Diagnose;
 
@@ -16,8 +19,10 @@ public class Referral {
 	@SequenceGenerator(name="REFERRAL_seq",sequenceName="REFERRAL_seq")
     @GeneratedValue(strategy=GenerationType.SEQUENCE, generator="REFERRAL_seq")
     @Column(name="REFERRAL_ID",unique = true, nullable = true)
-	private @NonNull Long referralId;
-    private @NonNull String note;
+    private @NotNull Long referralId;
+    @Size(min = 5, max = 50)
+    @Pattern(regexp = "^[0-9a-zA-Zก-๙\\s]+$")
+    private @NotNull String note;
 
 
     @ManyToOne(fetch = FetchType.EAGER, targetEntity = ForwardTo.class)

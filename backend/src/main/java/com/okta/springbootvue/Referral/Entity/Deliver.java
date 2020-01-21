@@ -1,9 +1,10 @@
 package com.okta.springbootvue.Referral.Entity;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
+
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import lombok.NonNull;
 
 @Data
 @Entity
@@ -13,8 +14,8 @@ public class Deliver {
     @SequenceGenerator(name="DELIVER_SEQ",sequenceName="DELIVER_SEQ")
     @GeneratedValue(strategy=GenerationType.SEQUENCE, generator="DELIVER_SEQ")
     @Column(name="DELIVER_ID",unique = true, nullable = false)
-    private @NonNull Long deliverId;
-    private @NonNull String deliver;
+    private @NotNull Long deliverId;
+    private @NotNull String deliver;
 
     public Long getDeliverId() {
         return deliverId;
