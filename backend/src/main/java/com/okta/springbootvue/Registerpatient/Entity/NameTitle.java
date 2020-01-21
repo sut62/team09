@@ -1,8 +1,11 @@
 package com.okta.springbootvue.Registerpatient.Entity;
+
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
+
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import lombok.NonNull;
+
 
 @Data
 @Entity
@@ -12,8 +15,8 @@ public class NameTitle {
     @SequenceGenerator(name="NAMETITLE_SEQ",sequenceName="NAMETITLE_SEQ")
     @GeneratedValue(strategy=GenerationType.SEQUENCE, generator="NAMETITLE_SEQ")
     @Column(name="NAMETITLE_ID",unique = true, nullable = false)
-    private @NonNull Long nameTitleId;
-    private @NonNull String nametitle;
+    private @NotNull Long nameTitleId;
+    private @NotNull String nametitle;
 
     public Long getNameTitleId() {
         return nameTitleId;

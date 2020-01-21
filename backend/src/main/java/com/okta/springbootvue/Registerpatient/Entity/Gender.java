@@ -1,9 +1,10 @@
 package com.okta.springbootvue.Registerpatient.Entity;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
+
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import lombok.NonNull;
 
 @Data
 @Entity
@@ -13,8 +14,8 @@ public class Gender {
     @SequenceGenerator(name="GENDER_SEQ",sequenceName="GENDER_SEQ")
     @GeneratedValue(strategy=GenerationType.SEQUENCE, generator="GENDER_SEQ")
     @Column(name="GENDER_ID",unique = true, nullable = false)
-    private @NonNull Long genderId;
-    private @NonNull String gender;
+    private @NotNull Long genderId;
+    private @NotNull String gender;
 
     public Long getGenderId() {
         return genderId;
