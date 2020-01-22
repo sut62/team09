@@ -1,4 +1,4 @@
-package com.okta.springbootvue;
+package com.okta.springbootvue.Query;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
