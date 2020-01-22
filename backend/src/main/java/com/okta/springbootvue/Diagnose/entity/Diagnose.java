@@ -11,6 +11,9 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
+import javax.validation.constraints.Pattern;
+import javax.validation.constraints.Size;
+import javax.validation.constraints.NotNull;
 
 import com.okta.springbootvue.Query.Entity.Query;
 import com.fasterxml.jackson.annotation.JsonBackReference;
@@ -22,82 +25,88 @@ import lombok.NonNull;
 @Data
 @Entity
 @NoArgsConstructor
-@Table(name="DIAGNOSE")
+@Table(name = "DIAGNOSE")
 public class Diagnose {
 
-    @Id
-    @SequenceGenerator(name="diagnose_seq",sequenceName="diagnose_seq")
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator="diagnose_seq")
-    @Column(name = "DIAGNOSE_ID", unique = true, nullable = true)
-    private @NonNull Long DiagnoseId;
-    
-    private String nameRegister;
-    
+  @Id
+  @SequenceGenerator(name = "diagnose_seq", sequenceName = "diagnose_seq")
+  @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "diagnose_seq")
+  @Column(name = "DIAGNOSE_ID", unique = true, nullable = true)
+  @NotNull 
+  private Long DiagnoseId;
 
+  @Size(min = 5, max = 30)
+  @Pattern(regexp = "^[0-9a-zA-Zก-๙\\s]+$")
+  @NotNull 
+  private String note;
 
-    @ManyToOne(fetch = FetchType.EAGER, targetEntity = Disease.class)
-    @JoinColumn(name = "Disease_ID", insertable = true)
-    private Disease disease;
-    private String nameDisease;
+  private String nameRegister;
 
-    @ManyToOne()
-    @JsonBackReference
-    @JoinColumn(name = "Query_ID")
-    private Query query;
-    
+  @ManyToOne(fetch = FetchType.EAGER, targetEntity = Disease.class)
+  @JoinColumn(name = "Disease_ID", insertable = true)
+  private Disease disease;
+  private String nameDisease;
 
-    @ManyToOne(fetch = FetchType.EAGER, targetEntity = Doctor.class)
-    @JoinColumn(name = "Doctor_ID", insertable = true)
-    private Doctor doctor;
-    private String nameDoctor;
+  @ManyToOne()
+  @JsonBackReference
+  @JoinColumn(name = "Query_ID")
+  private Query query;
 
+  @ManyToOne(fetch = FetchType.EAGER, targetEntity = Doctor.class)
+  @JoinColumn(name = "Doctor_ID", insertable = true)
+  private Doctor doctor;
+  private String nameDoctor;
 
-    public Long getDiagnoseId() {
-      return DiagnoseId;
-    }
-  
-    public void setDiagnoseId(Long diagnoseId) {
-      DiagnoseId = diagnoseId;
-    }
-  
-    public Disease getDisease() {
-      return disease;
-    }
-  
-    public void setDisease(Disease disease) {
-      this.disease = disease;
-    }
-  
-    public Query getQuery() {
-      return query;
-    }
-  
-    public void setQuery(Query query) {
-      this.query = query;
-    }
-
-    public Doctor getDoctor() {
-      return doctor;
-    }
-  
-    public void setDoctor(Doctor doctor) {
-      this.doctor = doctor;
-    }
-
-    public void setNameDisease(String name){
-      this.nameDisease = name;
-    }
-
-    public void setNameRegister(String name){
-      this.nameRegister = name;
-    }
-
-    public void setNameDoctor(String name){
-      this.nameDoctor = name ;
+  public Long getDiagnoseId() {
+    return DiagnoseId;
   }
 
-  
+  public void setDiagnoseId(Long diagnoseId) {
+    DiagnoseId = diagnoseId;
+  }
 
- 
+  public Disease getDisease() {
+    return disease;
+  }
+
+  public void setDisease(Disease disease) {
+    this.disease = disease;
+  }
+
+  public Query getQuery() {
+    return query;
+  }
+
+  public void setQuery(Query query) {
+    this.query = query;
+  }
+
+  public Doctor getDoctor() {
+    return doctor;
+  }
+
+  public void setDoctor(Doctor doctor) {
+    this.doctor = doctor;
+  }
+
+  public void setNameDisease(String name) {
+    this.nameDisease = name;
+  }
+
+  public void setNameRegister(String name) {
+    this.nameRegister = name;
+  }
+
+  public void setNameDoctor(String name) {
+    this.nameDoctor = name;
+  }
+
+  public String getNote() {
+    return note;
+  }
+
+  public void setNote(String note) {
+    this.note = note;
+  }
 
 }
