@@ -43,31 +43,26 @@ public class RegisterpatientTest {
         validator = factory.getValidator();
     }
 
-// FirstName กรณีที่ 1 ใส่ข้อมูลถูกต้องปกติ
-@Test
-void B5900985_testFirstNamewithCorrect() {
-    Gender gender = new Gender("ชาย");
-    genderRepository.saveAndFlush(gender);
+    // FirstName กรณีที่ 1 ใส่ข้อมูลถูกต้องปกติ
+    @Test
+    void B5900985_testFirstNamewithCorrect() {
+        Gender gender = genderRepository.findById(1);
+        NameTitle nameTitle = nameTitleRepository.findById(1);
+        Province province = provinceRepository.findById(1);
 
-    NameTitle nameTitle = new NameTitle("นาย");
-    nameTitleRepository.saveAndFlush(nameTitle);
+        Registerpatient r = new Registerpatient();
+        r.setFirstName("กกกกกก");
+        r.setLastName("ขขขขขข");
+        r.setAge(33);
+        r.setWeight(70);
+        r.setHeight(170);
+        r.setAddressDetail("Address");
+        r.setMobilePhone("0819658742");
+        r.setGender(gender);
+        r.setNameTitle(nameTitle);
+        r.setProvince(province);
 
-    Province province = new Province("นครราชสีมา");
-    provinceRepository.saveAndFlush(province);
-
-    Registerpatient r = new Registerpatient();
-    r.setFirstName("กกกกกก");
-    r.setLastName("ขขขขขข");
-    r.setAge(33);
-    r.setWeight(70);
-    r.setHeight(170);
-    r.setAddressDetail("Address");
-    r.setMobilePhone("0819658742");
-    r.setGender(gender);
-    r.setNameTitle(nameTitle);
-    r.setProvince(province);
-
-    registerpatientRepository.saveAndFlush(r);
+        registerpatientRepository.saveAndFlush(r);
         Optional<Registerpatient> check = registerpatientRepository.findById(r.getRegisterId());
         assertEquals("กกกกกก", check.get().getFirstName());
         assertEquals("ขขขขขข", check.get().getLastName());
@@ -79,19 +74,14 @@ void B5900985_testFirstNamewithCorrect() {
         assertEquals(gender, check.get().getGender());
         assertEquals(nameTitle, check.get().getNameTitle());
         assertEquals(province, check.get().getProvince());
-}
+    }
 
     // FirstName กรณีที่ 2 น้อยกว่า 4 ตัว
     @Test
     void B5900985_testFirstNameSizelessthan5() {
-        Gender gender = new Gender("ชาย");
-        genderRepository.saveAndFlush(gender);
-
-        NameTitle nameTitle = new NameTitle("นาย");
-        nameTitleRepository.saveAndFlush(nameTitle);
-
-        Province province = new Province("นครราชสีมา");
-        provinceRepository.saveAndFlush(province);
+        Gender gender = genderRepository.findById(1);
+        NameTitle nameTitle = nameTitleRepository.findById(1);
+        Province province = provinceRepository.findById(1);
 
         Registerpatient r = new Registerpatient();
         r.setFirstName("กกก");
@@ -119,14 +109,9 @@ void B5900985_testFirstNamewithCorrect() {
     // FirstName กรณีที่ 3 มากกว่า 30 ตัว
     @Test
     void B5900985_testFirstNameSizeMorethan30() {
-        Gender gender = new Gender("ชาย");
-        genderRepository.saveAndFlush(gender);
-
-        NameTitle nameTitle = new NameTitle("นาย");
-        nameTitleRepository.saveAndFlush(nameTitle);
-
-        Province province = new Province("นครราชสีมา");
-        provinceRepository.saveAndFlush(province);
+        Gender gender = genderRepository.findById(1);
+        NameTitle nameTitle = nameTitleRepository.findById(1);
+        Province province = provinceRepository.findById(1);
 
         Registerpatient r = new Registerpatient();
         r.setFirstName("กกกกกกกกกกกกกกกกกกกกกกกกกกกกกกกก");
@@ -139,7 +124,7 @@ void B5900985_testFirstNamewithCorrect() {
         r.setGender(gender);
         r.setNameTitle(nameTitle);
         r.setProvince(province);
-        
+
         Set<ConstraintViolation<Registerpatient>> result = validator.validate(r);
 
         // result ต้องมี error 1 ค่าเท่านั้น
@@ -154,14 +139,9 @@ void B5900985_testFirstNamewithCorrect() {
     // FirstName กรณีที่ 4 ชื่อต้องไม่ว่างเปล่า
     @Test
     void B5900985_testFirstNameMustNotBeNull() {
-        Gender gender = new Gender("ชาย");
-        genderRepository.saveAndFlush(gender);
-
-        NameTitle nameTitle = new NameTitle("นาย");
-        nameTitleRepository.saveAndFlush(nameTitle);
-
-        Province province = new Province("นครราชสีมา");
-        provinceRepository.saveAndFlush(province);
+        Gender gender = genderRepository.findById(1);
+        NameTitle nameTitle = nameTitleRepository.findById(1);
+        Province province = provinceRepository.findById(1);
 
         Registerpatient r = new Registerpatient();
         r.setLastName("ขขขขข");
@@ -173,7 +153,7 @@ void B5900985_testFirstNamewithCorrect() {
         r.setGender(gender);
         r.setNameTitle(nameTitle);
         r.setProvince(province);
-        
+
         Set<ConstraintViolation<Registerpatient>> result = validator.validate(r);
 
         // result ต้องมี error 1 ค่าเท่านั้น
@@ -186,30 +166,25 @@ void B5900985_testFirstNamewithCorrect() {
     }
 
     // LastName กรณีที่ 1 ใส่ข้อมูลถูกต้องปกติ
-@Test
-void B5900985_testLastNamewithCorrect() {
-    Gender gender = new Gender("ชาย");
-    genderRepository.saveAndFlush(gender);
+    @Test
+    void B5900985_testLastNamewithCorrect() {
+        Gender gender = genderRepository.findById(1);
+        NameTitle nameTitle = nameTitleRepository.findById(1);
+        Province province = provinceRepository.findById(1);
 
-    NameTitle nameTitle = new NameTitle("นาย");
-    nameTitleRepository.saveAndFlush(nameTitle);
+        Registerpatient r = new Registerpatient();
+        r.setFirstName("กกกกกก");
+        r.setLastName("ขขขขขข");
+        r.setAge(33);
+        r.setWeight(70);
+        r.setHeight(170);
+        r.setAddressDetail("Address");
+        r.setMobilePhone("0819658742");
+        r.setGender(gender);
+        r.setNameTitle(nameTitle);
+        r.setProvince(province);
 
-    Province province = new Province("นครราชสีมา");
-    provinceRepository.saveAndFlush(province);
-
-    Registerpatient r = new Registerpatient();
-    r.setFirstName("กกกกกก");
-    r.setLastName("ขขขขขข");
-    r.setAge(33);
-    r.setWeight(70);
-    r.setHeight(170);
-    r.setAddressDetail("Address");
-    r.setMobilePhone("0819658742");
-    r.setGender(gender);
-    r.setNameTitle(nameTitle);
-    r.setProvince(province);
-
-    registerpatientRepository.saveAndFlush(r);
+        registerpatientRepository.saveAndFlush(r);
         Optional<Registerpatient> check = registerpatientRepository.findById(r.getRegisterId());
         assertEquals("กกกกกก", check.get().getFirstName());
         assertEquals("ขขขขขข", check.get().getLastName());
@@ -221,19 +196,14 @@ void B5900985_testLastNamewithCorrect() {
         assertEquals(gender, check.get().getGender());
         assertEquals(nameTitle, check.get().getNameTitle());
         assertEquals(province, check.get().getProvince());
-}
+    }
 
     // LastName กรณีที่ 2 น้อยกว่า 4 ตัว
     @Test
     void B5900985_testLastNameSizelessthan5() {
-        Gender gender = new Gender("ชาย");
-        genderRepository.saveAndFlush(gender);
-
-        NameTitle nameTitle = new NameTitle("นาย");
-        nameTitleRepository.saveAndFlush(nameTitle);
-
-        Province province = new Province("นครราชสีมา");
-        provinceRepository.saveAndFlush(province);
+        Gender gender = genderRepository.findById(1);
+        NameTitle nameTitle = nameTitleRepository.findById(1);
+        Province province = provinceRepository.findById(1);
 
         Registerpatient r = new Registerpatient();
         r.setFirstName("กกกกก");
@@ -258,18 +228,12 @@ void B5900985_testLastNamewithCorrect() {
         assertEquals("lastName", v.getPropertyPath().toString());
     }
 
-  
     // LastName กรณีที่ 3 มากกว่า 30 ตัว
     @Test
     void B5900985_testLastNameSizeMorethan30() {
-        Gender gender = new Gender("ชาย");
-        genderRepository.saveAndFlush(gender);
-
-        NameTitle nameTitle = new NameTitle("นาย");
-        nameTitleRepository.saveAndFlush(nameTitle);
-
-        Province province = new Province("นครราชสีมา");
-        provinceRepository.saveAndFlush(province);
+        Gender gender = genderRepository.findById(1);
+        NameTitle nameTitle = nameTitleRepository.findById(1);
+        Province province = provinceRepository.findById(1);
 
         Registerpatient r = new Registerpatient();
         r.setFirstName("กกกกก");
@@ -282,7 +246,7 @@ void B5900985_testLastNamewithCorrect() {
         r.setGender(gender);
         r.setNameTitle(nameTitle);
         r.setProvince(province);
-        
+
         Set<ConstraintViolation<Registerpatient>> result = validator.validate(r);
 
         // result ต้องมี error 1 ค่าเท่านั้น
@@ -294,64 +258,55 @@ void B5900985_testLastNamewithCorrect() {
         assertEquals("lastName", v.getPropertyPath().toString());
     }
 
-  // LastName กรณีที่ 4 ชื่อต้องไม่ว่างเปล่า
-  @Test
-  void B5900985_testLastNameMustNotBeNull() {
-      Gender gender = new Gender("ชาย");
-      genderRepository.saveAndFlush(gender);
+    // LastName กรณีที่ 4 ชื่อต้องไม่ว่างเปล่า
+    @Test
+    void B5900985_testLastNameMustNotBeNull() {
+        Gender gender = genderRepository.findById(1);
+        NameTitle nameTitle = nameTitleRepository.findById(1);
+        Province province = provinceRepository.findById(1);
 
-      NameTitle nameTitle = new NameTitle("นาย");
-      nameTitleRepository.saveAndFlush(nameTitle);
+        Registerpatient r = new Registerpatient();
+        r.setFirstName("กกกกก");
+        r.setAge(33);
+        r.setWeight(70);
+        r.setHeight(170);
+        r.setAddressDetail("Address");
+        r.setMobilePhone("0819658742");
+        r.setGender(gender);
+        r.setNameTitle(nameTitle);
+        r.setProvince(province);
 
-      Province province = new Province("นครราชสีมา");
-      provinceRepository.saveAndFlush(province);
+        Set<ConstraintViolation<Registerpatient>> result = validator.validate(r);
 
-      Registerpatient r = new Registerpatient();
-      r.setFirstName("กกกกก");
-      r.setAge(33);
-      r.setWeight(70);
-      r.setHeight(170);
-      r.setAddressDetail("Address");
-      r.setMobilePhone("0819658742");
-      r.setGender(gender);
-      r.setNameTitle(nameTitle);
-      r.setProvince(province);
-      
-      Set<ConstraintViolation<Registerpatient>> result = validator.validate(r);
+        // result ต้องมี error 1 ค่าเท่านั้น
+        assertEquals(1, result.size());
 
-      // result ต้องมี error 1 ค่าเท่านั้น
-      assertEquals(1, result.size());
+        // error message ตรงชนิด และถูก field
+        ConstraintViolation<Registerpatient> v = result.iterator().next();
+        assertEquals("must not be null", v.getMessage());
+        assertEquals("lastName", v.getPropertyPath().toString());
+    }
 
-      // error message ตรงชนิด และถูก field
-      ConstraintViolation<Registerpatient> v = result.iterator().next();
-      assertEquals("must not be null", v.getMessage());
-      assertEquals("lastName", v.getPropertyPath().toString());
-  }
-// Age กรณีที่ 1 ใส่ข้อมูลถูกต้องปกติ
-@Test
-void B5900985_testAgewithCorrect() {
-    Gender gender = new Gender("ชาย");
-    genderRepository.saveAndFlush(gender);
+    // Age กรณีที่ 1 ใส่ข้อมูลถูกต้องปกติ
+    @Test
+    void B5900985_testAgewithCorrect() {
+        Gender gender = genderRepository.findById(1);
+        NameTitle nameTitle = nameTitleRepository.findById(1);
+        Province province = provinceRepository.findById(1);
 
-    NameTitle nameTitle = new NameTitle("นาย");
-    nameTitleRepository.saveAndFlush(nameTitle);
+        Registerpatient r = new Registerpatient();
+        r.setFirstName("กกกกกก");
+        r.setLastName("ขขขขขข");
+        r.setAge(33);
+        r.setWeight(70);
+        r.setHeight(170);
+        r.setAddressDetail("Address");
+        r.setMobilePhone("0819658742");
+        r.setGender(gender);
+        r.setNameTitle(nameTitle);
+        r.setProvince(province);
 
-    Province province = new Province("นครราชสีมา");
-    provinceRepository.saveAndFlush(province);
-
-    Registerpatient r = new Registerpatient();
-    r.setFirstName("กกกกกก");
-    r.setLastName("ขขขขขข");
-    r.setAge(33);
-    r.setWeight(70);
-    r.setHeight(170);
-    r.setAddressDetail("Address");
-    r.setMobilePhone("0819658742");
-    r.setGender(gender);
-    r.setNameTitle(nameTitle);
-    r.setProvince(province);
-
-    registerpatientRepository.saveAndFlush(r);
+        registerpatientRepository.saveAndFlush(r);
         Optional<Registerpatient> check = registerpatientRepository.findById(r.getRegisterId());
         assertEquals("กกกกกก", check.get().getFirstName());
         assertEquals("ขขขขขข", check.get().getLastName());
@@ -363,135 +318,117 @@ void B5900985_testAgewithCorrect() {
         assertEquals(gender, check.get().getGender());
         assertEquals(nameTitle, check.get().getNameTitle());
         assertEquals(province, check.get().getProvince());
-}
+    }
 
-  // Age กรณีที่ 2 อายุไม่ถึง 15 ปี
-  @Test
-  void B5900985_testAgemin15() {
-      Gender gender = new Gender("ชาย");
-      genderRepository.saveAndFlush(gender);
+    // Age กรณีที่ 2 อายุไม่ถึง 15 ปี
+    @Test
+    void B5900985_testAgemin15() {
+        Gender gender = genderRepository.findById(1);
+        NameTitle nameTitle = nameTitleRepository.findById(1);
+        Province province = provinceRepository.findById(1);
 
-      NameTitle nameTitle = new NameTitle("นาย");
-      nameTitleRepository.saveAndFlush(nameTitle);
+        Registerpatient r = new Registerpatient();
+        r.setFirstName("กกกกก");
+        r.setLastName("ขขขขข");
+        r.setAge(2);
+        r.setWeight(70);
+        r.setHeight(170);
+        r.setAddressDetail("Address");
+        r.setMobilePhone("0819658742");
+        r.setGender(gender);
+        r.setNameTitle(nameTitle);
+        r.setProvince(province);
 
-      Province province = new Province("กรุงเทพ");
-      provinceRepository.saveAndFlush(province);
+        Set<ConstraintViolation<Registerpatient>> result = validator.validate(r);
 
-      Registerpatient r = new Registerpatient();
-      r.setFirstName("กกกกก");
-      r.setLastName("ขขขขข");
-      r.setAge(2);
-      r.setWeight(70);
-      r.setHeight(170);
-      r.setAddressDetail("Address");
-      r.setMobilePhone("0819658742");
-      r.setGender(gender);
-      r.setNameTitle(nameTitle);
-      r.setProvince(province);
+        // result ต้องมี error 1 ค่าเท่านั้น
+        assertEquals(1, result.size());
 
-      Set<ConstraintViolation<Registerpatient>> result = validator.validate(r);
+        // error message ตรงชนิด และถูก field
+        ConstraintViolation<Registerpatient> v = result.iterator().next();
+        assertEquals("must be greater than or equal to 15", v.getMessage());
+        assertEquals("age", v.getPropertyPath().toString());
+    }
 
-      // result ต้องมี error 1 ค่าเท่านั้น
-      assertEquals(1, result.size());
+    // Age กรณีที่ 3 อายุไม่เกิน 150 ปี
+    @Test
+    void B5900985_testAgemax150() {
+        Gender gender = genderRepository.findById(1);
+        NameTitle nameTitle = nameTitleRepository.findById(1);
+        Province province = provinceRepository.findById(1);
 
-      // error message ตรงชนิด และถูก field
-      ConstraintViolation<Registerpatient> v = result.iterator().next();
-      assertEquals("must be greater than or equal to 15", v.getMessage());
-      assertEquals("age", v.getPropertyPath().toString());
-  }
+        Registerpatient r = new Registerpatient();
+        r.setFirstName("กกกกก");
+        r.setLastName("ขขขขข");
+        r.setAge(151);
+        r.setWeight(70);
+        r.setHeight(170);
+        r.setAddressDetail("Address");
+        r.setMobilePhone("0819658742");
+        r.setGender(gender);
+        r.setNameTitle(nameTitle);
+        r.setProvince(province);
 
-   // Age กรณีที่ 3 อายุไม่เกิน 150 ปี
-   @Test
-   void B5900985_testAgemax150() {
-       Gender gender = new Gender("ชาย");
-       genderRepository.saveAndFlush(gender);
- 
-       NameTitle nameTitle = new NameTitle("นาย");
-       nameTitleRepository.saveAndFlush(nameTitle);
- 
-       Province province = new Province("กรุงเทพ");
-       provinceRepository.saveAndFlush(province);
- 
-       Registerpatient r = new Registerpatient();
-       r.setFirstName("กกกกก");
-       r.setLastName("ขขขขข");
-       r.setAge(151);
-       r.setWeight(70);
-       r.setHeight(170);
-       r.setAddressDetail("Address");
-       r.setMobilePhone("0819658742");
-       r.setGender(gender);
-       r.setNameTitle(nameTitle);
-       r.setProvince(province);
- 
-       Set<ConstraintViolation<Registerpatient>> result = validator.validate(r);
- 
-       // result ต้องมี error 1 ค่าเท่านั้น
-       assertEquals(1, result.size());
- 
-       // error message ตรงชนิด และถูก field
-       ConstraintViolation<Registerpatient> v = result.iterator().next();
-       assertEquals("must be less than or equal to 150", v.getMessage());
-       assertEquals("age", v.getPropertyPath().toString());
-   }
-   // Age กรณีที่ 4 
-  @Test
-  void B5900985_testAgeMustNotBeNull() {
-      Gender gender = new Gender("ชาย");
-      genderRepository.saveAndFlush(gender);
+        Set<ConstraintViolation<Registerpatient>> result = validator.validate(r);
 
-      NameTitle nameTitle = new NameTitle("นาย");
-      nameTitleRepository.saveAndFlush(nameTitle);
+        // result ต้องมี error 1 ค่าเท่านั้น
+        assertEquals(1, result.size());
 
-      Province province = new Province("กรุงเทพ");
-      provinceRepository.saveAndFlush(province);
+        // error message ตรงชนิด และถูก field
+        ConstraintViolation<Registerpatient> v = result.iterator().next();
+        assertEquals("must be less than or equal to 150", v.getMessage());
+        assertEquals("age", v.getPropertyPath().toString());
+    }
 
-      Registerpatient r = new Registerpatient();
-      r.setFirstName("กกกกก");
-      r.setLastName("ขขขขข");
-      r.setWeight(70);
-      r.setHeight(170);
-      r.setAddressDetail("Address");
-      r.setMobilePhone("0819658742");
-      r.setGender(gender);
-      r.setNameTitle(nameTitle);
-      r.setProvince(province);
+    // Age กรณีที่ 4
+    @Test
+    void B5900985_testAgeMustNotBeNull() {
+        Gender gender = genderRepository.findById(1);
+        NameTitle nameTitle = nameTitleRepository.findById(1);
+        Province province = provinceRepository.findById(1);
 
-      Set<ConstraintViolation<Registerpatient>> result = validator.validate(r);
+        Registerpatient r = new Registerpatient();
+        r.setFirstName("กกกกก");
+        r.setLastName("ขขขขข");
+        r.setWeight(70);
+        r.setHeight(170);
+        r.setAddressDetail("Address");
+        r.setMobilePhone("0819658742");
+        r.setGender(gender);
+        r.setNameTitle(nameTitle);
+        r.setProvince(province);
 
-      // result ต้องมี error 1 ค่าเท่านั้น
-      assertEquals(1, result.size());
+        Set<ConstraintViolation<Registerpatient>> result = validator.validate(r);
 
-      // error message ตรงชนิด และถูก field
-      ConstraintViolation<Registerpatient> v = result.iterator().next();
-      assertEquals("must not be null", v.getMessage());
-      assertEquals("age", v.getPropertyPath().toString());
-  }
-// Weight กรณีที่ 1 ใส่ข้อมูลถูกต้องปกติ
-@Test
-void B5900985_testWeightwithCorrect() {
-    Gender gender = new Gender("ชาย");
-    genderRepository.saveAndFlush(gender);
+        // result ต้องมี error 1 ค่าเท่านั้น
+        assertEquals(1, result.size());
 
-    NameTitle nameTitle = new NameTitle("นาย");
-    nameTitleRepository.saveAndFlush(nameTitle);
+        // error message ตรงชนิด และถูก field
+        ConstraintViolation<Registerpatient> v = result.iterator().next();
+        assertEquals("must not be null", v.getMessage());
+        assertEquals("age", v.getPropertyPath().toString());
+    }
 
-    Province province = new Province("นครราชสีมา");
-    provinceRepository.saveAndFlush(province);
+    // Weight กรณีที่ 1 ใส่ข้อมูลถูกต้องปกติ
+    @Test
+    void B5900985_testWeightwithCorrect() {
+        Gender gender = genderRepository.findById(1);
+        NameTitle nameTitle = nameTitleRepository.findById(1);
+        Province province = provinceRepository.findById(1);
 
-    Registerpatient r = new Registerpatient();
-    r.setFirstName("กกกกกก");
-    r.setLastName("ขขขขขข");
-    r.setAge(33);
-    r.setWeight(70);
-    r.setHeight(170);
-    r.setAddressDetail("Address");
-    r.setMobilePhone("0819658742");
-    r.setGender(gender);
-    r.setNameTitle(nameTitle);
-    r.setProvince(province);
+        Registerpatient r = new Registerpatient();
+        r.setFirstName("กกกกกก");
+        r.setLastName("ขขขขขข");
+        r.setAge(33);
+        r.setWeight(70);
+        r.setHeight(170);
+        r.setAddressDetail("Address");
+        r.setMobilePhone("0819658742");
+        r.setGender(gender);
+        r.setNameTitle(nameTitle);
+        r.setProvince(province);
 
-    registerpatientRepository.saveAndFlush(r);
+        registerpatientRepository.saveAndFlush(r);
         Optional<Registerpatient> check = registerpatientRepository.findById(r.getRegisterId());
         assertEquals("กกกกกก", check.get().getFirstName());
         assertEquals("ขขขขขข", check.get().getLastName());
@@ -503,137 +440,117 @@ void B5900985_testWeightwithCorrect() {
         assertEquals(gender, check.get().getGender());
         assertEquals(nameTitle, check.get().getNameTitle());
         assertEquals(province, check.get().getProvince());
-}
+    }
 
-  // Weight กรณีที่ 2 นนไม่ถึง 0
-  @Test
-  void B5900985_testWeightmin0() {
-      Gender gender = new Gender("ชาย");
-      genderRepository.saveAndFlush(gender);
+    // Weight กรณีที่ 2 นนไม่ถึง 0
+    @Test
+    void B5900985_testWeightmin0() {
+        Gender gender = genderRepository.findById(1);
+        NameTitle nameTitle = nameTitleRepository.findById(1);
+        Province province = provinceRepository.findById(1);
 
-      NameTitle nameTitle = new NameTitle("นาย");
-      nameTitleRepository.saveAndFlush(nameTitle);
+        Registerpatient r = new Registerpatient();
+        r.setFirstName("กกกกก");
+        r.setLastName("ขขขขข");
+        r.setAge(16);
+        r.setWeight(0);
+        r.setHeight(170);
+        r.setAddressDetail("Address");
+        r.setMobilePhone("0819658742");
+        r.setGender(gender);
+        r.setNameTitle(nameTitle);
+        r.setProvince(province);
 
-      Province province = new Province("กรุงเทพ");
-      provinceRepository.saveAndFlush(province);
+        Set<ConstraintViolation<Registerpatient>> result = validator.validate(r);
 
-      Registerpatient r = new Registerpatient();
-      r.setFirstName("กกกกก");
-      r.setLastName("ขขขขข");
-      r.setAge(16);
-      r.setWeight(0);
-      r.setHeight(170);
-      r.setAddressDetail("Address");
-      r.setMobilePhone("0819658742");
-      r.setGender(gender);
-      r.setNameTitle(nameTitle);
-      r.setProvince(province);
+        // result ต้องมี error 1 ค่าเท่านั้น
+        assertEquals(1, result.size());
 
-      Set<ConstraintViolation<Registerpatient>> result = validator.validate(r);
+        // error message ตรงชนิด และถูก field
+        ConstraintViolation<Registerpatient> v = result.iterator().next();
+        assertEquals("must be greater than or equal to 1", v.getMessage());
+        assertEquals("weight", v.getPropertyPath().toString());
+    }
 
-      // result ต้องมี error 1 ค่าเท่านั้น
-      assertEquals(1, result.size());
+    // Weight กรณีที่ 3 นนเกิน 200
+    @Test
+    void B5900985_testWeightmax200() {
+        Gender gender = genderRepository.findById(1);
+        NameTitle nameTitle = nameTitleRepository.findById(1);
+        Province province = provinceRepository.findById(1);
 
-      // error message ตรงชนิด และถูก field
-      ConstraintViolation<Registerpatient> v = result.iterator().next();
-      assertEquals("must be greater than or equal to 1", v.getMessage());
-      assertEquals("weight", v.getPropertyPath().toString());
-  }
+        Registerpatient r = new Registerpatient();
+        r.setFirstName("กกกกก");
+        r.setLastName("ขขขขข");
+        r.setAge(16);
+        r.setWeight(201);
+        r.setHeight(170);
+        r.setAddressDetail("Address");
+        r.setMobilePhone("0819658742");
+        r.setGender(gender);
+        r.setNameTitle(nameTitle);
+        r.setProvince(province);
 
-   // Weight กรณีที่ 3 นนเกิน 200
-   @Test
-   void B5900985_testWeightmax200() {
-       Gender gender = new Gender("ชาย");
-       genderRepository.saveAndFlush(gender);
- 
-       NameTitle nameTitle = new NameTitle("นาย");
-       nameTitleRepository.saveAndFlush(nameTitle);
- 
-       Province province = new Province("กรุงเทพ");
-       provinceRepository.saveAndFlush(province);
- 
-       Registerpatient r = new Registerpatient();
-       r.setFirstName("กกกกก");
-       r.setLastName("ขขขขข");
-       r.setAge(16);
-       r.setWeight(201);
-       r.setHeight(170);
-       r.setAddressDetail("Address");
-       r.setMobilePhone("0819658742");
-       r.setGender(gender);
-       r.setNameTitle(nameTitle);
-       r.setProvince(province);
- 
-       Set<ConstraintViolation<Registerpatient>> result = validator.validate(r);
- 
-       // result ต้องมี error 1 ค่าเท่านั้น
-       assertEquals(1, result.size());
- 
-       // error message ตรงชนิด และถูก field
-       ConstraintViolation<Registerpatient> v = result.iterator().next();
-       assertEquals("must be less than or equal to 200", v.getMessage());
-       assertEquals("weight", v.getPropertyPath().toString());
-   }
+        Set<ConstraintViolation<Registerpatient>> result = validator.validate(r);
 
-   // Weight กรณีที่ 4 
-   @Test
-   void B5900985_testWeightMustNotBeNull() {
-       Gender gender = new Gender("ชาย");
-       genderRepository.saveAndFlush(gender);
- 
-       NameTitle nameTitle = new NameTitle("นาย");
-       nameTitleRepository.saveAndFlush(nameTitle);
- 
-       Province province = new Province("กรุงเทพ");
-       provinceRepository.saveAndFlush(province);
- 
-       Registerpatient r = new Registerpatient();
-       r.setFirstName("กกกกก");
-       r.setLastName("ขขขขข");
-       r.setAge(16);
-       r.setHeight(170);
-       r.setAddressDetail("Address");
-       r.setMobilePhone("0819658742");
-       r.setGender(gender);
-       r.setNameTitle(nameTitle);
-       r.setProvince(province);
- 
-       Set<ConstraintViolation<Registerpatient>> result = validator.validate(r);
- 
-       // result ต้องมี error 1 ค่าเท่านั้น
-       assertEquals(1, result.size());
- 
-       // error message ตรงชนิด และถูก field
-       ConstraintViolation<Registerpatient> v = result.iterator().next();
-       assertEquals("must not be null", v.getMessage());
-       assertEquals("weight", v.getPropertyPath().toString());
-   }
+        // result ต้องมี error 1 ค่าเท่านั้น
+        assertEquals(1, result.size());
 
-   // Height กรณีที่ 1 ใส่ข้อมูลถูกต้องปกติ
-@Test
-void B5900985_testHeightwithCorrect() {
-    Gender gender = new Gender("ชาย");
-    genderRepository.saveAndFlush(gender);
+        // error message ตรงชนิด และถูก field
+        ConstraintViolation<Registerpatient> v = result.iterator().next();
+        assertEquals("must be less than or equal to 200", v.getMessage());
+        assertEquals("weight", v.getPropertyPath().toString());
+    }
 
-    NameTitle nameTitle = new NameTitle("นาย");
-    nameTitleRepository.saveAndFlush(nameTitle);
+    // Weight กรณีที่ 4
+    @Test
+    void B5900985_testWeightMustNotBeNull() {
+        Gender gender = genderRepository.findById(1);
+        NameTitle nameTitle = nameTitleRepository.findById(1);
+        Province province = provinceRepository.findById(1);
 
-    Province province = new Province("นครราชสีมา");
-    provinceRepository.saveAndFlush(province);
+        Registerpatient r = new Registerpatient();
+        r.setFirstName("กกกกก");
+        r.setLastName("ขขขขข");
+        r.setAge(16);
+        r.setHeight(170);
+        r.setAddressDetail("Address");
+        r.setMobilePhone("0819658742");
+        r.setGender(gender);
+        r.setNameTitle(nameTitle);
+        r.setProvince(province);
 
-    Registerpatient r = new Registerpatient();
-    r.setFirstName("กกกกกก");
-    r.setLastName("ขขขขขข");
-    r.setAge(33);
-    r.setWeight(70);
-    r.setHeight(170);
-    r.setAddressDetail("Address");
-    r.setMobilePhone("0819658742");
-    r.setGender(gender);
-    r.setNameTitle(nameTitle);
-    r.setProvince(province);
+        Set<ConstraintViolation<Registerpatient>> result = validator.validate(r);
 
-    registerpatientRepository.saveAndFlush(r);
+        // result ต้องมี error 1 ค่าเท่านั้น
+        assertEquals(1, result.size());
+
+        // error message ตรงชนิด และถูก field
+        ConstraintViolation<Registerpatient> v = result.iterator().next();
+        assertEquals("must not be null", v.getMessage());
+        assertEquals("weight", v.getPropertyPath().toString());
+    }
+
+    // Height กรณีที่ 1 ใส่ข้อมูลถูกต้องปกติ
+    @Test
+    void B5900985_testHeightwithCorrect() {
+        Gender gender = genderRepository.findById(1);
+        NameTitle nameTitle = nameTitleRepository.findById(1);
+        Province province = provinceRepository.findById(1);
+
+        Registerpatient r = new Registerpatient();
+        r.setFirstName("กกกกกก");
+        r.setLastName("ขขขขขข");
+        r.setAge(33);
+        r.setWeight(70);
+        r.setHeight(170);
+        r.setAddressDetail("Address");
+        r.setMobilePhone("0819658742");
+        r.setGender(gender);
+        r.setNameTitle(nameTitle);
+        r.setProvince(province);
+
+        registerpatientRepository.saveAndFlush(r);
         Optional<Registerpatient> check = registerpatientRepository.findById(r.getRegisterId());
         assertEquals("กกกกกก", check.get().getFirstName());
         assertEquals("ขขขขขข", check.get().getLastName());
@@ -645,137 +562,117 @@ void B5900985_testHeightwithCorrect() {
         assertEquals(gender, check.get().getGender());
         assertEquals(nameTitle, check.get().getNameTitle());
         assertEquals(province, check.get().getProvince());
-}
+    }
 
-   // Height กรณีที่ 2 ส่วนสูงไม่ถึง 1
-  @Test
-  void B5900985_testHeightmin0() {
-      Gender gender = new Gender("ชาย");
-      genderRepository.saveAndFlush(gender);
+    // Height กรณีที่ 2 ส่วนสูงไม่ถึง 1
+    @Test
+    void B5900985_testHeightmin0() {
+        Gender gender = genderRepository.findById(1);
+        NameTitle nameTitle = nameTitleRepository.findById(1);
+        Province province = provinceRepository.findById(1);
 
-      NameTitle nameTitle = new NameTitle("นาย");
-      nameTitleRepository.saveAndFlush(nameTitle);
+        Registerpatient r = new Registerpatient();
+        r.setFirstName("กกกกก");
+        r.setLastName("ขขขขข");
+        r.setAge(16);
+        r.setWeight(50);
+        r.setHeight(0);
+        r.setAddressDetail("Address");
+        r.setMobilePhone("0819658742");
+        r.setGender(gender);
+        r.setNameTitle(nameTitle);
+        r.setProvince(province);
 
-      Province province = new Province("กรุงเทพ");
-      provinceRepository.saveAndFlush(province);
+        Set<ConstraintViolation<Registerpatient>> result = validator.validate(r);
 
-      Registerpatient r = new Registerpatient();
-      r.setFirstName("กกกกก");
-      r.setLastName("ขขขขข");
-      r.setAge(16);
-      r.setWeight(50);
-      r.setHeight(0);
-      r.setAddressDetail("Address");
-      r.setMobilePhone("0819658742");
-      r.setGender(gender);
-      r.setNameTitle(nameTitle);
-      r.setProvince(province);
+        // result ต้องมี error 1 ค่าเท่านั้น
+        assertEquals(1, result.size());
 
-      Set<ConstraintViolation<Registerpatient>> result = validator.validate(r);
+        // error message ตรงชนิด และถูก field
+        ConstraintViolation<Registerpatient> v = result.iterator().next();
+        assertEquals("must be greater than or equal to 1", v.getMessage());
+        assertEquals("height", v.getPropertyPath().toString());
+    }
 
-      // result ต้องมี error 1 ค่าเท่านั้น
-      assertEquals(1, result.size());
+    // Height กรณีที่ 3 ส่วนสูงเกิน 200
+    @Test
+    void B5900985_testHeightmax200() {
+        Gender gender = genderRepository.findById(1);
+        NameTitle nameTitle = nameTitleRepository.findById(1);
+        Province province = provinceRepository.findById(1);
 
-      // error message ตรงชนิด และถูก field
-      ConstraintViolation<Registerpatient> v = result.iterator().next();
-      assertEquals("must be greater than or equal to 1", v.getMessage());
-      assertEquals("height", v.getPropertyPath().toString());
-  }
+        Registerpatient r = new Registerpatient();
+        r.setFirstName("กกกกก");
+        r.setLastName("ขขขขข");
+        r.setAge(16);
+        r.setWeight(50);
+        r.setHeight(210);
+        r.setAddressDetail("Address");
+        r.setMobilePhone("0819658742");
+        r.setGender(gender);
+        r.setNameTitle(nameTitle);
+        r.setProvince(province);
 
-   // Height กรณีที่ 3 ส่วนสูงเกิน 200
-   @Test
-   void B5900985_testHeightmax200() {
-       Gender gender = new Gender("ชาย");
-       genderRepository.saveAndFlush(gender);
- 
-       NameTitle nameTitle = new NameTitle("นาย");
-       nameTitleRepository.saveAndFlush(nameTitle);
- 
-       Province province = new Province("กรุงเทพ");
-       provinceRepository.saveAndFlush(province);
- 
-       Registerpatient r = new Registerpatient();
-       r.setFirstName("กกกกก");
-       r.setLastName("ขขขขข");
-       r.setAge(16);
-       r.setWeight(50);
-       r.setHeight(210);
-       r.setAddressDetail("Address");
-       r.setMobilePhone("0819658742");
-       r.setGender(gender);
-       r.setNameTitle(nameTitle);
-       r.setProvince(province);
- 
-       Set<ConstraintViolation<Registerpatient>> result = validator.validate(r);
- 
-       // result ต้องมี error 1 ค่าเท่านั้น
-       assertEquals(1, result.size());
- 
-       // error message ตรงชนิด และถูก field
-       ConstraintViolation<Registerpatient> v = result.iterator().next();
-       assertEquals("must be less than or equal to 200", v.getMessage());
-       assertEquals("height", v.getPropertyPath().toString());
-   }
+        Set<ConstraintViolation<Registerpatient>> result = validator.validate(r);
 
-   // Height กรณีที่ 4 
-   @Test
-   void B5900985_testHeightMustNotBeNull() {
-       Gender gender = new Gender("ชาย");
-       genderRepository.saveAndFlush(gender);
- 
-       NameTitle nameTitle = new NameTitle("นาย");
-       nameTitleRepository.saveAndFlush(nameTitle);
- 
-       Province province = new Province("กรุงเทพ");
-       provinceRepository.saveAndFlush(province);
- 
-       Registerpatient r = new Registerpatient();
-       r.setFirstName("กกกกก");
-       r.setLastName("ขขขขข");
-       r.setAge(16);
-       r.setWeight(50);
-       r.setAddressDetail("Address");
-       r.setMobilePhone("0819658742");
-       r.setGender(gender);
-       r.setNameTitle(nameTitle);
-       r.setProvince(province);
- 
-       Set<ConstraintViolation<Registerpatient>> result = validator.validate(r);
- 
-       // result ต้องมี error 1 ค่าเท่านั้น
-       assertEquals(1, result.size());
- 
-       // error message ตรงชนิด และถูก field
-       ConstraintViolation<Registerpatient> v = result.iterator().next();
-       assertEquals("must not be null", v.getMessage());
-       assertEquals("height", v.getPropertyPath().toString());
-   }
+        // result ต้องมี error 1 ค่าเท่านั้น
+        assertEquals(1, result.size());
 
-   // AddressDeta กรณีที่ 1 ใส่ข้อมูลถูกต้องปกติ
-@Test
-void B5900985_testAddressDetawithCorrect() {
-    Gender gender = new Gender("ชาย");
-    genderRepository.saveAndFlush(gender);
+        // error message ตรงชนิด และถูก field
+        ConstraintViolation<Registerpatient> v = result.iterator().next();
+        assertEquals("must be less than or equal to 200", v.getMessage());
+        assertEquals("height", v.getPropertyPath().toString());
+    }
 
-    NameTitle nameTitle = new NameTitle("นาย");
-    nameTitleRepository.saveAndFlush(nameTitle);
+    // Height กรณีที่ 4
+    @Test
+    void B5900985_testHeightMustNotBeNull() {
+        Gender gender = genderRepository.findById(1);
+        NameTitle nameTitle = nameTitleRepository.findById(1);
+        Province province = provinceRepository.findById(1);
 
-    Province province = new Province("นครราชสีมา");
-    provinceRepository.saveAndFlush(province);
+        Registerpatient r = new Registerpatient();
+        r.setFirstName("กกกกก");
+        r.setLastName("ขขขขข");
+        r.setAge(16);
+        r.setWeight(50);
+        r.setAddressDetail("Address");
+        r.setMobilePhone("0819658742");
+        r.setGender(gender);
+        r.setNameTitle(nameTitle);
+        r.setProvince(province);
 
-    Registerpatient r = new Registerpatient();
-    r.setFirstName("กกกกกก");
-    r.setLastName("ขขขขขข");
-    r.setAge(33);
-    r.setWeight(70);
-    r.setHeight(170);
-    r.setAddressDetail("Address");
-    r.setMobilePhone("0819658742");
-    r.setGender(gender);
-    r.setNameTitle(nameTitle);
-    r.setProvince(province);
+        Set<ConstraintViolation<Registerpatient>> result = validator.validate(r);
 
-    registerpatientRepository.saveAndFlush(r);
+        // result ต้องมี error 1 ค่าเท่านั้น
+        assertEquals(1, result.size());
+
+        // error message ตรงชนิด และถูก field
+        ConstraintViolation<Registerpatient> v = result.iterator().next();
+        assertEquals("must not be null", v.getMessage());
+        assertEquals("height", v.getPropertyPath().toString());
+    }
+
+    // AddressDeta กรณีที่ 1 ใส่ข้อมูลถูกต้องปกติ
+    @Test
+    void B5900985_testAddressDetawithCorrect() {
+        Gender gender = genderRepository.findById(1);
+        NameTitle nameTitle = nameTitleRepository.findById(1);
+        Province province = provinceRepository.findById(1);
+
+        Registerpatient r = new Registerpatient();
+        r.setFirstName("กกกกกก");
+        r.setLastName("ขขขขขข");
+        r.setAge(33);
+        r.setWeight(70);
+        r.setHeight(170);
+        r.setAddressDetail("Address");
+        r.setMobilePhone("0819658742");
+        r.setGender(gender);
+        r.setNameTitle(nameTitle);
+        r.setProvince(province);
+
+        registerpatientRepository.saveAndFlush(r);
         Optional<Registerpatient> check = registerpatientRepository.findById(r.getRegisterId());
         assertEquals("กกกกกก", check.get().getFirstName());
         assertEquals("ขขขขขข", check.get().getLastName());
@@ -787,137 +684,117 @@ void B5900985_testAddressDetawithCorrect() {
         assertEquals(gender, check.get().getGender());
         assertEquals(nameTitle, check.get().getNameTitle());
         assertEquals(province, check.get().getProvince());
-}
+    }
 
- // AddressDeta กรณีที่ 2 น้อยกว่า 5 ตัว
- @Test
- void B5900985_testAddressDetailSizelessthan5() {
-     Gender gender = new Gender("ชาย");
-     genderRepository.saveAndFlush(gender);
+    // AddressDeta กรณีที่ 2 น้อยกว่า 5 ตัว
+    @Test
+    void B5900985_testAddressDetailSizelessthan5() {
+        Gender gender = genderRepository.findById(1);
+        NameTitle nameTitle = nameTitleRepository.findById(1);
+        Province province = provinceRepository.findById(1);
 
-     NameTitle nameTitle = new NameTitle("นาย");
-     nameTitleRepository.saveAndFlush(nameTitle);
+        Registerpatient r = new Registerpatient();
+        r.setFirstName("กกกกก");
+        r.setLastName("ขขขขข");
+        r.setAge(33);
+        r.setWeight(70);
+        r.setHeight(170);
+        r.setAddressDetail("32aa");
+        r.setMobilePhone("0819658742");
+        r.setGender(gender);
+        r.setNameTitle(nameTitle);
+        r.setProvince(province);
 
-     Province province = new Province("นครราชสีมา");
-     provinceRepository.saveAndFlush(province);
+        Set<ConstraintViolation<Registerpatient>> result = validator.validate(r);
 
-     Registerpatient r = new Registerpatient();
-     r.setFirstName("กกกกก");
-     r.setLastName("ขขขขข");
-     r.setAge(33);
-     r.setWeight(70);
-     r.setHeight(170);
-     r.setAddressDetail("32aa");
-     r.setMobilePhone("0819658742");
-     r.setGender(gender);
-     r.setNameTitle(nameTitle);
-     r.setProvince(province);
+        // result ต้องมี error 1 ค่าเท่านั้น
+        assertEquals(1, result.size());
 
-     Set<ConstraintViolation<Registerpatient>> result = validator.validate(r);
+        // error message ตรงชนิด และถูก field
+        ConstraintViolation<Registerpatient> v = result.iterator().next();
+        assertEquals("size must be between 5 and 50", v.getMessage());
+        assertEquals("addressDetail", v.getPropertyPath().toString());
+    }
 
-     // result ต้องมี error 1 ค่าเท่านั้น
-     assertEquals(1, result.size());
+    // AddressDeta กรณีที่ 3 มากกว่า 50 ตัว
+    @Test
+    void B5900985_testAddressDetailSizeMorethan50() {
+        Gender gender = genderRepository.findById(1);
+        NameTitle nameTitle = nameTitleRepository.findById(1);
+        Province province = provinceRepository.findById(1);
 
-     // error message ตรงชนิด และถูก field
-     ConstraintViolation<Registerpatient> v = result.iterator().next();
-     assertEquals("size must be between 5 and 50", v.getMessage());
-     assertEquals("addressDetail", v.getPropertyPath().toString());
- }
+        Registerpatient r = new Registerpatient();
+        r.setFirstName("กกกกก");
+        r.setLastName("ขขขขข");
+        r.setAge(33);
+        r.setWeight(70);
+        r.setHeight(170);
+        r.setAddressDetail("32ถ.หนองสาหร่ายต.หนองสาหร่ายอ.ปากช่อง1111111111111111111");
+        r.setMobilePhone("0819658742");
+        r.setGender(gender);
+        r.setNameTitle(nameTitle);
+        r.setProvince(province);
 
- // AddressDeta กรณีที่ 3 มากกว่า 50 ตัว
- @Test
- void B5900985_testAddressDetailSizeMorethan50() {
-     Gender gender = new Gender("ชาย");
-     genderRepository.saveAndFlush(gender);
+        Set<ConstraintViolation<Registerpatient>> result = validator.validate(r);
 
-     NameTitle nameTitle = new NameTitle("นาย");
-     nameTitleRepository.saveAndFlush(nameTitle);
+        // result ต้องมี error 1 ค่าเท่านั้น
+        assertEquals(1, result.size());
 
-     Province province = new Province("นครราชสีมา");
-     provinceRepository.saveAndFlush(province);
+        // error message ตรงชนิด และถูก field
+        ConstraintViolation<Registerpatient> v = result.iterator().next();
+        assertEquals("size must be between 5 and 50", v.getMessage());
+        assertEquals("addressDetail", v.getPropertyPath().toString());
+    }
 
-     Registerpatient r = new Registerpatient();
-     r.setFirstName("กกกกก");
-     r.setLastName("ขขขขข");
-     r.setAge(33);
-     r.setWeight(70);
-     r.setHeight(170);
-     r.setAddressDetail("32ถ.หนองสาหร่ายต.หนองสาหร่ายอ.ปากช่อง1111111111111111111");
-     r.setMobilePhone("0819658742");
-     r.setGender(gender);
-     r.setNameTitle(nameTitle);
-     r.setProvince(province);
-     
-     Set<ConstraintViolation<Registerpatient>> result = validator.validate(r);
+    // AddressDeta กรณีที่ 4 ชื่อต้องไม่ว่างเปล่า
+    @Test
+    void B5900985_testAddressDetailMustNotBeNull() {
+        Gender gender = genderRepository.findById(1);
+        NameTitle nameTitle = nameTitleRepository.findById(1);
+        Province province = provinceRepository.findById(1);
 
-     // result ต้องมี error 1 ค่าเท่านั้น
-     assertEquals(1, result.size());
+        Registerpatient r = new Registerpatient();
+        r.setFirstName("กกกกก");
+        r.setLastName("ขขขขข");
+        r.setAge(33);
+        r.setWeight(70);
+        r.setHeight(170);
+        r.setMobilePhone("0819658742");
+        r.setGender(gender);
+        r.setNameTitle(nameTitle);
+        r.setProvince(province);
 
-     // error message ตรงชนิด และถูก field
-     ConstraintViolation<Registerpatient> v = result.iterator().next();
-     assertEquals("size must be between 5 and 50", v.getMessage());
-     assertEquals("addressDetail", v.getPropertyPath().toString());
- }
+        Set<ConstraintViolation<Registerpatient>> result = validator.validate(r);
 
- // AddressDeta กรณีที่ 4 ชื่อต้องไม่ว่างเปล่า
- @Test
- void B5900985_testAddressDetailMustNotBeNull() {
-     Gender gender = new Gender("ชาย");
-     genderRepository.saveAndFlush(gender);
+        // result ต้องมี error 1 ค่าเท่านั้น
+        assertEquals(1, result.size());
 
-     NameTitle nameTitle = new NameTitle("นาย");
-     nameTitleRepository.saveAndFlush(nameTitle);
+        // error message ตรงชนิด และถูก field
+        ConstraintViolation<Registerpatient> v = result.iterator().next();
+        assertEquals("must not be null", v.getMessage());
+        assertEquals("addressDetail", v.getPropertyPath().toString());
+    }
 
-     Province province = new Province("นครราชสีมา");
-     provinceRepository.saveAndFlush(province);
+    // MobilePhone กรณีที่ 1 ใส่ข้อมูลถูกต้องปกติ
+    @Test
+    void B5900985_testMobilePhonewithCorrect() {
+        Gender gender = genderRepository.findById(1);
+        NameTitle nameTitle = nameTitleRepository.findById(1);
+        Province province = provinceRepository.findById(1);
 
-     Registerpatient r = new Registerpatient();
-     r.setFirstName("กกกกก");
-     r.setLastName("ขขขขข");
-     r.setAge(33);
-     r.setWeight(70);
-     r.setHeight(170);
-     r.setMobilePhone("0819658742");
-     r.setGender(gender);
-     r.setNameTitle(nameTitle);
-     r.setProvince(province);
-     
-     Set<ConstraintViolation<Registerpatient>> result = validator.validate(r);
+        Registerpatient r = new Registerpatient();
+        r.setFirstName("กกกกกก");
+        r.setLastName("ขขขขขข");
+        r.setAge(33);
+        r.setWeight(70);
+        r.setHeight(170);
+        r.setAddressDetail("Address");
+        r.setMobilePhone("0819658742");
+        r.setGender(gender);
+        r.setNameTitle(nameTitle);
+        r.setProvince(province);
 
-     // result ต้องมี error 1 ค่าเท่านั้น
-     assertEquals(1, result.size());
-
-     // error message ตรงชนิด และถูก field
-     ConstraintViolation<Registerpatient> v = result.iterator().next();
-     assertEquals("must not be null", v.getMessage());
-     assertEquals("addressDetail", v.getPropertyPath().toString());
- }
-
-// MobilePhone กรณีที่ 1 ใส่ข้อมูลถูกต้องปกติ
-@Test
-void B5900985_testMobilePhonewithCorrect() {
-    Gender gender = new Gender("ชาย");
-    genderRepository.saveAndFlush(gender);
-
-    NameTitle nameTitle = new NameTitle("นาย");
-    nameTitleRepository.saveAndFlush(nameTitle);
-
-    Province province = new Province("นครราชสีมา");
-    provinceRepository.saveAndFlush(province);
-
-    Registerpatient r = new Registerpatient();
-    r.setFirstName("กกกกกก");
-    r.setLastName("ขขขขขข");
-    r.setAge(33);
-    r.setWeight(70);
-    r.setHeight(170);
-    r.setAddressDetail("Address");
-    r.setMobilePhone("0819658742");
-    r.setGender(gender);
-    r.setNameTitle(nameTitle);
-    r.setProvince(province);
-
-    registerpatientRepository.saveAndFlush(r);
+        registerpatientRepository.saveAndFlush(r);
         Optional<Registerpatient> check = registerpatientRepository.findById(r.getRegisterId());
         assertEquals("กกกกกก", check.get().getFirstName());
         assertEquals("ขขขขขข", check.get().getLastName());
@@ -929,19 +806,14 @@ void B5900985_testMobilePhonewithCorrect() {
         assertEquals(gender, check.get().getGender());
         assertEquals(nameTitle, check.get().getNameTitle());
         assertEquals(province, check.get().getProvince());
-}
+    }
 
-     // MobilePhone กรณีที่ 2 น้อยกว่า 10 ตัว
+    // MobilePhone กรณีที่ 2 น้อยกว่า 10 ตัว
     @Test
     void B5900985_testMobilePhoneSizelessthan10() {
-        Gender gender = new Gender("ชาย");
-        genderRepository.saveAndFlush(gender);
-
-        NameTitle nameTitle = new NameTitle("นาย");
-        nameTitleRepository.saveAndFlush(nameTitle);
-
-        Province province = new Province("กรุงเทพ");
-        provinceRepository.saveAndFlush(province);
+        Gender gender = genderRepository.findById(1);
+        NameTitle nameTitle = nameTitleRepository.findById(1);
+        Province province = provinceRepository.findById(1);
 
         Registerpatient r = new Registerpatient();
         r.setFirstName("กกกกก");
@@ -965,52 +837,43 @@ void B5900985_testMobilePhonewithCorrect() {
         assertEquals("must match \"\\d{10}\"", v.getMessage());
         assertEquals("mobilePhone", v.getPropertyPath().toString());
     }
-     // MobilePhone กรณีที่ 3 มากกว่า 10 ตัว
-     @Test
-     void B5900985_testMobilePhoneSizelessthan11() {
-         Gender gender = new Gender("ชาย");
-         genderRepository.saveAndFlush(gender);
- 
-         NameTitle nameTitle = new NameTitle("นาย");
-         nameTitleRepository.saveAndFlush(nameTitle);
- 
-         Province province = new Province("กรุงเทพ");
-         provinceRepository.saveAndFlush(province);
- 
-         Registerpatient r = new Registerpatient();
-         r.setFirstName("กกกกก");
-         r.setLastName("ขขขขข");
-         r.setAge(33);
-         r.setWeight(70);
-         r.setHeight(170);
-         r.setAddressDetail("Address");
-         r.setMobilePhone("09878975400");
-         r.setGender(gender);
-         r.setNameTitle(nameTitle);
-         r.setProvince(province);
- 
-         Set<ConstraintViolation<Registerpatient>> result = validator.validate(r);
- 
-         // result ต้องมี error 1 ค่าเท่านั้น
-         assertEquals(1, result.size());
- 
-         // error message ตรงชนิด และถูก field
-         ConstraintViolation<Registerpatient> v = result.iterator().next();
-         assertEquals("must match \"\\d{10}\"", v.getMessage());
-         assertEquals("mobilePhone", v.getPropertyPath().toString());
-     }
 
-      // MobilePhone กรณีที่ 4
+    // MobilePhone กรณีที่ 3 มากกว่า 10 ตัว
+    @Test
+    void B5900985_testMobilePhoneSizelessthan11() {
+        Gender gender = genderRepository.findById(1);
+        NameTitle nameTitle = nameTitleRepository.findById(1);
+        Province province = provinceRepository.findById(1);
+
+        Registerpatient r = new Registerpatient();
+        r.setFirstName("กกกกก");
+        r.setLastName("ขขขขข");
+        r.setAge(33);
+        r.setWeight(70);
+        r.setHeight(170);
+        r.setAddressDetail("Address");
+        r.setMobilePhone("09878975400");
+        r.setGender(gender);
+        r.setNameTitle(nameTitle);
+        r.setProvince(province);
+
+        Set<ConstraintViolation<Registerpatient>> result = validator.validate(r);
+
+        // result ต้องมี error 1 ค่าเท่านั้น
+        assertEquals(1, result.size());
+
+        // error message ตรงชนิด และถูก field
+        ConstraintViolation<Registerpatient> v = result.iterator().next();
+        assertEquals("must match \"\\d{10}\"", v.getMessage());
+        assertEquals("mobilePhone", v.getPropertyPath().toString());
+    }
+
+    // MobilePhone กรณีที่ 4
     @Test
     void B5900985_testMobilePhoneMustNotBeNull() {
-        Gender gender = new Gender("ชาย");
-        genderRepository.saveAndFlush(gender);
-
-        NameTitle nameTitle = new NameTitle("นาย");
-        nameTitleRepository.saveAndFlush(nameTitle);
-
-        Province province = new Province("กรุงเทพ");
-        provinceRepository.saveAndFlush(province);
+        Gender gender = genderRepository.findById(1);
+        NameTitle nameTitle = nameTitleRepository.findById(1);
+        Province province = provinceRepository.findById(1);
 
         Registerpatient r = new Registerpatient();
         r.setFirstName("กกกกก");
@@ -1034,5 +897,4 @@ void B5900985_testMobilePhonewithCorrect() {
         assertEquals("mobilePhone", v.getPropertyPath().toString());
     }
 
-    
 }
