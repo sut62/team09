@@ -43,21 +43,6 @@ public class DurationTest {
         assertEquals("1 วัน", result.get().getDuration());
     }
 
-	@Test
-    void B5910519_testDurationIdMustNotBeNull() {
-        Duration duration = new Duration();
-		duration.setDurationId(null);
-		duration.setDuration("1 วัน");
-
-		Set<ConstraintViolation<Duration>> result = validator.validate(duration);
-		
-		assertEquals(1, result.size());
-		
-        ConstraintViolation<Duration> v = result.iterator().next();
-        assertEquals("must not be null", v.getMessage());
-        assertEquals("durationId", v.getPropertyPath().toString());
-    }
-	
 	
 	@Test
     void B5910519_testDurationMustNotBeNull() {

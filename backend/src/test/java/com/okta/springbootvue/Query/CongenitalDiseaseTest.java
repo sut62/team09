@@ -43,21 +43,6 @@ public class CongenitalDiseaseTest {
         assertEquals("โรคหัวใจ", result.get().getCongenitalDisease());
     }
 
-	@Test
-    void B5910519_testCongenitalDiseaseIdMustNotBeNull() {
-        CongenitalDisease congenitalDisease = new CongenitalDisease();
-		congenitalDisease.setCongenitalDiseaseId(null);
-		congenitalDisease.setCongenitalDisease("โรคหัวใจ");
-        System.out.println(congenitalDisease);
-		Set<ConstraintViolation<CongenitalDisease>> result = validator.validate(congenitalDisease);
-		
-		assertEquals(1, result.size());
-		
-        ConstraintViolation<CongenitalDisease> v = result.iterator().next();
-        assertEquals("must not be null", v.getMessage());
-        assertEquals("congenitalDiseaseId", v.getPropertyPath().toString());
-    }
-	
 	
 	@Test
     void B5910519_testCongenitalDiseaseMustNotBeNull() {
