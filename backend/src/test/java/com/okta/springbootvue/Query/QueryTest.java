@@ -265,7 +265,6 @@ public class QueryTest {
         assertEquals("lastName", v.getPropertyPath().toString());
     }
 
-    
     @Test
     void B5910519_testFirstNameCannotEnterNumber() {
         Query query = new Query();
