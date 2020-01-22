@@ -4,11 +4,10 @@ import lombok.*;
 
 import javax.persistence.Id;
 import javax.persistence.SequenceGenerator;
-
 import javax.persistence.Table;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
-
+import javax.validation.constraints.NotNull;
 import java.util.Optional;
 
 import javax.persistence.Column;
@@ -26,8 +25,8 @@ public class CauseofDeath {
     @SequenceGenerator(name="CAUSEOFDEATH_seq",sequenceName="CAUSEOFDEATH_seq")
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator="CAUSEOFDEATH_seq")
     @Column(name="CAUSEOFDEATH_ID",unique = true, nullable = true)
-    private @NonNull Long causeofdeathId;
-    private @NonNull String causeofdeath;
+    private @NotNull Long causeofdeathId;
+    private @NotNull String causeofdeath;
 
     public Long getCauseofDeathId() {
         return causeofdeathId;
