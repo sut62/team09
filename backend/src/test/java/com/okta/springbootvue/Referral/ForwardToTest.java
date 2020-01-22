@@ -44,22 +44,6 @@ public class ForwardToTest {
         assertEquals(1L, result.get().getForwardToId());
         assertEquals("โรงพยาบาลเทคโนโลยีสุรนารี", result.get().getForwardTo());
     }
-
-	@Test
-    void B5903191_testForwardToIdMustNotBeNull() {
-        ForwardTo forwardTo = new ForwardTo();
-		forwardTo.setForwardToId(null);
-		forwardTo.setForwardTo("โรงพยาบาลเทคโนโลยีสุรนารี");
-
-		Set<ConstraintViolation<ForwardTo>> result = validator.validate(forwardTo);
-		
-		assertEquals(1, result.size());
-		
-        ConstraintViolation<ForwardTo> v = result.iterator().next();
-        assertEquals("must not be null", v.getMessage());
-        assertEquals("forwardToId", v.getPropertyPath().toString());
-    }
-	
 	
 	@Test
     void B5903191_testForwardToMustNotBeNull() {
