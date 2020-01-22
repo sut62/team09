@@ -9,7 +9,6 @@ import javax.validation.ConstraintViolation;
 import javax.validation.Validation;
 import javax.validation.Validator;
 import javax.validation.ValidatorFactory;
-
 import com.okta.springbootvue.RegisterDeaths.Entity.*;
 import com.okta.springbootvue.RegisterDeaths.Repository.*;
 
@@ -42,18 +41,17 @@ public class PlaceTest {
         assertEquals("บ้าน", result.get().getPlace());
     }
 
-	// @Test
-    // void B5905836_testPlaceMustNotBeNull() {
-    //     Place place = new Place();
-    //     place.setPlace(null);
-    //     // place.setPlace("บ้าน");
+	 @Test
+     void B5905836_testPlaceMustNotBeNull() {
+         Place place = new Place();
+          place.setPlace("บ้าน");
 
-	// 	Set<ConstraintViolation<Place>> result = validator.validate(place);
+	 	Set<ConstraintViolation<Place>> result = validator.validate(place);
 		
-	// 	assertEquals(1, result.size());
+	 	assertEquals(1, result.size());
 		
-    //     ConstraintViolation<Place> v = result.iterator().next();
-    //     assertEquals("must not be null", v.getMessage());
-    //     assertEquals("placeId", v.getPropertyPath().toString());
-    // }
+         ConstraintViolation<Place> v = result.iterator().next();
+         assertEquals("must not be null", v.getMessage());
+         assertEquals("placeId", v.getPropertyPath().toString());
+     }
 }

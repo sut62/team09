@@ -42,18 +42,17 @@ public class CauseofDeathTest {
         assertEquals("ฆาตรกรรม", result.get().getCauseofDeath());
     }
 
-	// @Test
-    // void B5905836_testCauseofDeathMustNotBeNull() {
-    //     CauseofDeath causeofDeath = new CauseofDeath();
-    //     causeofDeath.setCauseofDeath(null);
-    //     // causeofDeath.setCauseofDeath("ฆาตรกรรม");
+         @Test
+         void B5905836_testCauseofDeathMustNotBeNull() {
+             CauseofDeath causeofDeath = new CauseofDeath();
+             causeofDeath.setCauseofDeath("ฆาตรกรรม");
 
-	// 	Set<ConstraintViolation<CauseofDeath>> result = validator.validate(causeofDeath);
-		
-	// 	assertEquals(1, result.size());
-		
-    //     ConstraintViolation<CauseofDeath> v = result.iterator().next();
-    //     assertEquals("must not be null", v.getMessage());
-    //     assertEquals("causeofDeathId", v.getPropertyPath().toString());
-    // }
+            Set<ConstraintViolation<CauseofDeath>> result = validator.validate(causeofDeath);
+
+            assertEquals(1, result.size());
+
+             ConstraintViolation<CauseofDeath> v = result.iterator().next();
+             assertEquals("must not be null", v.getMessage());
+             assertEquals("causeofdeathId", v.getPropertyPath().toString());
+         }
 }

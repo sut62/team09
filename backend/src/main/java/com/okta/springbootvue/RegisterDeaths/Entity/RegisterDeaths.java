@@ -16,7 +16,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
-
+import javax.validation.constraints.NotNull;
 // import java.util.Date;
 
 import com.okta.springbootvue.Registerpatient.Entity.Gender;
@@ -37,23 +37,23 @@ public class RegisterDeaths {
     private @NonNull Long registerdeathId;
 
     @Size(max=30,min=5)
-    private @NonNull String firstName;
+    private @NotNull String firstName;
 
     @Size(max=30,min=5)
-    private @NonNull String lastName;
+    private @NotNull String lastName;
 
     @Min(1)
     @Max(150)
-    private @NonNull Integer age;
+    private @NotNull Integer age;
 
     private @NonNull String born;
     private @NonNull String death;
 
     @Size(max=50,min=5)
-    private @NonNull String addressDetail;
+    private @NotNull String addressDetail;
 
     @Pattern(regexp = "\\d{10}")
-	private @NonNull String mobilePhone;
+	private @NotNull String mobilePhone;
     
     
     @ManyToOne(fetch = FetchType.EAGER, targetEntity = CauseofDeath.class)
