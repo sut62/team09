@@ -41,8 +41,8 @@ public class DiagnoseController {
         return diagnoseRepository.findAll().stream().collect(Collectors.toList());
     }
 
-    @PostMapping("/diagnose/{queryId}/{doctorId}/{diseaseId}")
-    public Diagnose newDiagnose(@PathVariable long queryId,
+    @PostMapping("/diagnose/{queryId}/{note}/{doctorId}/{diseaseId}")
+    public Diagnose newDiagnose(@PathVariable long queryId,@PathVariable String note,
     @PathVariable long doctorId, @PathVariable long diseaseId) {
         Diagnose diagnose = new Diagnose();
 
@@ -53,6 +53,7 @@ public class DiagnoseController {
         diagnose.setQuery(query);
         diagnose.setDoctor(doctor);
         diagnose.setDisease(disease);
+        diagnose.setNote(note);
         diagnose.setNameRegister(query.getFirstName());
         diagnose.setNameDoctor(doctor.getName());
         diagnose.setNameDisease(disease.getName());
