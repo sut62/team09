@@ -17,6 +17,10 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 
+import javax.validation.constraints.Size;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Pattern;
+
 
 @Getter
 @Setter
@@ -31,27 +35,39 @@ public class Appointment {
     @GeneratedValue(strategy=GenerationType.SEQUENCE, generator="APPOINTMENT_seq")
 	@Column(name="APPOINTMENT_ID",unique = true, nullable = true)
     private @NonNull Long appointmentId;
-    private @NonNull String appointDate;
-    private @NonNull String appointTime;
+
+    @NotNull
+    @Pattern (regexp = "^\\d{2}-\\d{2}-\\d{4}$")
+    private String appointDate;
+
+    
+    @NotNull
+    @Pattern (regexp = "^\\d{2}:\\d{2}$")
+    private String appointTime;
 
     @ManyToOne(fetch = FetchType.EAGER, targetEntity = Clinic.class)
     @JoinColumn(name = "CLINIC_ID", insertable = true)
+    @NotNull
     private Clinic clinic;
 
     @ManyToOne(fetch = FetchType.EAGER, targetEntity = Demeanor.class)
     @JoinColumn(name = "DEMEANOR_ID", insertable = true)
+    @NotNull
     private Demeanor demeanor;
 
     @ManyToOne(fetch = FetchType.EAGER, targetEntity = Reason.class)
     @JoinColumn(name = "REASON_ID", insertable = true)
+    @NotNull
     private Reason reason;
 
     @ManyToOne(fetch = FetchType.EAGER, targetEntity = Diagnose.class)
     @JoinColumn(name = "DIAGNOSE_ID", insertable = true)
+    @NotNull
     private Diagnose diagnose;
 
     @ManyToOne(fetch = FetchType.EAGER, targetEntity = Doctor.class)
     @JoinColumn(name = "DOCTOR_ID", insertable = true)
+    @NotNull
     private Doctor doctor;
 
     public Doctor getDoctor() {

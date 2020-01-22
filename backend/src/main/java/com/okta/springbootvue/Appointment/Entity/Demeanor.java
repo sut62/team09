@@ -10,6 +10,8 @@ import javax.persistence.GenerationType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 
+import javax.validation.constraints.NotNull;
+
 @Getter
 @Setter
 @Data
@@ -23,7 +25,8 @@ public class Demeanor {
 	@Column(name="DEMEANOR_ID",unique = true, nullable = true)
     private @NonNull Long demeanorId;
     
-    private @NonNull String demeanor;
+    @NotNull
+    private String demeanor;
 
     public Long getDemeanorId() {
         return demeanorId;

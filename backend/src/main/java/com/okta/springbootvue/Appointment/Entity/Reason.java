@@ -10,6 +10,8 @@ import javax.persistence.GenerationType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 
+import javax.validation.constraints.NotNull;
+
 @Getter
 @Setter
 @Data
@@ -23,7 +25,8 @@ public class Reason {
 	@Column(name="REASON_ID",unique = true, nullable = true)
     private @NonNull Long reasonId;
     
-    private @NonNull String reason;
+    @NotNull
+    private String reason;
 
     public Long getReasonId() {
         return reasonId;
