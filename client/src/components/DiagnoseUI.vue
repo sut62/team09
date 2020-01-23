@@ -17,8 +17,6 @@
           required
           @input="selectque"
           @change="getCongenitalDisease"
-          
-
         ></v-select>
 
         <v-text-field
@@ -29,12 +27,17 @@
           v-model="congenitalDisease"
         ></v-text-field>
 
-        <v-text-field
-          block
-          disabled
-          prepend-icon="watch_later"
-          label="ระยะเวลา"
+        <v-text-field 
+          block disabled 
+          prepend-icon="watch_later" 
+          label="ระยะเวลา" 
           v-model="duration"
+        ></v-text-field>
+
+        <v-text-field 
+          label="สาเหตุ" 
+          prepend-icon="description" 
+          v-model="myform.note" required
         ></v-text-field>
 
         <v-select
@@ -67,14 +70,22 @@
             </v-row>
           </v-col>
         </v-row>
+
+        <div class="text-center">
+            <v-btn class="ma-5" 
+              tile color="indigo" 
+              dark v-on:click="show">แสดงผลข้อมูล
+            </v-btn>
+        </div>
+
       </v-col>
     </v-row>
   </v-container>
 </template>
 
 <script>
-import axios from "axios"
-  /* eslint-disable */
+import axios from "axios";
+/* eslint-disable */
 
 export default {
   data() {
@@ -83,7 +94,8 @@ export default {
         queryId: null,
         doctorId: null,
         diseaseId: null,
-        registerpatientId: null
+        registerpatientId: null,
+        note: ""
       },
       querys: [],
       doctor: [],
@@ -93,70 +105,75 @@ export default {
       selectdoctor: "",
       congenitalDisease: "",
       duration: ""
-    }
+    };
   },
   methods: {
     clear() {
-      this.$router.push("/home")
+      this.$router.push("/home");
     },
-
+    show(){
+      this.$router.push('/showdiagnose');
+    },
     save() {
-      this.myform.queryId = this.selectquery
-      this.myform.doctorId = this.selectdoctor
-      this.myform.diseaseId = this.selectdisease
+      this.myform.queryId = this.selectquery;
+      this.myform.doctorId = this.selectdoctor;
+      this.myform.diseaseId = this.selectdisease;
 
       console.log(
         "query" + this.myform.queryId,
         "disease" + this.myform.diseaseId,
         "doctor" + this.myform.doctorId
-      )
+      );
 
       for (let i in this.querys) {
         if (this.selectquery == this.querys[i].id) {
-          this.myform.registerId = this.querys[i].idregisterpatient
+          this.myform.registerId = this.querys[i].idregisterpatient;
         }
-        console.log(this.myform.registerId)
+        console.log(this.myform.registerId);
       }
 
-      console.log(this.myform)
+      console.log(this.myform);
       axios
         .post(
           "http://localhost:9000/diagnose/" +
             this.myform.queryId +
+            "/" +
+            this.myform.note +
             "/" +
             this.myform.diseaseId +
             "/" +
             this.myform.doctorId
         )
         .then(response => {
-          alert("สำเร็จ")
+          alert("สำเร็จ");
           let blankDate = {
             queryId: "",
             congenitalDisease: "",
+            note: "",
             duration: "",
             diseaseId: "",
             doctorId: ""
-          }
-          this.myform = blankDate
-          this.selectquery = ""
-          this.selectdisease = ""
-          this.selectdoctor = ""
+          };
+          this.myform = blankDate;
+          this.selectquery = "";
+          this.selectdisease = "";
+          this.selectdoctor = "";
         })
         .catch(e => {
-          console.log(e)
-          alert("ไม่สำเร็จ!")
-        })
+          console.log(e);
+          alert("ไม่สำเร็จ!");
+        });
     },
 
     selectque() {
-      console.log(this.selectquery)
+      console.log(this.selectquery);
 
       for (let i in this.querys) {
-        console.log(this.querys[i].id)
+        console.log(this.querys[i].id);
         if (this.selectquery == this.querys[i].id) {
           //console.log(this.querys[i].addsymptom)
-          this.congenitalDisease = this.querys[i].congenitalDisease
-          this.duration = this.querys[i].duration
+          this.congenitalDisease = this.querys[i].congenitalDisease;
+          this.duration = this.querys[i].duration;
         }
       }
 
@@ -164,48 +181,47 @@ export default {
     },
     getCongenitalDisease() {
       this.querys.forEach(query => {
-        if(query.queryid === this.selectquery) {
-          this.congenitalDisease = query.congenitalDisease.congenitalDisease
-          this.duration = query.duration.duration
+        if (query.queryid === this.selectquery) {
+          this.congenitalDisease = query.congenitalDisease.congenitalDisease;
+          this.duration = query.duration.duration;
         }
       });
-      }
+    }
   },
   mounted() {
     axios
       .get(`http://localhost:9000/doctor`)
       .then(response => {
         // JSON responses are automatically parsed.
-        console.log(response)
-        this.doctor = response.data
+        console.log(response);
+        this.doctor = response.data;
       })
       .catch(e => {
-        console.log(e)
-      })
+        console.log(e);
+      });
 
     axios
       .get(`http://localhost:9000/disease`)
       .then(response => {
         // JSON responses are automatically parsed.
-        console.log(response)
-        this.disease = response.data
+        console.log(response);
+        this.disease = response.data;
       })
       .catch(e => {
-        console.log(e)
-      })
+        console.log(e);
+      });
 
     axios
       .get(`http://localhost:9000/querys`)
       .then(response => {
-        console.log(response)
-        this.querys = response.data
-        console.log(this.querys)
+        console.log(response);
+        this.querys = response.data;
+        console.log(this.querys);
       })
       .catch(e => {
-        console.log(e)
-      })
-      
+        console.log(e);
+      });
   }
-}
+};
 </script>
 
