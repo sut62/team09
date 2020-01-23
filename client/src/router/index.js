@@ -10,6 +10,7 @@ import ShowRegisterpatient from "../components/ShowRegisterpatient"
 import ShowRegisterpatientDetail from '../components/ShowRegisterpatientDetail'
 import Login from "../components/Login";
 import Home from "../components/Home"
+import ReferralData from "../components/ReferralData"
 Vue.use(Router);
 
 export default new Router({
@@ -70,6 +71,11 @@ export default new Router({
       path: "/registerdeaths",
       name: "registerdeaths",
       component: RegisterDeaths
+    },
+    {
+      path: "/referraldata",
+      name: "referraldata",
+      component: ReferralData
     }
   ]
 });

@@ -83,6 +83,7 @@
     <div class="text-center">
       <v-btn class="ma-5" tile color="indigo" dark v-on:click="save">ตกลง</v-btn>
       <v-btn class="ma-5" tile color="indigo" dark v-on:click="cancel">ยกเลิก</v-btn>
+      <v-btn class="ma-5" tile color="indigo" dark v-on:click="referraldata">ดูข้อมูล</v-btn>
     </div>
   </v-container>
 </template>
@@ -114,6 +115,9 @@ export default {
   },
 
   methods: {
+    referraldata() {
+      this.$router.push("/referraldata")
+    },
     getDisease() {
       this.diagnose.forEach(dia => {
         if(dia.diagnoseId === this.myform.a) {
