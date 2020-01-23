@@ -48,6 +48,7 @@ public class AppointmentTest {
     void B5905188_testAppointmentSuccess() {
         Diagnose diagnose = new Diagnose();
         diagnose.setNameRegister("ศานันทินี");
+        diagnose.setNote("แพ้ยาพารา");
         diagnoseRepository.saveAndFlush(diagnose);
 
         Clinic clinic = new Clinic();
@@ -92,6 +93,7 @@ public class AppointmentTest {
     void B5905188_testAppointTimeMustNotBeNull() {
         Diagnose diagnose = new Diagnose();
         diagnose.setNameRegister("ศานันทินี");
+        diagnose.setNote("แพ้ยาพารา");
         diagnoseRepository.saveAndFlush(diagnose);
 
         Clinic clinic = new Clinic();
@@ -135,6 +137,7 @@ public class AppointmentTest {
     void B5905188_testAppointDateMustNotMatchPattern() {
         Diagnose diagnose = new Diagnose();
         diagnose.setNameRegister("ศานันทินี");
+        diagnose.setNote("แพ้ยาพารา");
         diagnoseRepository.saveAndFlush(diagnose);
 
         Clinic clinic = new Clinic();
@@ -178,6 +181,7 @@ public class AppointmentTest {
     void B5905188_testAppointTimeMustNotMatchPattern() {
         Diagnose diagnose = new Diagnose();
         diagnose.setNameRegister("ศานันทินี");
+        diagnose.setNote("แพ้ยาพารา");
         diagnoseRepository.saveAndFlush(diagnose);
 
         Clinic clinic = new Clinic();
@@ -221,6 +225,7 @@ public class AppointmentTest {
     void B5905188_testAppointTimeMustNotLessThan5() {
         Diagnose diagnose = new Diagnose();
         diagnose.setNameRegister("ศานันทินี");
+        diagnose.setNote("แพ้ยาพารา");
         diagnoseRepository.saveAndFlush(diagnose);
 
         Clinic clinic = new Clinic();
@@ -264,6 +269,7 @@ public class AppointmentTest {
     void B5905188_testClinicMustNotBeNull() {
         Diagnose diagnose = new Diagnose();
         diagnose.setNameRegister("ศานันทินี");
+        diagnose.setNote("แพ้ยาพารา");
         diagnoseRepository.saveAndFlush(diagnose);
 
         Clinic clinic = new Clinic();
