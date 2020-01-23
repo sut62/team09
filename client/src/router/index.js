@@ -11,6 +11,7 @@ import ShowRegisterpatientDetail from '../components/ShowRegisterpatientDetail'
 import Login from "../components/Login";
 import Home from "../components/Home"
 import ReferralData from "../components/ReferralData"
+import QueryData from "../components/QueryData"
 Vue.use(Router);
 
 export default new Router({
@@ -76,6 +77,11 @@ export default new Router({
       path: "/referraldata",
       name: "referraldata",
       component: ReferralData
+    },
+    {
+      path: "/querydata",
+      name: "querydata",
+      component: QueryData
     }
   ]
 });
