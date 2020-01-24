@@ -3,6 +3,7 @@ import Router from "vue-router";
 import RegisterPatient from "../components/Registerpatient";
 import Appointment from "../components/Appointment";
 import Diagnose from "../components/DiagnoseUI";
+import ShowDiagnose from "../components/ShowDiagnose"
 import Query from "../components/Query";
 import Referral from "../components/Referral";
 import RegisterDeaths from "../components/RegisterDeaths";
@@ -52,6 +53,11 @@ export default new Router({
       path: "/appointment",
       name: "appointment",
       component: Appointment
+    },
+    {
+      path: "/showdiagnose",
+      name: "showdiagnose",
+      component: ShowDiagnose
     },
     {
       path: "/diagnose",
