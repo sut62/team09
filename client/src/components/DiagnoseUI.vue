@@ -13,7 +13,6 @@
           item-text="firstName"
           item-value="queryid"
           prepend-icon="local_hospital"
-          :rules="[(v) => !!v || 'กรุณาเลือกขื่อผู้ป่วย']"
           required
           @input="selectque"
           @change="getCongenitalDisease"
@@ -23,60 +22,52 @@
           block
           disabled
           prepend-icon="local_pharmacy"
-          label="โรคประจำตัว"
+          label="อาการ"
           v-model="congenitalDisease"
         ></v-text-field>
 
-        <v-text-field 
-          block disabled 
-          prepend-icon="watch_later" 
-          label="ระยะเวลา" 
+        <v-text-field
+          block
+          disabled
+          prepend-icon="watch_later"
+          label="ระยะเวลาการเจ็บป่วย"
           v-model="duration"
         ></v-text-field>
 
-        <v-text-field 
-          label="สาเหตุ" 
-          prepend-icon="description" 
-          v-model="myform.note" required
-        ></v-text-field>
+        <v-text-field label="*สาเหตุ" prepend-icon="description" v-model="myform.note" required></v-text-field>
 
         <v-select
           :items="disease"
           v-model="selectdisease"
-          label="รายชื่อโรค"
+          label="คำวินิจฉัย"
           item-text="name"
           item-value="diseaseId"
           prepend-icon="menu_book"
-          :rules="[(v) => !!v || 'กรุณาเลือกโรคที่วินิจฉัยได้']"
           required
         ></v-select>
 
         <v-select
           :items="doctor"
           v-model="selectdoctor"
-          label="รายชื่อแพทย์ที่วินิจฉัยโรค"
+          label="แพทย์ผู้วินิจฉัยโรค"
           item-text="name"
           item-value="doctorId"
           prepend-icon="face"
-          :rules="[(v) => !!v || 'กรุณาลงชื่อแพทย์ที่วินิจฉัย']"
           required
         ></v-select>
 
         <v-row justify="center">
           <v-col cols="12">
             <v-row justify="center">
-              <v-btn v-on:click="save">วินิจฉัยโรค</v-btn>
-              <v-btn style="margin-left: 15px;" v-on:click="clear()">ยกเลิก</v-btn>
+              <v-btn style="margin-left: 15px;" color="blue darken-4" dark v-on:click="save">บันทึก</v-btn>
+              <v-btn style="margin-left: 15px;" color="red darken-3" dark v-on:click="clear()">ยกเลิก</v-btn>
             </v-row>
           </v-col>
         </v-row>
 
-        <div class="text-center">
-            <v-btn class="ma-5" 
-              tile color="indigo" 
-              dark v-on:click="show">แสดงผลข้อมูล
-            </v-btn>
-        </div>
+        <v-row justify="center">
+          <v-btn style="margin-left: 15px;" color="blue-grey darken-3" dark v-on:click="show">แสดงผลข้อมูล</v-btn>
+        </v-row>
 
       </v-col>
     </v-row>
@@ -111,8 +102,8 @@ export default {
     clear() {
       this.$router.push("/home");
     },
-    show(){
-      this.$router.push('/showdiagnose');
+    show() {
+      this.$router.push("/showdiagnose");
     },
     save() {
       this.myform.queryId = this.selectquery;
@@ -158,6 +149,8 @@ export default {
           this.selectquery = "";
           this.selectdisease = "";
           this.selectdoctor = "";
+          this.congenitalDisease = "";
+          this.duration = "";
         })
         .catch(e => {
           console.log(e);
