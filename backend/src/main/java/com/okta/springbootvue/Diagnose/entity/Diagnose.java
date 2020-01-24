@@ -47,9 +47,8 @@ public class Diagnose {
   private Disease disease;
   private String nameDisease;
 
-  @ManyToOne()
-  @JsonBackReference
-  @JoinColumn(name = "Query_ID")
+  @ManyToOne(fetch = FetchType.EAGER, targetEntity = Query.class)
+  @JoinColumn(name = "QUERY_ID", insertable = true)
   private Query query;
 
   @ManyToOne(fetch = FetchType.EAGER, targetEntity = Doctor.class)
