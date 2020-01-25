@@ -120,6 +120,7 @@
     <div class="text-center">
       <v-btn class="ma-5" tile color="indigo" dark v-on:click="save(myform)">ตกลง</v-btn>
       <v-btn class="ma-5" tile color="indigo" dark v-on:click="cancel()">ยกเลิก</v-btn>
+      <v-btn class="ma-5" tile color="indigo" dark v-on:click="show()">แสดงผลข้อมูล</v-btn>
     </div>
   </v-container>
 </template>
@@ -165,6 +166,9 @@ export default {
     cancel() {
       this.$router.push("/home")
     },
+      show(){
+      this.$router.push('/showregisterdeaths');
+    },  
     save(myform) {
       //@PostMapping("/RegisterDeaths/{firstName}/{lastName}/{age}/{born}/{death}/{addressDetail}/{mobilePhone}/{provinceId}/{nameTitileId}/{genderId}/{CauseofDeath}/{Place}")
       this.myform.nameTitleId = this.selectNameTitle
@@ -296,3 +300,4 @@ export default {
   }
 }
 </script>
+}
