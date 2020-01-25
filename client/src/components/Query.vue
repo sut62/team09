@@ -68,6 +68,7 @@
     <div class="text-center">
       <v-btn class="ma-5" tile color="indigo" dark v-on:click="save">ตกลง</v-btn>
       <v-btn class="ma-5" tile color="indigo" dark v-on:click="cancel">ยกเลิก</v-btn>
+      <v-btn class="ma-5" tile color="indigo" dark v-on:click="querydata">ดูข้อมูล</v-btn>
     </div>
   </v-container>
 </template>
@@ -98,6 +99,9 @@ export default {
   },
 
   methods: {
+    querydata() {
+      this.$router.push("/querydata")
+    },
     cancel() {
       this.$router.push("/home")
     },
