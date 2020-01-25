@@ -137,9 +137,7 @@ export default {
         .post(
           "http://localhost:9000/diagnose/" +
             this.myform.queryId +
-            "/" +
-            this.myform.symptom +
-            "/" +
+            "/" + 
             this.myform.note +
             "/" +
             this.myform.diseaseId +
