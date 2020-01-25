@@ -3,7 +3,7 @@
     <v-flex>
       <h2
         class="font-weight-black text-uppercase display-3 light-blue accent-3 text-center"
-      >แสดงข้อมูลลงทะเบียนผู้ป่วย</h2>
+      >แสดงข้อมูลลงทะเบียนผู้เสียชีวิต</h2>
     </v-flex>
 
     <v-card class="my-2" max-width="1200">
