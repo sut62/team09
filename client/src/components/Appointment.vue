@@ -111,6 +111,7 @@
         <div class="text-center">
           <v-btn class="ma-5" tile color="indigo" dark v-on:click="save">ตกลง</v-btn>
           <v-btn class="ma-5" tile color="indigo" dark v-on:click="cancel">ยกเลิก</v-btn>
+          <v-btn class="ma-5" tile color="indigo" dark v-on:click="print">พิมพ์ใบนัดหมาย</v-btn>
         </div>
       </v-col>
     </v-row>
@@ -144,6 +145,9 @@ export default {
     
     cancel() {
       this.$router.push("/home")
+    },
+        print(){
+      this.$router.push("/printappointment");
     },
     save() {
       //@PostMapping("/appointment/{diagnoseId}/{clinicId}/{demeanorId}/{reasonId}/{doctorId}/{appointDate}/{appointTime}")
