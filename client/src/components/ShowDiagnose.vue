@@ -28,7 +28,8 @@ export default {
       headers: [
         { text: "ID", value: "diagnoseId" },
         { text: "ชื่อผู้ป่วย", value: "nameRegister" },
-        { text: "อาการ", value: "query.congenitalDisease.congenitalDisease" },
+        { text: "โรคประจำตัว", value: "query.congenitalDisease.congenitalDisease" },
+        { text: "อาการ", value: "query.symptom" },
         { text: "ระยะเวลา", value: "query.duration.duration" },
         { text: "สาเหตุเหตุ", value: "note" },
         { text: "ผลการวินิจฉัย", value: "disease.name" },

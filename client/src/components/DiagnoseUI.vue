@@ -22,8 +22,16 @@
           block
           disabled
           prepend-icon="local_pharmacy"
-          label="อาการ"
+          label="โรคประจำตัว"
           v-model="congenitalDisease"
+        ></v-text-field>
+
+        <v-text-field
+          block
+          disabled
+          prepend-icon="local_pharmacy"
+          label="อาการ"
+          v-model="symptom"
         ></v-text-field>
 
         <v-text-field
@@ -95,7 +103,8 @@ export default {
       selectdisease: "",
       selectdoctor: "",
       congenitalDisease: "",
-      duration: ""
+      duration: "",
+      symptom: ""
     };
   },
   methods: {
@@ -129,6 +138,8 @@ export default {
           "http://localhost:9000/diagnose/" +
             this.myform.queryId +
             "/" +
+            this.myform.symptom +
+            "/" +
             this.myform.note +
             "/" +
             this.myform.diseaseId +
@@ -141,6 +152,7 @@ export default {
             queryId: "",
             congenitalDisease: "",
             note: "",
+            symptom: "",
             duration: "",
             diseaseId: "",
             doctorId: ""
@@ -151,6 +163,7 @@ export default {
           this.selectdoctor = "";
           this.congenitalDisease = "";
           this.duration = "";
+          this.symptom = "";
         })
         .catch(e => {
           console.log(e);
@@ -167,6 +180,7 @@ export default {
           //console.log(this.querys[i].addsymptom)
           this.congenitalDisease = this.querys[i].congenitalDisease;
           this.duration = this.querys[i].duration;
+          this.symptom = this.query[i].symptom;
         }
       }
 
@@ -177,6 +191,7 @@ export default {
         if (query.queryid === this.selectquery) {
           this.congenitalDisease = query.congenitalDisease.congenitalDisease;
           this.duration = query.duration.duration;
+          this.symptom = query.symptom;
         }
       });
     }
