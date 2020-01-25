@@ -7,6 +7,8 @@ import ShowDiagnose from "../components/ShowDiagnose"
 import Query from "../components/Query";
 import Referral from "../components/Referral";
 import RegisterDeaths from "../components/RegisterDeaths";
+import ShowRegisterDeaths from "../components/ShowRegisterDeaths"
+import ShowRegisterDeathsDetail from '../components/ShowRegisterDeathsDetail'
 import ShowRegisterpatient from "../components/ShowRegisterpatient"
 import ShowRegisterpatientDetail from '../components/ShowRegisterpatientDetail'
 import Login from "../components/Login";
@@ -78,6 +80,16 @@ export default new Router({
       path: "/registerdeaths",
       name: "registerdeaths",
       component: RegisterDeaths
+    },
+    {
+       path: "/showregisterdeaths",
+       name: "showregisterdeaths",
+       component: ShowRegisterDeaths
+   },
+   {
+      path: "/showregisterdeathsDetail",
+      name: "showregisterdeathsDetail",
+      component: ShowRegisterDeathsDetail
     },
     {
       path: "/referraldata",
