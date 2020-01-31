@@ -144,6 +144,7 @@ public class RegisterpatientTest {
         Province province = provinceRepository.findById(1);
 
         Registerpatient r = new Registerpatient();
+        r.setFirstName(null);
         r.setLastName("ขขขขข");
         r.setAge(33);
         r.setWeight(70);
@@ -267,6 +268,7 @@ public class RegisterpatientTest {
 
         Registerpatient r = new Registerpatient();
         r.setFirstName("กกกกก");
+        r.setLastName(null);
         r.setAge(33);
         r.setWeight(70);
         r.setHeight(170);
@@ -390,6 +392,7 @@ public class RegisterpatientTest {
         Registerpatient r = new Registerpatient();
         r.setFirstName("กกกกก");
         r.setLastName("ขขขขข");
+        r.setAge(null);
         r.setWeight(70);
         r.setHeight(170);
         r.setAddressDetail("Address");
@@ -513,6 +516,7 @@ public class RegisterpatientTest {
         r.setFirstName("กกกกก");
         r.setLastName("ขขขขข");
         r.setAge(16);
+        r.setWeight(null);
         r.setHeight(170);
         r.setAddressDetail("Address");
         r.setMobilePhone("0819658742");
@@ -636,6 +640,7 @@ public class RegisterpatientTest {
         r.setLastName("ขขขขข");
         r.setAge(16);
         r.setWeight(50);
+        r.setHeight(null);
         r.setAddressDetail("Address");
         r.setMobilePhone("0819658742");
         r.setGender(gender);
@@ -759,6 +764,7 @@ public class RegisterpatientTest {
         r.setAge(33);
         r.setWeight(70);
         r.setHeight(170);
+        r.setAddressDetail(null);
         r.setMobilePhone("0819658742");
         r.setGender(gender);
         r.setNameTitle(nameTitle);
@@ -882,6 +888,7 @@ public class RegisterpatientTest {
         r.setWeight(70);
         r.setHeight(170);
         r.setAddressDetail("Address");
+        r.setMobilePhone(null);
         r.setGender(gender);
         r.setNameTitle(nameTitle);
         r.setProvince(province);
