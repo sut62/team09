@@ -26,13 +26,7 @@
           v-model="congenitalDisease"
         ></v-text-field>
 
-        <v-text-field
-          block
-          disabled
-          prepend-icon="local_pharmacy"
-          label="อาการ"
-          v-model="symptom"
-        ></v-text-field>
+        <v-text-field block disabled prepend-icon="local_pharmacy" label="อาการ" v-model="symptom"></v-text-field>
 
         <v-text-field
           block
@@ -68,15 +62,29 @@
           <v-col cols="12">
             <v-row justify="center">
               <v-btn style="margin-left: 15px;" color="blue darken-4" dark v-on:click="save">บันทึก</v-btn>
-              <v-btn style="margin-left: 15px;" color="red darken-3" dark v-on:click="clear()">ยกเลิก</v-btn>
+              <v-btn
+                style="margin-left: 15px;"
+                color="red darken-3"
+                dark
+                v-on:click="clear()"
+              >ยกเลิก</v-btn>
             </v-row>
           </v-col>
         </v-row>
 
         <v-row justify="center">
-          <v-btn style="margin-left: 15px;" color="blue-grey darken-3" dark v-on:click="show">แสดงผลข้อมูล</v-btn>
+          <v-btn
+            style="margin-left: 15px;"
+            color="blue-grey darken-3"
+            dark
+            v-on:click="show"
+          >แสดงผลข้อมูล</v-btn>
         </v-row>
 
+        <v-snackbar v-model="snackbar">
+          {{ message }}
+          <v-btn text color="primary" @click="snackbar = !snackbar">ปิด</v-btn>
+        </v-snackbar>
       </v-col>
     </v-row>
   </v-container>
@@ -99,6 +107,8 @@ export default {
       querys: [],
       doctor: [],
       disease: [],
+      message: "",
+      snackbar: false,
       selectquery: "",
       selectdisease: "",
       selectdoctor: "",
@@ -137,7 +147,7 @@ export default {
         .post(
           "http://localhost:9000/diagnose/" +
             this.myform.queryId +
-            "/" + 
+            "/" +
             this.myform.note +
             "/" +
             this.myform.diseaseId +
@@ -145,15 +155,27 @@ export default {
             this.myform.doctorId
         )
         .then(response => {
-          alert("สำเร็จ");
+          this.message = "สำเร็จ";
+        })
+        .catch(e => {
+          console.log(e);
+          this.message = "ไม่สำเร็จ!";
+        })
+
+        .finally(() => {
+          this.snackbar = !this.snackbar;
           let blankDate = {
-            queryId: "",
+            querys: [],
+            doctor: [],
+            disease: [],
+            message: "",
+            snackbar: false,
+            selectquery: "",
+            selectdisease: "",
+            selectdoctor: "",
             congenitalDisease: "",
-            note: "",
-            symptom: "",
             duration: "",
-            diseaseId: "",
-            doctorId: ""
+            symptom: ""
           };
           this.myform = blankDate;
           this.selectquery = "";
@@ -162,10 +184,6 @@ export default {
           this.congenitalDisease = "";
           this.duration = "";
           this.symptom = "";
-        })
-        .catch(e => {
-          console.log(e);
-          alert("ไม่สำเร็จ!");
         });
     },
 
