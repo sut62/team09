@@ -3,13 +3,30 @@
       <v-row no-gutters>
         <v-col v-for="item in items" :key="item.appointmentId">
         <div>
-            <p class="display-1 font-weight-bold text-center">ใบนัดหมายผู้ป่วย</p>
+          <v-row >
+            <v-col cols="2" sm="2"></v-col>
+            <v-col class="text-center" cols="3" sm="3">
+              <v-img src="https://lh3.googleusercontent.com/proxy/4SdnEUBgv3f3pKdIFWDP0i_I0Ce_tF3G7s02Mr7wokxnyYQw_Vm9IIay7sYTxW5TGOvF6YJ2DweaBg9aQuRi4--e7mmQpwoYaHyIwqUtuzo"></v-img>
+            </v-col>
+            <v-col class="text-center" cols="5" sm="">
+              <p class="display-1 font-weight-bold text-center">ใบนัดหมายผู้ป่วย</p>
+            </v-col>
+          </v-row>
+            
             <v-row>
-              <v-col><p class="title">ชื่อ : {{item.diagnose.nameRegister}}</p></v-col>
+              <v-col><p class="title">ชื่อ : {{item.diagnose.query.registerpatient.nameTitle.nametitle}}{{item.diagnose.nameRegister}} {{item.diagnose.query.lastName}}</p></v-col>
+              <v-col><p class="title">อายุ : {{item.diagnose.query.registerpatient.age}} ปี</p></v-col>
+            </v-row>
+            <v-row>
+              <v-col><p class="title">โรคที่วินิจฉัยได้ : {{item.diagnose.disease.name}}</p></v-col>
+              <v-col><p class="title">โรคประจำตัว : {{item.diagnose.query.congenitalDisease.congenitalDisease}}</p></v-col>
             </v-row>
             <v-row>
               <v-col><p class="title">วันที่นัด : {{item.appointDate}}</p></v-col>
               <v-col><p class="title">เวลา : {{item.appointTime}} น.</p></v-col>
+            </v-row>
+            <v-row>
+              <v-col><p class="title">เหตุผลที่นัด : {{item.reason.reason}}</p></v-col>
             </v-row>
             <v-row>
               <v-col><p class="font-italic font-weight-medium title"><u>ยื่นที่ เวชปฏิบัติทั่วไป</u></p></v-col>
@@ -62,15 +79,7 @@ export default {
 
   data() {
     return {
-      items: {
-        appointDate: "",
-        appointTime: "",
-        clinic: "",
-        demeanor: "",
-        reason: "",
-        diagnose: "",
-        doctor: ""
-      }
+      items: []
     };
   },
 
@@ -87,7 +96,8 @@ export default {
       .get("http://localhost:9000/appointments")
       .then(response => {
         console.log(response.data);
-        this.items = response.data;
+        this.items.push(response.data[response.data.length - 1]);
+        console.log(this.items);
       })
       .catch(e => {
         console.log(e);
