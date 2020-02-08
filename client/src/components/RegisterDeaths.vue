@@ -218,7 +218,7 @@ export default {
           this.myform
         )
         .then(response => {
-          alert("สำเร็จ")
+          //alert("สำเร็จ")
           let blankDate = {
             firstName: "",
             lastName: "",
