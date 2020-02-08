@@ -85,6 +85,10 @@
       <v-btn class="ma-5" tile color="indigo" dark v-on:click="cancel">ยกเลิก</v-btn>
       <v-btn class="ma-5" tile color="indigo" dark v-on:click="referraldata">ดูข้อมูล</v-btn>
     </div>
+    <v-snackbar v-model="snackbar">
+          {{ message }}
+          <v-btn text color="primary" @click="snackbar = !snackbar">ปิด</v-btn>
+        </v-snackbar>
   </v-container>
 </template>
 
@@ -107,6 +111,8 @@ export default {
       selectForwardTo: "",
       selectDeliver: "",
       selectForwardType: "",
+      message: "",
+      snackbar: false,
       forwardTos: [],
       delivers: [],
       forwardTypes: [],
@@ -152,23 +158,30 @@ export default {
             this.myform.forwardTypeId
         )
         .then(response => {
-          alert("สำเร็จ!")
-          let blankData = {
-            a: "",
-            note: "",
-            forwardToId: "",
-            deliverId: "",
-            forwardTypeId: ""
-          }
-          this.myform = blankData
-          this.selectForwardTo = ""
-          this.selectDeliver = ""
-          this.selectForwardType = ""
+          this.message = "สำเร็จ";
         })
         .catch(e => {
-          console.log(e)
-          alert("ไม่สำเร็จ!")
+          console.log(e);
+          this.message = "ไม่สำเร็จ!";
         })
+        .finally(() => {
+          this.snackbar = !this.snackbar;
+          let blankDate = {
+            selectForwardTo: "",
+            selectDeliver: "",
+            selectForwardType: "",
+            message: "",
+            snackbar: false,
+            forwardTos: [],
+            delivers: [],
+            forwardTypes: [],
+            diagnose: []
+          };
+          this.myform = blankDate;
+          this.selectForwardTo = "";
+          this.selectDeliver = "";
+          this.selectForwardType = "";
+        });
     }
   },
   mounted() {
