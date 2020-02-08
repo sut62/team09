@@ -122,6 +122,10 @@
       <v-btn class="ma-5" tile color="indigo" dark v-on:click="cancel()">ยกเลิก</v-btn>
       <v-btn class="ma-5" tile color="indigo" dark v-on:click="show()">แสดงผลข้อมูล</v-btn>
     </div>
+    <v-snackbar v-model="snackbar">
+          {{ message }}
+          <v-btn text color="primary" @click="snackbar = !snackbar">ปิด</v-btn>
+        </v-snackbar>
   </v-container>
 </template>
 
@@ -218,7 +222,14 @@ export default {
           this.myform
         )
         .then(response => {
-          //alert("สำเร็จ")
+          this.message = "สำเร็จ";
+        })
+        .catch(e => {
+          console.log(e)
+          alert("ไม่สำเร็จ!")
+        })
+        .finally(() => {
+          this.snackbar = !this.snackbar;
           let blankDate = {
             firstName: "",
             lastName: "",
@@ -239,11 +250,7 @@ export default {
           this.selectProvince = ""
           this.selectcauseofdeath = ""
           this.selectplace = ""
-        })
-        .catch(e => {
-          console.log(e)
-          alert("ไม่สำเร็จ!")
-        })
+        });
     }
   },
   mounted() {
