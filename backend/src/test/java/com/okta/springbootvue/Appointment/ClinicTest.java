@@ -31,7 +31,7 @@ public class ClinicTest {
         validator = factory.getValidator();
     }
 
-    // ตั้งชื่อ test ให้สอดคล้องกับสิ่งที่ต้อง test
+    // บันทึกชื่อคลินิกสำเร็จ
     @Test
     void B5905188_testClinicSuccess() {
         Clinic clinic = new Clinic();
@@ -43,7 +43,7 @@ public class ClinicTest {
         assertEquals("โรคกระดูก", found.get().getClinic());
     }
 
-    // ตั้งชื่อ test ให้สอดคล้องกับสิ่งที่ต้อง test
+    // ชื่อคลินิกห้ามเป็น null
     @Test
     void B5905188_testClinicMustNotBeNull() {
         Clinic clinic = new Clinic();

@@ -43,7 +43,7 @@ public class AppointmentTest {
         validator = factory.getValidator();
     }
 
-    // ตั้งชื่อ test ให้สอดคล้องกับสิ่งที่ต้อง test
+    // บันทึกการนัดหมายสำเร็จ
     @Test
     void B5905188_testAppointmentSuccess() {
         Diagnose diagnose = new Diagnose();
@@ -88,7 +88,51 @@ public class AppointmentTest {
         assertEquals(doctor, found.get().getDoctor());
     }
 
-    // ตั้งชื่อ test ให้สอดคล้องกับสิ่งที่ต้อง test
+    // วันที่ห้ามเป็น null
+    @Test
+    void B5905188_testAppointDateMustNotBeNull() {
+        Diagnose diagnose = new Diagnose();
+        diagnose.setNameRegister("ศานันทินี");
+        diagnose.setNote("แพ้ยาพารา");
+        diagnoseRepository.saveAndFlush(diagnose);
+
+        Clinic clinic = new Clinic();
+        clinic.setClinic("อายุรกรรมทั่วไป");
+        clinicRepository.saveAndFlush(clinic);
+
+        Demeanor demeanor = new Demeanor();
+        demeanor.setDemeanor("งดดื่มแอลกอฮอล์ อย่างน้อย 24 ชั่วโมงก่อนการตรวจ");
+        demeanorRepository.saveAndFlush(demeanor);
+
+        Reason reason = new Reason();
+        reason.setReason("ตรวจโรค");
+        reasonRepository.saveAndFlush(reason);
+
+        Doctor doctor = new Doctor();
+        doctor.setName("นอนน้อย นอนนะ");
+        doctorRepository.saveAndFlush(doctor);
+
+        Appointment appoint = new Appointment();
+        appoint.setDiagnose(diagnose);
+        appoint.setAppointDate(null);
+        appoint.setAppointTime("10:30");
+        appoint.setClinic(clinic);
+        appoint.setDemeanor(demeanor);
+        appoint.setReason(reason);        
+        appoint.setDoctor(doctor);
+
+        Set<ConstraintViolation<Appointment>> result = validator.validate(appoint);
+
+        // result ต้องมี error 1 ค่าเท่านั้น
+        assertEquals(1, result.size());
+
+        // error message ตรงชนิด และถูก field
+        ConstraintViolation<Appointment> found = result.iterator().next();
+        assertEquals("must not be null", found.getMessage());
+        assertEquals("appointDate", found.getPropertyPath().toString());
+    }
+
+    // เวลาห้ามเป็น null
     @Test
     void B5905188_testAppointTimeMustNotBeNull() {
         Diagnose diagnose = new Diagnose();
@@ -132,7 +176,7 @@ public class AppointmentTest {
         assertEquals("appointTime", found.getPropertyPath().toString());
     }
 
-    // ตั้งชื่อ test ให้สอดคล้องกับสิ่งที่ต้อง test
+    // รูปแบบวันที่ต้องมี - คั่นระหว่างวันที่กับเดือนกับปี
     @Test
     void B5905188_testAppointDateMustNotMatchPattern() {
         Diagnose diagnose = new Diagnose();
@@ -176,7 +220,7 @@ public class AppointmentTest {
         assertEquals("appointDate", found.getPropertyPath().toString());
     }
 
-    // ตั้งชื่อ test ให้สอดคล้องกับสิ่งที่ต้อง test
+    // รูปแบบเวลาต้องมี : คั่นระหว่างชั่วโมงกับนาที
     @Test
     void B5905188_testAppointTimeMustNotMatchPattern() {
         Diagnose diagnose = new Diagnose();
@@ -220,7 +264,7 @@ public class AppointmentTest {
         assertEquals("appointTime", found.getPropertyPath().toString());
     }
 
-    // ตั้งชื่อ test ให้สอดคล้องกับสิ่งที่ต้อง test
+    // รูปแบบเวลาไม่น้อยกว่า 5 ตัว
     @Test
     void B5905188_testAppointTimeMustNotLessThan5() {
         Diagnose diagnose = new Diagnose();
@@ -264,7 +308,7 @@ public class AppointmentTest {
         assertEquals("appointTime", found.getPropertyPath().toString());
     }
 
-    // ตั้งชื่อ test ให้สอดคล้องกับสิ่งที่ต้อง test
+    // คลินิกห้ามเป็น null
     @Test
     void B5905188_testClinicMustNotBeNull() {
         Diagnose diagnose = new Diagnose();
@@ -306,5 +350,181 @@ public class AppointmentTest {
         ConstraintViolation<Appointment> found = result.iterator().next();
         assertEquals("must not be null", found.getMessage());
         assertEquals("clinic", found.getPropertyPath().toString());
+    }
+
+    // การปฏิบัติตัวห้ามเป็น null
+    @Test
+    void B5905188_testDemeanorMustNotBeNull() {
+        Diagnose diagnose = new Diagnose();
+        diagnose.setNameRegister("ศานันทินี");
+        diagnose.setNote("แพ้ยาพารา");
+        diagnoseRepository.saveAndFlush(diagnose);
+
+        Clinic clinic = new Clinic();
+        clinic.setClinic("อายุรกรรมทั่วไป");
+        clinicRepository.saveAndFlush(clinic);
+
+        Demeanor demeanor = new Demeanor();
+        demeanor.setDemeanor("งดดื่มแอลกอฮอล์ อย่างน้อย 24 ชั่วโมงก่อนการตรวจ");
+        demeanorRepository.saveAndFlush(demeanor);
+
+        Reason reason = new Reason();
+        reason.setReason("ตรวจโรค");
+        reasonRepository.saveAndFlush(reason);
+
+        Doctor doctor = new Doctor();
+        doctor.setName("นอนน้อย นอนนะ");
+        doctorRepository.saveAndFlush(doctor);
+
+        Appointment appoint = new Appointment();
+        appoint.setDiagnose(diagnose);
+        appoint.setAppointDate("12-02-2563");
+        appoint.setAppointTime("10:30");
+        appoint.setClinic(clinic);
+        appoint.setDemeanor(null);
+        appoint.setReason(reason);        
+        appoint.setDoctor(doctor);
+
+        Set<ConstraintViolation<Appointment>> result = validator.validate(appoint);
+
+        // result ต้องมี error 1 ค่าเท่านั้น
+        assertEquals(1, result.size());
+
+        // error message ตรงชนิด และถูก field
+        ConstraintViolation<Appointment> found = result.iterator().next();
+        assertEquals("must not be null", found.getMessage());
+        assertEquals("demeanor", found.getPropertyPath().toString());
+    }
+
+    // เหตุผลห้ามเป็น null
+    @Test
+    void B5905188_testReasonMustNotBeNull() {
+        Diagnose diagnose = new Diagnose();
+        diagnose.setNameRegister("ศานันทินี");
+        diagnose.setNote("แพ้ยาพารา");
+        diagnoseRepository.saveAndFlush(diagnose);
+
+        Clinic clinic = new Clinic();
+        clinic.setClinic("อายุรกรรมทั่วไป");
+        clinicRepository.saveAndFlush(clinic);
+
+        Demeanor demeanor = new Demeanor();
+        demeanor.setDemeanor("งดดื่มแอลกอฮอล์ อย่างน้อย 24 ชั่วโมงก่อนการตรวจ");
+        demeanorRepository.saveAndFlush(demeanor);
+
+        Reason reason = new Reason();
+        reason.setReason("ตรวจโรค");
+        reasonRepository.saveAndFlush(reason);
+
+        Doctor doctor = new Doctor();
+        doctor.setName("นอนน้อย นอนนะ");
+        doctorRepository.saveAndFlush(doctor);
+
+        Appointment appoint = new Appointment();
+        appoint.setDiagnose(diagnose);
+        appoint.setAppointDate("12-02-2563");
+        appoint.setAppointTime("10:30");
+        appoint.setClinic(clinic);
+        appoint.setDemeanor(demeanor);
+        appoint.setReason(null);        
+        appoint.setDoctor(doctor);
+
+        Set<ConstraintViolation<Appointment>> result = validator.validate(appoint);
+
+        // result ต้องมี error 1 ค่าเท่านั้น
+        assertEquals(1, result.size());
+
+        // error message ตรงชนิด และถูก field
+        ConstraintViolation<Appointment> found = result.iterator().next();
+        assertEquals("must not be null", found.getMessage());
+        assertEquals("reason", found.getPropertyPath().toString());
+    }
+
+    // แพทย์ห้ามเป็น null
+    @Test
+    void B5905188_testDoctorMustNotBeNull() {
+        Diagnose diagnose = new Diagnose();
+        diagnose.setNameRegister("ศานันทินี");
+        diagnose.setNote("แพ้ยาพารา");
+        diagnoseRepository.saveAndFlush(diagnose);
+
+        Clinic clinic = new Clinic();
+        clinic.setClinic("อายุรกรรมทั่วไป");
+        clinicRepository.saveAndFlush(clinic);
+
+        Demeanor demeanor = new Demeanor();
+        demeanor.setDemeanor("งดดื่มแอลกอฮอล์ อย่างน้อย 24 ชั่วโมงก่อนการตรวจ");
+        demeanorRepository.saveAndFlush(demeanor);
+
+        Reason reason = new Reason();
+        reason.setReason("ตรวจโรค");
+        reasonRepository.saveAndFlush(reason);
+
+        Doctor doctor = new Doctor();
+        doctor.setName("นอนน้อย นอนนะ");
+        doctorRepository.saveAndFlush(doctor);
+
+        Appointment appoint = new Appointment();
+        appoint.setDiagnose(diagnose);
+        appoint.setAppointDate("12-02-2563");
+        appoint.setAppointTime("10:30");
+        appoint.setClinic(clinic);
+        appoint.setDemeanor(demeanor);
+        appoint.setReason(reason);        
+        appoint.setDoctor(null);
+
+        Set<ConstraintViolation<Appointment>> result = validator.validate(appoint);
+
+        // result ต้องมี error 1 ค่าเท่านั้น
+        assertEquals(1, result.size());
+
+        // error message ตรงชนิด และถูก field
+        ConstraintViolation<Appointment> found = result.iterator().next();
+        assertEquals("must not be null", found.getMessage());
+        assertEquals("doctor", found.getPropertyPath().toString());
+    }
+
+    // ชื่อผู้ป่วยห้ามเป็น null
+    @Test
+    void B5905188_testDiagnoseMustNotBeNull() {
+        Diagnose diagnose = new Diagnose();
+        diagnose.setNameRegister("ศานันทินี");
+        diagnose.setNote("แพ้ยาพารา");
+        diagnoseRepository.saveAndFlush(diagnose);
+
+        Clinic clinic = new Clinic();
+        clinic.setClinic("อายุรกรรมทั่วไป");
+        clinicRepository.saveAndFlush(clinic);
+
+        Demeanor demeanor = new Demeanor();
+        demeanor.setDemeanor("งดดื่มแอลกอฮอล์ อย่างน้อย 24 ชั่วโมงก่อนการตรวจ");
+        demeanorRepository.saveAndFlush(demeanor);
+
+        Reason reason = new Reason();
+        reason.setReason("ตรวจโรค");
+        reasonRepository.saveAndFlush(reason);
+
+        Doctor doctor = new Doctor();
+        doctor.setName("นอนน้อย นอนนะ");
+        doctorRepository.saveAndFlush(doctor);
+
+        Appointment appoint = new Appointment();
+        appoint.setDiagnose(null);
+        appoint.setAppointDate("12-02-2563");
+        appoint.setAppointTime("10:30");
+        appoint.setClinic(clinic);
+        appoint.setDemeanor(demeanor);
+        appoint.setReason(reason);        
+        appoint.setDoctor(doctor);
+
+        Set<ConstraintViolation<Appointment>> result = validator.validate(appoint);
+
+        // result ต้องมี error 1 ค่าเท่านั้น
+        assertEquals(1, result.size());
+
+        // error message ตรงชนิด และถูก field
+        ConstraintViolation<Appointment> found = result.iterator().next();
+        assertEquals("must not be null", found.getMessage());
+        assertEquals("diagnose", found.getPropertyPath().toString());
     }
 }
