@@ -19,7 +19,6 @@
               item-text="nameRegister"
               item-value="diagnoseId"
               prepend-icon="people_alt"
-              :rules="[(v) => !!v || 'กรุณาเลือกชื่อผู้ป่วย']"
               required
             ></v-select>
           </v-col>
@@ -50,7 +49,6 @@
               v-model="selectClinic"
               item-text="clinic"
               item-value="clinicId"
-              :rules="[(v) => !!v || 'กรุณาเลือกClinic']"
               required
             ></v-select>
           </v-col>
@@ -67,7 +65,6 @@
               v-model="selectReason"
               item-text="reason"
               item-value="reasonId"
-              :rules="[(v) => !!v || 'กรุณาเลือกเหตุผลที่นัด']"
               required
             ></v-select>
           </v-col>
@@ -84,7 +81,6 @@
               v-model="selectDemeanor"
               item-text="demeanor"
               item-value="demeanorId"
-              :rules="[(v) => !!v || 'กรุณาเลือกการปฏิบัติตัว']"
               required
             ></v-select>
           </v-col>
@@ -101,7 +97,6 @@
               v-model="selectDoctor"
               item-text="name"
               item-value="doctorId"
-              :rules="[(v) => !!v || 'กรุณาเลือกแพทย์ผู้นัด']"
               required
             ></v-select>
           </v-col>
@@ -110,9 +105,14 @@
 
         <div class="text-center">
           <v-btn class="ma-5" tile color="indigo" dark v-on:click="save">ตกลง</v-btn>
-          <v-btn class="ma-5" tile color="indigo" dark v-on:click="cancel">ยกเลิก</v-btn>
-          <v-btn class="ma-5" tile color="indigo" dark v-on:click="print">พิมพ์ใบนัดหมาย</v-btn>
+          <v-btn class="ma-5" tile color="red darken-3" dark v-on:click="cancel">ยกเลิก</v-btn>
+          <v-btn class="ma-5" tile color="grey darken-1" dark v-on:click="print">พิมพ์ใบนัดหมาย</v-btn>
         </div>
+
+        <v-snackbar v-model="snackbar">
+          {{ message }}
+          <v-btn text color="primary" @click="snackbar = !snackbar">ปิด</v-btn>
+        </v-snackbar>
       </v-col>
     </v-row>
   </v-container>
@@ -146,7 +146,7 @@ export default {
     cancel() {
       this.$router.push("/home")
     },
-        print(){
+    print(){
       this.$router.push("/printappointment");
     },
     save() {
@@ -180,7 +180,15 @@ export default {
           this.myform
         )
         .then(response => {
-          alert("สำเร็จ")
+          this.message = "สำเร็จ";
+        })
+        .catch(e => {
+          console.log(e);
+          this.message = "ไม่สำเร็จ!";
+        })
+
+        .finally(() => {
+          this.snackbar = !this.snackbar;
           let blankDate = {
             appointDate: "",
             appointTime: "",
@@ -188,15 +196,13 @@ export default {
             reasonId: "",
             demeanorId: ""
           }
-          this.myform = blankDate
-          this.selectClinic = ""
-          this.selectReason = ""
-          this.selectDemeanor = ""
-        })
-        .catch(e => {
-          console.log(e)
-          alert("ไม่สำเร็จ!")
-        })
+          this.myform = blankDate;
+          this.selectClinic = "";
+          this.selectReason = "";
+          this.selectDemeanor = "";
+          this.selectDoctor = "";
+          this.diagnose = "";
+        });
     }
   },
   mounted() {
