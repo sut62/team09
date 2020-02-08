@@ -8,12 +8,12 @@
 
     <v-col cols="12">
       <v-select
-        :items="patient"
-        v-model="myform.patientId"
-        label="ชื่อผู้ป่วย"
-        item-text="firstName"
-        item-value="registerId"
-        prepend-icon="person"
+        :items ="patient"
+        v-model ="myform.patientId"
+        label= "ชื่อผู้ป่วย"
+        item-text = "firstName"
+        item-value = "registerId"
+        prepend-icon = "person"
         required
       ></v-select>
     </v-col>
@@ -70,6 +70,11 @@
       <v-btn class="ma-5" tile color="indigo" dark v-on:click="cancel">ยกเลิก</v-btn>
       <v-btn class="ma-5" tile color="indigo" dark v-on:click="querydata">ดูข้อมูล</v-btn>
     </div>
+
+     <v-snackbar v-model="snackbar">
+          {{ message }}
+          <v-btn text color="primary" @click="snackbar = !snackbar">ปิด</v-btn>
+        </v-snackbar>
   </v-container>
 </template>
 
@@ -95,6 +100,8 @@ export default {
       selectcongenitalDisease: "",
       durations: [],
       congenitalDiseases: [],
+       message: "",
+      snackbar: false
     }
   },
 
@@ -135,8 +142,16 @@ export default {
             this.myform.patientId,
           this.myform
         )
-        .then(response => {
-          alert("สำเร็จ!")
+         .then(response => {
+          this.message = "สำเร็จ";
+        })
+        .catch(e => {
+          console.log(e);
+          this.message = "ไม่สำเร็จ!";
+        })
+
+        .finally(() => {
+          this.snackbar = !this.snackbar;
           let blankData = {
             temperature: "",
             pressureSYS: "",
@@ -144,16 +159,15 @@ export default {
             symptom: "",
             durationId: "",
             congenitalDiseaseId: "",
-            patientId: ""
+            patientId: "",
+            message: "",
+            snackbar: false,
           }
           this.myform = blankData
           this.selectduration = ""
           this.selectcongenitalDisease = ""
         })
-        .catch(e => {
-          console.log(e)
-          alert("ไม่สำเร็จ")
-        })
+        
     }
   },
   mounted() {
