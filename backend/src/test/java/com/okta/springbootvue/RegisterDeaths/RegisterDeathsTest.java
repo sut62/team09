@@ -394,6 +394,7 @@ void B5905836_testFirstNamewithCorrect() {
 
              RegisterDeaths r = new RegisterDeaths();
              r.setFirstName("กดกดกด");
+             r.setLastName(null);
              r.setAge(63);
              r.setBorn("11-01-2500");
              r.setDeath("11-01-2563");
@@ -571,6 +572,7 @@ void B5905836_testFirstNamewithCorrect() {
                RegisterDeaths r = new RegisterDeaths();
                r.setFirstName("กกกกก");
                r.setLastName("ขขขขข");
+               r.setAge(null);
                r.setBorn("11-01-2500");
                r.setDeath("11-01-2563");
                r.setAddressDetail("Address");
@@ -753,6 +755,7 @@ void B5905836_testFirstNamewithCorrect() {
              r.setAge(63);
              r.setBorn("11-01-2500");
              r.setDeath("11-01-2563");
+             r.setAddressDetail(null);
              r.setMobilePhone("0897654321");
              r.setGender(gender);
              r.setNameTitle(nameTitle);
@@ -931,6 +934,7 @@ void B5905836_testFirstNamewithCorrect() {
                  r.setBorn("11-01-2500");
                  r.setDeath("11-01-2563");
                  r.setAddressDetail("Address");
+                 r.setMobilePhone(null);
                  r.setGender(gender);
                  r.setNameTitle(nameTitle);
                  r.setPlace(place);
@@ -943,6 +947,8 @@ void B5905836_testFirstNamewithCorrect() {
                  assertEquals(1, result.size());
 
                  // error message ตรงชนิด และถูก field
+
+                 
                  ConstraintViolation<RegisterDeaths> v = result.iterator().next();
                  assertEquals("must not be null", v.getMessage());
                  assertEquals("mobilePhone", v.getPropertyPath().toString());
