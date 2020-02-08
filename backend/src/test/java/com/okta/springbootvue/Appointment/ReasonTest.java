@@ -31,7 +31,7 @@ public class ReasonTest {
         validator = factory.getValidator();
     }
 
-    // ตั้งชื่อ test ให้สอดคล้องกับสิ่งที่ต้อง test
+    // บันทึกรายการเหตุผลสำเร็จ
     @Test
     void B5905188_testReasonSuccess() {
         Reason reason = new Reason();
@@ -43,7 +43,7 @@ public class ReasonTest {
         assertEquals("ผ่าตัด", found.get().getReason());
     }
 
-    // ตั้งชื่อ test ให้สอดคล้องกับสิ่งที่ต้อง test
+    // รายการเหตุผลห้ามเป็น null
     @Test
     void B5905188_testReasonMustNotBeNull() {
         Reason reason = new Reason();

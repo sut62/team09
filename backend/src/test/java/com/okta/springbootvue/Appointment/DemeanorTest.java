@@ -31,7 +31,7 @@ public class DemeanorTest {
         validator = factory.getValidator();
     }
 
-    // ตั้งชื่อ test ให้สอดคล้องกับสิ่งที่ต้อง test
+    // บันทึกรายการการปฏิบัติตัวสำเร็จ
     @Test
     void B5905188_testDemeanorSuccess() {
         Demeanor demeanor = new Demeanor();
@@ -43,7 +43,7 @@ public class DemeanorTest {
         assertEquals("งดเครื่องดื่ม งดอาหาร อย่างน้อย 8-10 ชั่วโมงก่อนการตรวจ", found.get().getDemeanor());
     }
 
-    // ตั้งชื่อ test ให้สอดคล้องกับสิ่งที่ต้อง test
+    // รายการการปฏิบัติตัวห้ามเป็น null
     @Test
     void B5905188_testDemeanorMustNotBeNull() {
         Demeanor demeanor = new Demeanor();
