@@ -32,28 +32,27 @@ public class Diagnose {
   @SequenceGenerator(name = "diagnose_seq", sequenceName = "diagnose_seq")
   @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "diagnose_seq")
   @Column(name = "DIAGNOSE_ID", unique = true, nullable = true)
-  @NotNull 
-  private Long DiagnoseId;
+  private @NonNull Long DiagnoseId;
 
   @Size(min = 5, max = 30)
   @Pattern(regexp = "^[0-9a-zA-Zก-๙\\s]+$")
-  @NotNull 
-  private String note;
-
+  private @NotNull String note;
   private String nameRegister;
 
   @ManyToOne(fetch = FetchType.EAGER, targetEntity = Disease.class)
   @JoinColumn(name = "Disease_ID", insertable = true)
-  private Disease disease;
+  private @NotNull Disease disease;
   private String nameDisease;
 
   @ManyToOne(fetch = FetchType.EAGER, targetEntity = Query.class)
   @JoinColumn(name = "QUERY_ID", insertable = true)
+  @NotNull
   private Query query;
 
   @ManyToOne(fetch = FetchType.EAGER, targetEntity = Doctor.class)
   @JoinColumn(name = "Doctor_ID", insertable = true)
-  private Doctor doctor;
+  private @NotNull Doctor doctor;
+
   private String nameDoctor;
 
   public Long getDiagnoseId() {
