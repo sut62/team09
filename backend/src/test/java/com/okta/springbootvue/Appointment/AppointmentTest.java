@@ -47,7 +47,7 @@ public class AppointmentTest {
     @Test
     void B5905188_testAppointmentSuccess() {
         Diagnose diagnose = new Diagnose();
-        diagnose.setNameRegister("ศานันทินี");
+        
         diagnose.setNote("แพ้ยาพารา");
         diagnoseRepository.saveAndFlush(diagnose);
 
@@ -92,7 +92,7 @@ public class AppointmentTest {
     @Test
     void B5905188_testAppointDateMustNotBeNull() {
         Diagnose diagnose = new Diagnose();
-        diagnose.setNameRegister("ศานันทินี");
+        
         diagnose.setNote("แพ้ยาพารา");
         diagnoseRepository.saveAndFlush(diagnose);
 
@@ -136,7 +136,7 @@ public class AppointmentTest {
     @Test
     void B5905188_testAppointTimeMustNotBeNull() {
         Diagnose diagnose = new Diagnose();
-        diagnose.setNameRegister("ศานันทินี");
+        
         diagnose.setNote("แพ้ยาพารา");
         diagnoseRepository.saveAndFlush(diagnose);
 
@@ -180,7 +180,7 @@ public class AppointmentTest {
     @Test
     void B5905188_testAppointDateMustNotMatchPattern() {
         Diagnose diagnose = new Diagnose();
-        diagnose.setNameRegister("ศานันทินี");
+        
         diagnose.setNote("แพ้ยาพารา");
         diagnoseRepository.saveAndFlush(diagnose);
 
@@ -224,7 +224,7 @@ public class AppointmentTest {
     @Test
     void B5905188_testAppointTimeMustNotMatchPattern() {
         Diagnose diagnose = new Diagnose();
-        diagnose.setNameRegister("ศานันทินี");
+        
         diagnose.setNote("แพ้ยาพารา");
         diagnoseRepository.saveAndFlush(diagnose);
 
@@ -268,7 +268,7 @@ public class AppointmentTest {
     @Test
     void B5905188_testAppointTimeMustNotLessThan5() {
         Diagnose diagnose = new Diagnose();
-        diagnose.setNameRegister("ศานันทินี");
+        
         diagnose.setNote("แพ้ยาพารา");
         diagnoseRepository.saveAndFlush(diagnose);
 
@@ -312,7 +312,7 @@ public class AppointmentTest {
     @Test
     void B5905188_testClinicMustNotBeNull() {
         Diagnose diagnose = new Diagnose();
-        diagnose.setNameRegister("ศานันทินี");
+        
         diagnose.setNote("แพ้ยาพารา");
         diagnoseRepository.saveAndFlush(diagnose);
 
@@ -356,7 +356,7 @@ public class AppointmentTest {
     @Test
     void B5905188_testDemeanorMustNotBeNull() {
         Diagnose diagnose = new Diagnose();
-        diagnose.setNameRegister("ศานันทินี");
+        
         diagnose.setNote("แพ้ยาพารา");
         diagnoseRepository.saveAndFlush(diagnose);
 
@@ -400,7 +400,7 @@ public class AppointmentTest {
     @Test
     void B5905188_testReasonMustNotBeNull() {
         Diagnose diagnose = new Diagnose();
-        diagnose.setNameRegister("ศานันทินี");
+        
         diagnose.setNote("แพ้ยาพารา");
         diagnoseRepository.saveAndFlush(diagnose);
 
@@ -444,7 +444,7 @@ public class AppointmentTest {
     @Test
     void B5905188_testDoctorMustNotBeNull() {
         Diagnose diagnose = new Diagnose();
-        diagnose.setNameRegister("ศานันทินี");
+        
         diagnose.setNote("แพ้ยาพารา");
         diagnoseRepository.saveAndFlush(diagnose);
 
@@ -488,7 +488,7 @@ public class AppointmentTest {
     @Test
     void B5905188_testDiagnoseMustNotBeNull() {
         Diagnose diagnose = new Diagnose();
-        diagnose.setNameRegister("ศานันทินี");
+        
         diagnose.setNote("แพ้ยาพารา");
         diagnoseRepository.saveAndFlush(diagnose);
 

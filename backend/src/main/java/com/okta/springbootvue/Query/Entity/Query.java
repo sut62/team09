@@ -35,26 +35,21 @@ public class Query {
     private @NotNull Float temperature;
     private @NotNull Integer pressureSYS;
     private @NotNull Integer pressureDIA;
+    @Size(min = 5, max = 40)
+    @Pattern(regexp =  "^[0-9A-Za-zก-์\\s]+$")
     private @NotNull String symptom;
-
-    @Size(min = 2, max = 20)
-    @Pattern(regexp =  "^[A-Za-zก-์\\s]+$")
-    private @NotNull String firstName;
-    @Size(min = 2, max = 20)
-    @Pattern(regexp =  "^[A-Za-zก-์\\s]+$")
-    private @NotNull String lastName;
 
     @ManyToOne(fetch = FetchType.EAGER, targetEntity = Registerpatient.class)
     @JoinColumn(name = "REGISTERPATIENT_ID", insertable = true)
-    private Registerpatient registerpatient;
+    private @NotNull Registerpatient registerpatient;
 
     @ManyToOne(fetch = FetchType.EAGER, targetEntity = Duration.class)
     @JoinColumn(name = "DURATION_ID", insertable = true)
-    private Duration duration;
+    private @NotNull Duration duration;
 
     @ManyToOne(fetch = FetchType.EAGER, targetEntity = CongenitalDisease.class)
     @JoinColumn(name = "CONGENITALDISEASE_ID", insertable = true)
-    private CongenitalDisease congenitalDisease;
+    private @NotNull CongenitalDisease congenitalDisease;
 
     public Duration getDuration() {
         return this.duration;
@@ -115,14 +110,6 @@ public class Query {
         this.symptom = symptom;
     }
 
-    public String getFirstName() {
-        return this.firstName;
-    }
-
-    public void setFirstName(String firstName) {
-        this.firstName = firstName;
-    }
-
     public Registerpatient getRegisterpatient() {
         return this.registerpatient;
     }
@@ -131,11 +118,4 @@ public class Query {
         this.registerpatient = registerpatient;
     }
 
-    public String getLastName() {
-        return this.lastName;
-    }
-
-    public void setLastName(String lastName) {
-        this.lastName = lastName;
-    }
 }

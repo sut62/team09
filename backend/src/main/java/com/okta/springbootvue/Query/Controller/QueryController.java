@@ -47,8 +47,6 @@ public class QueryController {
         Duration d = durationRepository.findById(durationId);
         CongenitalDisease c = congenitalDiseaseRepository.findById(congenitalDiseaseId);
         Registerpatient registerpatient = registerpatientRepository.findById(patientId);
-        newquery.setFirstName(registerpatient.getFirstName());
-        newquery.setLastName(registerpatient.getLastName());
         newquery.setCongenitalDisease(c);
         newquery.setDuration(d);
         newquery.setRegisterpatient(registerpatient);
