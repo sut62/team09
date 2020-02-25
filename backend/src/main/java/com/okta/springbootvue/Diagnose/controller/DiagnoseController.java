@@ -54,7 +54,6 @@ public class DiagnoseController {
         diagnose.setDoctor(doctor);
         diagnose.setDisease(disease);
         diagnose.setNote(note);
-        diagnose.setNameRegister(query.getFirstName());
         diagnose.setNameDoctor(doctor.getName());
         diagnose.setNameDisease(disease.getName());
 

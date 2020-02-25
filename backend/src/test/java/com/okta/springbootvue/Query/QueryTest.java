@@ -10,8 +10,10 @@ import javax.validation.Validation;
 import javax.validation.Validator;
 import javax.validation.ValidatorFactory;
 
-import com.okta.springbootvue.Query.Entity.Query;
-import com.okta.springbootvue.Query.Repository.QueryRepository;
+import com.okta.springbootvue.Query.Entity.*;
+import com.okta.springbootvue.Query.Repository.*;
+import com.okta.springbootvue.Registerpatient.Entity.Registerpatient;
+import com.okta.springbootvue.Registerpatient.Repository.RegisterpatientRepository;
 
 import java.util.Optional;
 import java.util.Set;
@@ -22,73 +24,108 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 public class QueryTest {
 
     private Validator validator;
+    private Duration duration;
+    private CongenitalDisease congenitalDisease;
+    private Registerpatient registerPatient;
 
     @Autowired
     QueryRepository queryRepository;
+
+    @Autowired
+    DurationRepository durationRepository;
+
+    @Autowired 
+    CongenitalDiseaseRepository congenitalDiseaseRepository;
+
+    @Autowired
+    RegisterpatientRepository registerpatientRepository;
+
     @BeforeEach
     public void setup() {
         ValidatorFactory factory = Validation.buildDefaultValidatorFactory();
         validator = factory.getValidator();
+
+        duration = new Duration();
+        duration.setDuration("1 สัปดาห์");
+        duration.setDurationId(1L);
+        duration = durationRepository.saveAndFlush(duration);
+
+        congenitalDisease = new CongenitalDisease();
+        congenitalDisease.setCongenitalDisease("ไม่มีโรคประจำตัว");
+        congenitalDisease.setCongenitalDiseaseId(1L);
+        congenitalDisease = congenitalDiseaseRepository.saveAndFlush(congenitalDisease);
+
+        registerPatient = new Registerpatient();
+        registerPatient.setAddressDetail("addressDetail");
+        registerPatient.setAge(23);
+        registerPatient.setFirstName("firstName");
+        registerPatient.setHeight(120);
+        registerPatient.setLastName("lastName");
+        registerPatient.setMobilePhone("0812345678");
+        registerPatient.setWeight(45);
+        registerPatient.setRegisterId(1L);
+        registerPatient = registerpatientRepository.saveAndFlush(registerPatient);
     }
 
     @Test
     void B5910519_testCreateQueryOK() {
         Query query = new Query();
-        query.setFirstName("นายสมคิด");
-        query.setLastName("ป่วยนอก");
         query.setPressureDIA(123);
         query.setPressureSYS(123);
         query.setQueryIdx(1L);
         query.setSymptom("ปวดหัว");
+        query.setDuration(duration);
+        query.setRegisterpatient(registerPatient);
+        query.setCongenitalDisease(congenitalDisease);
         query.setTemperature(37.5f);
-		query = queryRepository.saveAndFlush(query);
+        query = queryRepository.saveAndFlush(query);
 
-		Optional<Query> result = queryRepository.findById(query.getQueryIdx());
+        Optional<Query> result = queryRepository.findById(query.getQueryIdx());
         assertEquals(1L, result.get().getQueryIdx());
-        assertEquals("นายสมคิด", result.get().getFirstName());
-        assertEquals("ป่วยนอก", result.get().getLastName());
         assertEquals(123, result.get().getPressureDIA());
         assertEquals(123, result.get().getPressureSYS());
         assertEquals("ปวดหัว", result.get().getSymptom());
         assertEquals(37.5f, result.get().getTemperature());
     }
 
-	@Test
+    @Test
     void B5910519_testQueryIdMustNotBeNull() {
         Query query = new Query();
-        query.setFirstName("นายสมคิด");
-        query.setLastName("ป่วยนอก");
         query.setPressureDIA(123);
         query.setPressureSYS(123);
         query.setQueryIdx(null);
         query.setSymptom("ปวดหัว");
         query.setTemperature(37.5f);
+        query.setDuration(duration);
+        query.setRegisterpatient(registerPatient);
+        query.setCongenitalDisease(congenitalDisease);
 
-		Set<ConstraintViolation<Query>> result = validator.validate(query);
-		
-		assertEquals(1, result.size());
-		
+        Set<ConstraintViolation<Query>> result = validator.validate(query);
+        
+        assertEquals(1, result.size());
+        
         ConstraintViolation<Query> v = result.iterator().next();
         assertEquals("must not be null", v.getMessage());
         assertEquals("queryid", v.getPropertyPath().toString());
     }
-	
-	
-	@Test
+    
+    
+    @Test
     void B5910519_testTemperatureMustNotBeNull() {
         Query query = new Query();
-        query.setFirstName("นายสมคิด");
-        query.setLastName("ป่วยนอก");
         query.setPressureDIA(123);
         query.setPressureSYS(123);
         query.setQueryIdx(1L);
         query.setSymptom("ปวดหัว");
         query.setTemperature(null);
+        query.setDuration(duration);
+        query.setRegisterpatient(registerPatient);
+        query.setCongenitalDisease(congenitalDisease);
 
-		Set<ConstraintViolation<Query>> result = validator.validate(query);
-		
-		assertEquals(1, result.size());
-		
+        Set<ConstraintViolation<Query>> result = validator.validate(query);
+        
+        assertEquals(1, result.size());
+        
         ConstraintViolation<Query> v = result.iterator().next();
         assertEquals("must not be null", v.getMessage());
         assertEquals("temperature", v.getPropertyPath().toString());
@@ -96,18 +133,19 @@ public class QueryTest {
     @Test
     void B5910519_testPressureSYSMustNotBeNull() {
         Query query = new Query();
-        query.setFirstName("นายสมคิด");
-        query.setLastName("ป่วยนอก");
         query.setPressureDIA(123);
         query.setPressureSYS(null);
         query.setQueryIdx(1L);
         query.setSymptom("ปวดหัว");
         query.setTemperature(37.5f);
+        query.setDuration(duration);
+        query.setRegisterpatient(registerPatient);
+        query.setCongenitalDisease(congenitalDisease);
 
-		Set<ConstraintViolation<Query>> result = validator.validate(query);
-		
-		assertEquals(1, result.size());
-		
+        Set<ConstraintViolation<Query>> result = validator.validate(query);
+        
+        assertEquals(1, result.size());
+        
         ConstraintViolation<Query> v = result.iterator().next();
         assertEquals("must not be null", v.getMessage());
         assertEquals("pressureSYS", v.getPropertyPath().toString());
@@ -115,18 +153,19 @@ public class QueryTest {
     @Test
     void B5910519_testPressureDIAMustNotBeNull() {
         Query query = new Query();
-        query.setFirstName("นายสมคิด");
-        query.setLastName("ป่วยนอก");
         query.setPressureDIA(null);
         query.setPressureSYS(123);
         query.setQueryIdx(1L);
         query.setSymptom("ปวดหัว");
         query.setTemperature(37.5f);
+        query.setDuration(duration);
+        query.setRegisterpatient(registerPatient);
+        query.setCongenitalDisease(congenitalDisease);
 
-		Set<ConstraintViolation<Query>> result = validator.validate(query);
-		
-		assertEquals(1, result.size());
-		
+        Set<ConstraintViolation<Query>> result = validator.validate(query);
+        
+        assertEquals(1, result.size());
+        
         ConstraintViolation<Query> v = result.iterator().next();
         assertEquals("must not be null", v.getMessage());
         assertEquals("pressureDIA", v.getPropertyPath().toString());
@@ -134,210 +173,148 @@ public class QueryTest {
     @Test
     void B5910519_testSymptomMustNotBeNull() {
         Query query = new Query();
-        query.setFirstName("นายสมคิด");
-        query.setLastName("ป่วยนอก");
         query.setPressureDIA(123);
         query.setPressureSYS(123);
         query.setQueryIdx(1L);
         query.setSymptom(null);
         query.setTemperature(37.5f);
+        query.setDuration(duration);
+        query.setRegisterpatient(registerPatient);
+        query.setCongenitalDisease(congenitalDisease);
 
-		Set<ConstraintViolation<Query>> result = validator.validate(query);
-		
-		assertEquals(1, result.size());
-		
+        Set<ConstraintViolation<Query>> result = validator.validate(query);
+        
+        assertEquals(1, result.size());
+        
         ConstraintViolation<Query> v = result.iterator().next();
         assertEquals("must not be null", v.getMessage());
         assertEquals("symptom", v.getPropertyPath().toString());
     }
+
     @Test
-    void B5910519_testFirstNameMustNotBeNull() {
+    void B5910519_testSymptomMustNotLessThan5() {
         Query query = new Query();
-        query.setFirstName(null);
-        query.setLastName("ป่วยนอก");
         query.setPressureDIA(123);
         query.setPressureSYS(123);
         query.setQueryIdx(1L);
-        query.setSymptom("ปวดหัว");
+        query.setSymptom("less");
         query.setTemperature(37.5f);
+        query.setDuration(duration);
+        query.setRegisterpatient(registerPatient);
+        query.setCongenitalDisease(congenitalDisease);
 
-		Set<ConstraintViolation<Query>> result = validator.validate(query);
-		
-		assertEquals(1, result.size());
-		
+        Set<ConstraintViolation<Query>> result = validator.validate(query);
+        
+        assertEquals(1, result.size());
+        
+        ConstraintViolation<Query> v = result.iterator().next();
+        assertEquals("size must be between 5 and 40", v.getMessage());
+        assertEquals("symptom", v.getPropertyPath().toString());
+    }
+
+    @Test
+    void B5910519_testSymptomMustNotMoreThan40() {
+        Query query = new Query();
+        query.setPressureDIA(123);
+        query.setPressureSYS(123);
+        query.setQueryIdx(1L);
+        query.setSymptom("symtom string must not more than 40 charactor");
+        query.setTemperature(37.5f);
+        query.setDuration(duration);
+        query.setRegisterpatient(registerPatient);
+        query.setCongenitalDisease(congenitalDisease);
+
+        Set<ConstraintViolation<Query>> result = validator.validate(query);
+        
+        assertEquals(1, result.size());
+        
+        ConstraintViolation<Query> v = result.iterator().next();
+        assertEquals("size must be between 5 and 40", v.getMessage());
+        assertEquals("symptom", v.getPropertyPath().toString());
+    }
+
+    @Test
+    void B5910519_testDurationMustNotBeNull() {
+        Query query = new Query();
+        query.setPressureDIA(123);
+        query.setPressureSYS(123);
+        query.setQueryIdx(1L);
+        query.setSymptom("symtom");
+        query.setTemperature(37.5f);
+        query.setDuration(null);
+        query.setRegisterpatient(registerPatient);
+        query.setCongenitalDisease(congenitalDisease);
+
+        Set<ConstraintViolation<Query>> result = validator.validate(query);
+        
+        assertEquals(1, result.size());
+        
         ConstraintViolation<Query> v = result.iterator().next();
         assertEquals("must not be null", v.getMessage());
-        assertEquals("firstName", v.getPropertyPath().toString());
+        assertEquals("duration", v.getPropertyPath().toString());
     }
+
     @Test
-    void B5910519_testLastNameMustNotBeNull() {
+    void B5910519_testCongenitalDiseaseMustNotBeNull() {
         Query query = new Query();
-        query.setFirstName("นายสมคิด");
-        query.setLastName(null);
         query.setPressureDIA(123);
         query.setPressureSYS(123);
         query.setQueryIdx(1L);
-        query.setSymptom("ปวดหัว");
+        query.setSymptom("symtom");
         query.setTemperature(37.5f);
+        query.setDuration(duration);
+        query.setRegisterpatient(registerPatient);
+        query.setCongenitalDisease(null);
 
-		Set<ConstraintViolation<Query>> result = validator.validate(query);
-		
-		assertEquals(1, result.size());
-		
+        Set<ConstraintViolation<Query>> result = validator.validate(query);
+        
+        assertEquals(1, result.size());
+        
         ConstraintViolation<Query> v = result.iterator().next();
         assertEquals("must not be null", v.getMessage());
-        assertEquals("lastName", v.getPropertyPath().toString());
-    }
-    @Test
-    void B5910519_testFirstNameNotLessThan2() {
-        Query query = new Query();
-        query.setFirstName("ก");
-        query.setLastName("ป่วยนอก");
-        query.setPressureDIA(123);
-        query.setPressureSYS(123);
-        query.setQueryIdx(1L);
-        query.setSymptom("ปวดหัว");
-        query.setTemperature(37.5f);
-
-		Set<ConstraintViolation<Query>> result = validator.validate(query);
-		
-		assertEquals(1, result.size());
-		
-        ConstraintViolation<Query> v = result.iterator().next();
-        assertEquals("size must be between 2 and 20", v.getMessage());
-        assertEquals("firstName", v.getPropertyPath().toString());
-    }
-    @Test
-    void B5910519_testFirstNameNotMoreThan20() {
-        Query query = new Query();
-        query.setFirstName("ศาสตรจารย์ นายแพทย์ พลเอก สมคิดสมศักดิ์");
-        query.setLastName("ป่วยนอก");
-        query.setPressureDIA(123);
-        query.setPressureSYS(123);
-        query.setQueryIdx(1L);
-        query.setSymptom("ปวดหัว");
-        query.setTemperature(37.5f);
-
-		Set<ConstraintViolation<Query>> result = validator.validate(query);
-		
-		assertEquals(1, result.size());
-		
-        ConstraintViolation<Query> v = result.iterator().next();
-        assertEquals("size must be between 2 and 20", v.getMessage());
-        assertEquals("firstName", v.getPropertyPath().toString());
-    }
-    @Test
-    void B5910519_testLastNameNotLessThan2() {
-        Query query = new Query();
-        query.setFirstName("นายสมคิด");
-        query.setLastName("ก");
-        query.setPressureDIA(123);
-        query.setPressureSYS(123);
-        query.setQueryIdx(1L);
-        query.setSymptom("ปวดหัว");
-        query.setTemperature(37.5f);
-
-		Set<ConstraintViolation<Query>> result = validator.validate(query);
-		
-		assertEquals(1, result.size());
-		
-        ConstraintViolation<Query> v = result.iterator().next();
-        assertEquals("size must be between 2 and 20", v.getMessage());
-        assertEquals("lastName", v.getPropertyPath().toString());
-    }
-    @Test
-    void B5910519_testLastNameNotMoreThan20() {
-        Query query = new Query();
-        query.setFirstName("สมคิด");
-        query.setLastName("อภิมหาสกุลชาติผ่องพรรณวดีมหาเศรษฐี");
-        query.setPressureDIA(123);
-        query.setPressureSYS(123);
-        query.setQueryIdx(1L);
-        query.setSymptom("ปวดหัว");
-        query.setTemperature(37.5f);
-
-		Set<ConstraintViolation<Query>> result = validator.validate(query);
-		
-		assertEquals(1, result.size());
-		
-        ConstraintViolation<Query> v = result.iterator().next();
-        assertEquals("size must be between 2 and 20", v.getMessage());
-        assertEquals("lastName", v.getPropertyPath().toString());
+        assertEquals("congenitalDisease", v.getPropertyPath().toString());
     }
 
     @Test
-    void B5910519_testFirstNameCannotEnterNumber() {
+    void B5910519_testRegisterPatientMustNotBeNull() {
         Query query = new Query();
-        query.setFirstName("สมคิด0123");
-        query.setLastName("ป่วยนอก");
         query.setPressureDIA(123);
         query.setPressureSYS(123);
         query.setQueryIdx(1L);
-        query.setSymptom("ปวดหัว");
+        query.setSymptom("symtom");
         query.setTemperature(37.5f);
+        query.setDuration(duration);
+        query.setRegisterpatient(null);
+        query.setCongenitalDisease(congenitalDisease);
 
         Set<ConstraintViolation<Query>> result = validator.validate(query);
+        
         assertEquals(1, result.size());
-
+        
         ConstraintViolation<Query> v = result.iterator().next();
-        assertEquals("must match \"^[A-Za-zก-์\\s]+$\"", v.getMessage());
-        assertEquals("firstName", v.getPropertyPath().toString());
+        assertEquals("must not be null", v.getMessage());
+        assertEquals("registerpatient", v.getPropertyPath().toString());
     }
+    
 
     @Test
-    void B5910519_testFirstNameCanNotEnterSpecialCharactor() {
+    void B5910519_testSymptomMustNotEnterSpecialCharactor() {
         Query query = new Query();
-        query.setFirstName("สมคิด()$%^^&&*");
-        query.setLastName("ป่วยนอก");
         query.setPressureDIA(123);
         query.setPressureSYS(123);
         query.setQueryIdx(1L);
-        query.setSymptom("ปวดหัว");
+        query.setSymptom("less@$@#%");
         query.setTemperature(37.5f);
+        query.setDuration(duration);
+        query.setRegisterpatient(registerPatient);
+        query.setCongenitalDisease(congenitalDisease);
 
         Set<ConstraintViolation<Query>> result = validator.validate(query);
+        
         assertEquals(1, result.size());
-
+        
         ConstraintViolation<Query> v = result.iterator().next();
-        assertEquals("must match \"^[A-Za-zก-์\\s]+$\"", v.getMessage());
-        assertEquals("firstName", v.getPropertyPath().toString());
-    }
-
-    @Test
-    void B5910519_testLastNameCannotEnterNumber() {
-        Query query = new Query();
-        query.setFirstName("สมคิด");
-        query.setLastName("ป่วยนอก123");
-        query.setPressureDIA(123);
-        query.setPressureSYS(123);
-        query.setQueryIdx(1L);
-        query.setSymptom("ปวดหัว");
-        query.setTemperature(37.5f);
-
-        Set<ConstraintViolation<Query>> result = validator.validate(query);
-        assertEquals(1, result.size());
-
-        ConstraintViolation<Query> v = result.iterator().next();
-        assertEquals("must match \"^[A-Za-zก-์\\s]+$\"", v.getMessage());
-        assertEquals("lastName", v.getPropertyPath().toString());
-    }
-
-    @Test
-    void B5910519_testLastNameCanNotEnterSpecialCharactor() {
-        Query query = new Query();
-        query.setFirstName("สมคิด");
-        query.setLastName("ป่วยนอก()$%^^&&*");
-        query.setPressureDIA(123);
-        query.setPressureSYS(123);
-        query.setQueryIdx(1L);
-        query.setSymptom("ปวดหัว");
-        query.setTemperature(37.5f);
-
-        Set<ConstraintViolation<Query>> result = validator.validate(query);
-        assertEquals(1, result.size());
-
-        ConstraintViolation<Query> v = result.iterator().next();
-        assertEquals("must match \"^[A-Za-zก-์\\s]+$\"", v.getMessage());
-        assertEquals("lastName", v.getPropertyPath().toString());
+        assertEquals("must match \"^[0-9A-Za-zก-์\\s]+$\"", v.getMessage());
+        assertEquals("symptom", v.getPropertyPath().toString());
     }
 }

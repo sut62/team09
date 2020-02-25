@@ -27,8 +27,8 @@ export default {
     return {
       headers: [
         { text: "Query ID", value: "queryid" },
-        { text: "ชื่อจริง", value: "firstName" },
-        { text: "นามสกุล", value: "lastName" },
+        { text: "ชื่อจริง", value: "registerpatient.firstName" },
+        { text: "นามสกุล", value: "registerpatient.lastName" },
         { text: "ความดัน DIA", value: "pressureDIA" },
         { text: "ความดัน SYS", value: "pressureSYS" },
         { text: "อาการ", value: "symptom" },
