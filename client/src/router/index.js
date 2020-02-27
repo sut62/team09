@@ -11,7 +11,6 @@ import RegisterDeaths from "../components/RegisterDeaths";
 import ShowRegisterDeaths from "../components/ShowRegisterDeaths"
 import ShowRegisterDeathsDetail from '../components/ShowRegisterDeathsDetail'
 import ShowRegisterpatient from "../components/ShowRegisterpatient"
-import ShowRegisterpatientDetail from '../components/ShowRegisterpatientDetail'
 import Login from "../components/Login";
 import Home from "../components/Home"
 import ReferralData from "../components/ReferralData"
@@ -46,11 +45,6 @@ export default new Router({
       path: "/showregisterpatient",
       name: "showregisterpatient",
       component: ShowRegisterpatient
-    },
-    {
-      path: "/showregisterpatientDetail",
-      name: "showregisterpatientDetail",
-      component: ShowRegisterpatientDetail
     },
     {
       path: "/appointment",
