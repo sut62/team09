@@ -101,8 +101,7 @@ public class DiagnoseTest {
         query.setRegisterpatient(r);
         query.setCongenitalDisease(congenitalDisease);
         query.setDuration(duration);
-        query.setFirstName("กกกกกก");
-        query.setLastName("ขขขขขข");
+        // query.setRegisterpatient(registerpatient);
         query.setPressureDIA(123);
         query.setPressureSYS(123);
         query.setSymptom("ปวดหัว");
