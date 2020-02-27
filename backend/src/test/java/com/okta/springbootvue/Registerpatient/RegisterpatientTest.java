@@ -904,4 +904,194 @@ public class RegisterpatientTest {
         assertEquals("mobilePhone", v.getPropertyPath().toString());
     }
 
+// Gender กรณีที่ 1 ใส่ข้อมูลถูกต้องปกติ
+@Test
+void B5900985_testGenderwithCorrect() {
+    Gender gender = genderRepository.findById(1);
+    NameTitle nameTitle = nameTitleRepository.findById(1);
+    Province province = provinceRepository.findById(1);
+
+    Registerpatient r = new Registerpatient();
+    r.setFirstName("กกกกกก");
+    r.setLastName("ขขขขขข");
+    r.setAge(33);
+    r.setWeight(70);
+    r.setHeight(170);
+    r.setAddressDetail("Address");
+    r.setMobilePhone("0819658742");
+    r.setGender(gender);
+    r.setNameTitle(nameTitle);
+    r.setProvince(province);
+
+    registerpatientRepository.saveAndFlush(r);
+    Optional<Registerpatient> check = registerpatientRepository.findById(r.getRegisterId());
+    assertEquals("กกกกกก", check.get().getFirstName());
+    assertEquals("ขขขขขข", check.get().getLastName());
+    assertEquals(33, check.get().getAge());
+    assertEquals(70, check.get().getWeight());
+    assertEquals(170, check.get().getHeight());
+    assertEquals("Address", check.get().getAddressDetail());
+    assertEquals("0819658742", check.get().getMobilePhone());
+    assertEquals(gender, check.get().getGender());
+    assertEquals(nameTitle, check.get().getNameTitle());
+    assertEquals(province, check.get().getProvince());
+}
+
+// Gender กรณีที่ 2 ใส่ข้อมูลnotnull
+    @Test
+    void B5900985_testGenderMustNotBeNull() {
+        Gender gender = genderRepository.findById(1);
+        NameTitle nameTitle = nameTitleRepository.findById(1);
+        Province province = provinceRepository.findById(1);
+
+        Registerpatient r = new Registerpatient();
+        r.setFirstName("กกกกก");
+        r.setLastName("ขขขขข");
+        r.setAge(33);
+        r.setWeight(70);
+        r.setHeight(170);
+        r.setAddressDetail("Address");
+        r.setMobilePhone("0810730675");
+        r.setGender(null);
+        r.setNameTitle(nameTitle);
+        r.setProvince(province);
+
+        Set<ConstraintViolation<Registerpatient>> result = validator.validate(r);
+
+        // result ต้องมี error 1 ค่าเท่านั้น
+        assertEquals(1, result.size());
+
+        // error message ตรงชนิด และถูก field
+        ConstraintViolation<Registerpatient> v = result.iterator().next();
+        assertEquals("must not be null", v.getMessage());
+        assertEquals("gender", v.getPropertyPath().toString());
+    }
+
+// testNameTitle กรณีที่ 1 ใส่ข้อมูลถูกต้องปกติ
+@Test
+void B5900985_testNameTitlewithCorrect() {
+    Gender gender = genderRepository.findById(1);
+    NameTitle nameTitle = nameTitleRepository.findById(1);
+    Province province = provinceRepository.findById(1);
+
+    Registerpatient r = new Registerpatient();
+    r.setFirstName("กกกกกก");
+    r.setLastName("ขขขขขข");
+    r.setAge(33);
+    r.setWeight(70);
+    r.setHeight(170);
+    r.setAddressDetail("Address");
+    r.setMobilePhone("0819658742");
+    r.setGender(gender);
+    r.setNameTitle(nameTitle);
+    r.setProvince(province);
+
+    registerpatientRepository.saveAndFlush(r);
+    Optional<Registerpatient> check = registerpatientRepository.findById(r.getRegisterId());
+    assertEquals("กกกกกก", check.get().getFirstName());
+    assertEquals("ขขขขขข", check.get().getLastName());
+    assertEquals(33, check.get().getAge());
+    assertEquals(70, check.get().getWeight());
+    assertEquals(170, check.get().getHeight());
+    assertEquals("Address", check.get().getAddressDetail());
+    assertEquals("0819658742", check.get().getMobilePhone());
+    assertEquals(gender, check.get().getGender());
+    assertEquals(nameTitle, check.get().getNameTitle());
+    assertEquals(province, check.get().getProvince());
+}
+
+// NameTitle กรณีที่ 2 ใส่ข้อมูลnotnull
+    @Test
+    void B5900985_testNameTitleMustNotBeNull() {
+        Gender gender = genderRepository.findById(1);
+        NameTitle nameTitle = nameTitleRepository.findById(1);
+        Province province = provinceRepository.findById(1);
+
+        Registerpatient r = new Registerpatient();
+        r.setFirstName("กกกกก");
+        r.setLastName("ขขขขข");
+        r.setAge(33);
+        r.setWeight(70);
+        r.setHeight(170);
+        r.setAddressDetail("Address");
+        r.setMobilePhone("0810730675");
+        r.setGender(gender);
+        r.setNameTitle(null);
+        r.setProvince(province);
+
+        Set<ConstraintViolation<Registerpatient>> result = validator.validate(r);
+
+        // result ต้องมี error 1 ค่าเท่านั้น
+        assertEquals(1, result.size());
+
+        // error message ตรงชนิด และถูก field
+        ConstraintViolation<Registerpatient> v = result.iterator().next();
+        assertEquals("must not be null", v.getMessage());
+        assertEquals("nameTitle", v.getPropertyPath().toString());
+    }
+
+    // Province กรณีที่ 1 ใส่ข้อมูลถูกต้องปกติ
+@Test void B5900985_testProvincewithCorrect() {
+    Gender gender = genderRepository.findById(1);
+    NameTitle nameTitle = nameTitleRepository.findById(1);
+    Province province = provinceRepository.findById(1);
+
+    Registerpatient r = new Registerpatient();
+    r.setFirstName("กกกกกก");
+    r.setLastName("ขขขขขข");
+    r.setAge(33);
+    r.setWeight(70);
+    r.setHeight(170);
+    r.setAddressDetail("Address");
+    r.setMobilePhone("0819658742");
+    r.setGender(gender);
+    r.setNameTitle(nameTitle);
+    r.setProvince(province);
+
+    registerpatientRepository.saveAndFlush(r);
+    Optional<Registerpatient> check = registerpatientRepository.findById(r.getRegisterId());
+    assertEquals("กกกกกก", check.get().getFirstName());
+    assertEquals("ขขขขขข", check.get().getLastName());
+    assertEquals(33, check.get().getAge());
+    assertEquals(70, check.get().getWeight());
+    assertEquals(170, check.get().getHeight());
+    assertEquals("Address", check.get().getAddressDetail());
+    assertEquals("0819658742", check.get().getMobilePhone());
+    assertEquals(gender, check.get().getGender());
+    assertEquals(nameTitle, check.get().getNameTitle());
+    assertEquals(province, check.get().getProvince());
+}
+
+// Province กรณีที่ 2 ใส่ข้อมูลnotnull
+    @Test
+    void B5900985_testProvinceMustNotBeNull() {
+        Gender gender = genderRepository.findById(1);
+        NameTitle nameTitle = nameTitleRepository.findById(1);
+        Province province = provinceRepository.findById(1);
+
+        Registerpatient r = new Registerpatient();
+        r.setFirstName("กกกกก");
+        r.setLastName("ขขขขข");
+        r.setAge(33);
+        r.setWeight(70);
+        r.setHeight(170);
+        r.setAddressDetail("Address");
+        r.setMobilePhone("0810730675");
+        r.setGender(gender);
+        r.setNameTitle(nameTitle);
+        r.setProvince(null);
+
+        Set<ConstraintViolation<Registerpatient>> result = validator.validate(r);
+
+        // result ต้องมี error 1 ค่าเท่านั้น
+        assertEquals(1, result.size());
+
+        // error message ตรงชนิด และถูก field
+        ConstraintViolation<Registerpatient> v = result.iterator().next();
+        assertEquals("must not be null", v.getMessage());
+        assertEquals("province", v.getPropertyPath().toString());
+    }
+
+
+
 }
