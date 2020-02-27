@@ -10,7 +10,7 @@
           :items="querys"
           v-model="selectquery"
           label="ชื่อผู้ป่วย"
-          item-text="firstName"
+          item-text="registerpatient.firstName"
           item-value="queryid"
           prepend-icon="local_hospital"
           required
@@ -189,6 +189,7 @@ export default {
 
     selectque() {
       console.log(this.selectquery);
+      console.log(this.registerId)
 
       for (let i in this.querys) {
         console.log(this.querys[i].id);
