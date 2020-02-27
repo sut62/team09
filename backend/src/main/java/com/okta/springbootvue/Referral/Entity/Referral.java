@@ -27,20 +27,20 @@ public class Referral {
 
     @ManyToOne(fetch = FetchType.EAGER, targetEntity = ForwardTo.class)
     @JoinColumn(name = "FORWARDTO_ID", insertable = true)
-    private ForwardTo forwardTo;  
+    private @NotNull ForwardTo forwardTo;  
 
     @ManyToOne(fetch = FetchType.EAGER, targetEntity = Deliver.class)
     @JoinColumn(name = "DELIVER_ID", insertable = true)
-    private Deliver deliver;
+    private @NotNull Deliver deliver;
 
 
     @ManyToOne(fetch = FetchType.EAGER, targetEntity = ForwardType.class)
     @JoinColumn(name = "FORWARDTYPE_ID", insertable = true)
-    private ForwardType forwardType;
+    private @NotNull ForwardType forwardType;
 
     @ManyToOne(fetch = FetchType.EAGER, targetEntity = Diagnose.class)
     @JoinColumn(name = "DIAGNOSE_ID", insertable = true)
-    private Diagnose diagnose;
+    private @NotNull Diagnose diagnose;
 
     public Diagnose getDiagnose() {
         return this.diagnose;
