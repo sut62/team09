@@ -45,6 +45,21 @@ public class DeliverTest {
         assertEquals("รับไว้รักษาต่อ", result.get().getDeliver());
     }
 
+    @Test
+    void B5903191_testDeliverIdMustNotBeNull() {
+        Deliver deliver = new Deliver();
+		deliver.setDeliverId(null);
+		deliver.setDeliver("รับไว้รักษาต่อ");
+
+		Set<ConstraintViolation<Deliver>> result = validator.validate(deliver);
+		
+		assertEquals(1, result.size());
+		
+        ConstraintViolation<Deliver> v = result.iterator().next();
+        assertEquals("must not be null", v.getMessage());
+        assertEquals("deliverId", v.getPropertyPath().toString());
+    }
+
 	@Test
     void B5903191_testDeliverMustNotBeNull() {
         Deliver deliver = new Deliver();

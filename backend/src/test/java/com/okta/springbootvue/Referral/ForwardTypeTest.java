@@ -44,6 +44,21 @@ public class ForwardTypeTest {
         assertEquals(1L, result.get().getForwardTypeId());
         assertEquals("ส่งในจังหวัด", result.get().getForwardType());
     }
+
+    @Test
+    void B5903191_testForwardIdTypeMustNotBeNull() {
+        ForwardType ForwardType = new ForwardType();
+		ForwardType.setForwardTypeId(null);
+		ForwardType.setForwardType("ส่งในจังหวัด");
+
+		Set<ConstraintViolation<ForwardType>> result = validator.validate(ForwardType);
+		
+		assertEquals(1, result.size());
+		
+        ConstraintViolation<ForwardType> v = result.iterator().next();
+        assertEquals("must not be null", v.getMessage());
+        assertEquals("forwardTypeId", v.getPropertyPath().toString());
+    }
 	
 	@Test
     void B5903191_testForwardTypeMustNotBeNull() {
