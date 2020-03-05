@@ -27,7 +27,7 @@ export default {
     return {
       headers: [
         { text: "ID", value: "registerId" },
-        { text: "คำนำหน้าชื่อ", value: "nameTitle.nameTitle" },
+        { text: "คำนำหน้าชื่อ", value: "nameTitle.nametitle" },
         { text: "ชื่อ", value: "firstName" },
         { text: "นามสกุล", value: "lastName" },
         { text: "เพศ", value: "gender.gender" },
