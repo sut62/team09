@@ -46,7 +46,6 @@ public class NameTitleTest {
     void B5900985_testNametitleMustNotBeNull() {
         NameTitle nametitle = new NameTitle();
         nametitle.setNametitle(null);
-        nametitle.setNametitle("นางสาว");
 
 		Set<ConstraintViolation<NameTitle>> result = validator.validate(nametitle);
 		
@@ -54,6 +53,6 @@ public class NameTitleTest {
 		
         ConstraintViolation<NameTitle> v = result.iterator().next();
         assertEquals("must not be null", v.getMessage());
-        assertEquals("nameTitleId", v.getPropertyPath().toString());
+        assertEquals("nametitle", v.getPropertyPath().toString());
     }
 }

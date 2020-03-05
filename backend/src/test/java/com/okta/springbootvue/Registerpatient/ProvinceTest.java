@@ -46,7 +46,6 @@ public class ProvinceTest {
     void B5900985_testProvinceMustNotBeNull() {
         Province province = new Province();
         province.setProvince(null);
-        province.setProvince("นครราชสีมา");
 
 		Set<ConstraintViolation<Province>> result = validator.validate(province);
 		
@@ -54,6 +53,6 @@ public class ProvinceTest {
 		
         ConstraintViolation<Province> v = result.iterator().next();
         assertEquals("must not be null", v.getMessage());
-        assertEquals("provinceId", v.getPropertyPath().toString());
+        assertEquals("province", v.getPropertyPath().toString());
     }
 }

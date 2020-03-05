@@ -15,7 +15,7 @@ public class NameTitle {
     @SequenceGenerator(name="NAMETITLE_SEQ",sequenceName="NAMETITLE_SEQ")
     @GeneratedValue(strategy=GenerationType.SEQUENCE, generator="NAMETITLE_SEQ")
     @Column(name="NAMETITLE_ID",unique = true, nullable = false)
-    private @NotNull Long nameTitleId;
+    private Long nameTitleId;
     private @NotNull String nametitle;
 
     public Long getNameTitleId() {
