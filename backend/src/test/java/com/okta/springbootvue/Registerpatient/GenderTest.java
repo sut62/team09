@@ -46,7 +46,6 @@ public class GenderTest {
     void B5900985_testGenderMustNotBeNull() {
         Gender gender = new Gender();
         gender.setGender(null);
-        gender.setGender("หญิง");
 
 		Set<ConstraintViolation<Gender>> result = validator.validate(gender);
 		
@@ -54,6 +53,6 @@ public class GenderTest {
 		
         ConstraintViolation<Gender> v = result.iterator().next();
         assertEquals("must not be null", v.getMessage());
-        assertEquals("genderId", v.getPropertyPath().toString());
+        assertEquals("gender", v.getPropertyPath().toString());
     }
 }
