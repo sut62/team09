@@ -23,7 +23,7 @@ public class NameTitle {
         return nameTitleId;
     }
 
-    public void setNameTitleId(final Long nameTitleId) {
+    public void setNameTitleId(Long nameTitleId) {
         this.nameTitleId = nameTitleId;
     }
 
@@ -31,10 +31,10 @@ public class NameTitle {
         return nametitle;
     }
 
-    public void setNametitle(final String nametitle) {
+    public void setNametitle(String nametitle) {
         this.nametitle = nametitle;
     }
-    public NameTitle(final String nameTitle) {
+    public NameTitle(String nameTitle) {
         this.nametitle = nameTitle;
     }
 
