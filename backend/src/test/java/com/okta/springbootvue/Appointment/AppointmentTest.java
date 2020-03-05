@@ -4,6 +4,10 @@ import com.okta.springbootvue.Appointment.Entity.*;
 import com.okta.springbootvue.Appointment.Repository.*;
 import com.okta.springbootvue.Diagnose.entity.*;
 import com.okta.springbootvue.Diagnose.repository.*;
+import com.okta.springbootvue.Query.Entity.*;
+import com.okta.springbootvue.Query.Repository.*;
+import com.okta.springbootvue.Registerpatient.Entity.*;
+import com.okta.springbootvue.Registerpatient.Repository.*;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -34,39 +38,108 @@ public class AppointmentTest {
     private DoctorRepository doctorRepository;
     @Autowired
     private DiagnoseRepository diagnoseRepository;
+    @Autowired
+    private DiseaseRepository diseaseRepository;
+    @Autowired
+    private QueryRepository queryRepository;
+    @Autowired
+    private DurationRepository durationRepository;
+    @Autowired
+    private CongenitalDiseaseRepository congenitalDiseaseRepository;
+    @Autowired
+    private RegisterpatientRepository registerpatientRepository;
+    @Autowired
+    private GenderRepository genderRepository;
+    @Autowired
+    private NameTitleRepository nameTitleRepository;
+    @Autowired
+    private ProvinceRepository provinceRepository;
 
     private Validator validator;
+    Diagnose diagnose = new Diagnose();
+    Appointment appointment = new Appointment();
+    Clinic clinic = new Clinic();
+    Demeanor demeanor = new Demeanor();
+    Reason reason = new Reason();
+    Doctor doctor = new Doctor();
+    
 
     @BeforeEach
     public void setup() {
         ValidatorFactory factory = Validation.buildDefaultValidatorFactory();
         validator = factory.getValidator();
+
+        Gender gender = new Gender();
+        gender.setGender("หญิง");
+        genderRepository.saveAndFlush(gender);
+
+        NameTitle nameTitle = new NameTitle();
+        nameTitle.setNametitle("นางสาว");
+        nameTitleRepository.saveAndFlush(nameTitle);
+
+        Province province = new Province();
+        province.setProvince("เชียงใหม่");
+        provinceRepository.saveAndFlush(province);
+
+        Registerpatient r = new Registerpatient();
+        r.setFirstName("ศานันทินี");
+        r.setLastName("ชวธนากร");
+        r.setAge(22);
+        r.setWeight(65);
+        r.setHeight(165);
+        r.setAddressDetail("บ้านปง หมู่7 ต.อินทขิล อ.แม่แตง");
+        r.setMobilePhone("0819658742");
+        r.setGender(gender);
+        r.setNameTitle(nameTitle);
+        r.setProvince(province);
+        registerpatientRepository.saveAndFlush(r);
+
+        Duration duration = new Duration();
+        duration.setDuration("1 วัน");
+        durationRepository.saveAndFlush(duration);
+
+        CongenitalDisease congenitalDisease = new CongenitalDisease();
+        congenitalDisease.setCongenitalDisease("ไม่มีโรคประจำตัว");
+        congenitalDiseaseRepository.saveAndFlush(congenitalDisease);
+
+        Query query = new Query();
+        query.setRegisterpatient(r);
+        query.setCongenitalDisease(congenitalDisease);
+        query.setDuration(duration);
+        query.setPressureDIA(123);
+        query.setPressureSYS(123);
+        query.setSymptom("ปวดท้อง");
+        query.setTemperature(37.5f);
+        queryRepository.saveAndFlush(query);
+
+        Disease disease = new Disease();
+        disease.setName("กรดไหลย้อน");
+        diseaseRepository.saveAndFlush(disease);
+
+        doctor.setName("นอนน้อย นอนนะ");
+        doctorRepository.saveAndFlush(doctor);
+
+        diagnose.setQuery(query);
+        diagnose.setNote("กินหมูกะทะ");
+        diagnose.setDisease(disease);
+        diagnose.setDoctor(doctor);
+        diagnoseRepository.saveAndFlush(diagnose);
+
+        clinic.setClinic("อายุรกรรมทั่วไป");
+        clinicRepository.saveAndFlush(clinic);
+
+        demeanor.setDemeanor("ไม่ต้อง");
+        demeanorRepository.saveAndFlush(demeanor);
+
+        reason.setReason("เจาะเลือด");
+        reasonRepository.saveAndFlush(reason);
+
+        
     }
 
     // บันทึกการนัดหมายสำเร็จ
     @Test
     void B5905188_testAppointmentSuccess() {
-        Diagnose diagnose = new Diagnose();
-        
-        diagnose.setNote("แพ้ยาพารา");
-        diagnoseRepository.saveAndFlush(diagnose);
-
-        Clinic clinic = new Clinic();
-        clinic.setClinic("อายุรกรรมทั่วไป");
-        clinicRepository.saveAndFlush(clinic);
-
-        Demeanor demeanor = new Demeanor();
-        demeanor.setDemeanor("งดดื่มแอลกอฮอล์ อย่างน้อย 24 ชั่วโมงก่อนการตรวจ");
-        demeanorRepository.saveAndFlush(demeanor);
-
-        Reason reason = new Reason();
-        reason.setReason("ตรวจโรค");
-        reasonRepository.saveAndFlush(reason);
-
-        Doctor doctor = new Doctor();
-        doctor.setName("นอนน้อย นอนนะ");
-        doctorRepository.saveAndFlush(doctor);
-
         Appointment appoint = new Appointment();
         appoint.setDiagnose(diagnose);
         appoint.setAppointDate("12-02-2563");
@@ -91,27 +164,6 @@ public class AppointmentTest {
     // วันที่ห้ามเป็น null
     @Test
     void B5905188_testAppointDateMustNotBeNull() {
-        Diagnose diagnose = new Diagnose();
-        
-        diagnose.setNote("แพ้ยาพารา");
-        diagnoseRepository.saveAndFlush(diagnose);
-
-        Clinic clinic = new Clinic();
-        clinic.setClinic("อายุรกรรมทั่วไป");
-        clinicRepository.saveAndFlush(clinic);
-
-        Demeanor demeanor = new Demeanor();
-        demeanor.setDemeanor("งดดื่มแอลกอฮอล์ อย่างน้อย 24 ชั่วโมงก่อนการตรวจ");
-        demeanorRepository.saveAndFlush(demeanor);
-
-        Reason reason = new Reason();
-        reason.setReason("ตรวจโรค");
-        reasonRepository.saveAndFlush(reason);
-
-        Doctor doctor = new Doctor();
-        doctor.setName("นอนน้อย นอนนะ");
-        doctorRepository.saveAndFlush(doctor);
-
         Appointment appoint = new Appointment();
         appoint.setDiagnose(diagnose);
         appoint.setAppointDate(null);
@@ -135,27 +187,6 @@ public class AppointmentTest {
     // เวลาห้ามเป็น null
     @Test
     void B5905188_testAppointTimeMustNotBeNull() {
-        Diagnose diagnose = new Diagnose();
-        
-        diagnose.setNote("แพ้ยาพารา");
-        diagnoseRepository.saveAndFlush(diagnose);
-
-        Clinic clinic = new Clinic();
-        clinic.setClinic("อายุรกรรมทั่วไป");
-        clinicRepository.saveAndFlush(clinic);
-
-        Demeanor demeanor = new Demeanor();
-        demeanor.setDemeanor("งดดื่มแอลกอฮอล์ อย่างน้อย 24 ชั่วโมงก่อนการตรวจ");
-        demeanorRepository.saveAndFlush(demeanor);
-
-        Reason reason = new Reason();
-        reason.setReason("ตรวจโรค");
-        reasonRepository.saveAndFlush(reason);
-
-        Doctor doctor = new Doctor();
-        doctor.setName("นอนน้อย นอนนะ");
-        doctorRepository.saveAndFlush(doctor);
-
         Appointment appoint = new Appointment();
         appoint.setDiagnose(diagnose);
         appoint.setAppointDate("12-02-2563");
@@ -179,27 +210,6 @@ public class AppointmentTest {
     // รูปแบบวันที่ต้องมี - คั่นระหว่างวันที่กับเดือนกับปี
     @Test
     void B5905188_testAppointDateMustNotMatchPattern() {
-        Diagnose diagnose = new Diagnose();
-        
-        diagnose.setNote("แพ้ยาพารา");
-        diagnoseRepository.saveAndFlush(diagnose);
-
-        Clinic clinic = new Clinic();
-        clinic.setClinic("อายุรกรรมทั่วไป");
-        clinicRepository.saveAndFlush(clinic);
-
-        Demeanor demeanor = new Demeanor();
-        demeanor.setDemeanor("งดดื่มแอลกอฮอล์ อย่างน้อย 24 ชั่วโมงก่อนการตรวจ");
-        demeanorRepository.saveAndFlush(demeanor);
-
-        Reason reason = new Reason();
-        reason.setReason("ตรวจโรค");
-        reasonRepository.saveAndFlush(reason);
-
-        Doctor doctor = new Doctor();
-        doctor.setName("นอนน้อย นอนนะ");
-        doctorRepository.saveAndFlush(doctor);
-
         Appointment appoint = new Appointment();
         appoint.setDiagnose(diagnose);
         appoint.setAppointDate("12.02.2563");
@@ -223,27 +233,6 @@ public class AppointmentTest {
     // รูปแบบเวลาต้องมี : คั่นระหว่างชั่วโมงกับนาที
     @Test
     void B5905188_testAppointTimeMustNotMatchPattern() {
-        Diagnose diagnose = new Diagnose();
-        
-        diagnose.setNote("แพ้ยาพารา");
-        diagnoseRepository.saveAndFlush(diagnose);
-
-        Clinic clinic = new Clinic();
-        clinic.setClinic("อายุรกรรมทั่วไป");
-        clinicRepository.saveAndFlush(clinic);
-
-        Demeanor demeanor = new Demeanor();
-        demeanor.setDemeanor("งดดื่มแอลกอฮอล์ อย่างน้อย 24 ชั่วโมงก่อนการตรวจ");
-        demeanorRepository.saveAndFlush(demeanor);
-
-        Reason reason = new Reason();
-        reason.setReason("ตรวจโรค");
-        reasonRepository.saveAndFlush(reason);
-
-        Doctor doctor = new Doctor();
-        doctor.setName("นอนน้อย นอนนะ");
-        doctorRepository.saveAndFlush(doctor);
-
         Appointment appoint = new Appointment();
         appoint.setDiagnose(diagnose);
         appoint.setAppointDate("12-02-2563");
@@ -267,27 +256,6 @@ public class AppointmentTest {
     // รูปแบบเวลาไม่น้อยกว่า 5 ตัว
     @Test
     void B5905188_testAppointTimeMustNotLessThan5() {
-        Diagnose diagnose = new Diagnose();
-        
-        diagnose.setNote("แพ้ยาพารา");
-        diagnoseRepository.saveAndFlush(diagnose);
-
-        Clinic clinic = new Clinic();
-        clinic.setClinic("อายุรกรรมทั่วไป");
-        clinicRepository.saveAndFlush(clinic);
-
-        Demeanor demeanor = new Demeanor();
-        demeanor.setDemeanor("งดดื่มแอลกอฮอล์ อย่างน้อย 24 ชั่วโมงก่อนการตรวจ");
-        demeanorRepository.saveAndFlush(demeanor);
-
-        Reason reason = new Reason();
-        reason.setReason("ตรวจโรค");
-        reasonRepository.saveAndFlush(reason);
-
-        Doctor doctor = new Doctor();
-        doctor.setName("นอนน้อย นอนนะ");
-        doctorRepository.saveAndFlush(doctor);
-
         Appointment appoint = new Appointment();
         appoint.setDiagnose(diagnose);
         appoint.setAppointDate("12-02-2563");
@@ -311,27 +279,6 @@ public class AppointmentTest {
     // คลินิกห้ามเป็น null
     @Test
     void B5905188_testClinicMustNotBeNull() {
-        Diagnose diagnose = new Diagnose();
-        
-        diagnose.setNote("แพ้ยาพารา");
-        diagnoseRepository.saveAndFlush(diagnose);
-
-        Clinic clinic = new Clinic();
-        clinic.setClinic("อายุรกรรมทั่วไป");
-        clinicRepository.saveAndFlush(clinic);
-
-        Demeanor demeanor = new Demeanor();
-        demeanor.setDemeanor("งดดื่มแอลกอฮอล์ อย่างน้อย 24 ชั่วโมงก่อนการตรวจ");
-        demeanorRepository.saveAndFlush(demeanor);
-
-        Reason reason = new Reason();
-        reason.setReason("ตรวจโรค");
-        reasonRepository.saveAndFlush(reason);
-
-        Doctor doctor = new Doctor();
-        doctor.setName("นอนน้อย นอนนะ");
-        doctorRepository.saveAndFlush(doctor);
-
         Appointment appoint = new Appointment();
         appoint.setDiagnose(diagnose);
         appoint.setAppointDate("12-02-2563");
@@ -355,27 +302,6 @@ public class AppointmentTest {
     // การปฏิบัติตัวห้ามเป็น null
     @Test
     void B5905188_testDemeanorMustNotBeNull() {
-        Diagnose diagnose = new Diagnose();
-        
-        diagnose.setNote("แพ้ยาพารา");
-        diagnoseRepository.saveAndFlush(diagnose);
-
-        Clinic clinic = new Clinic();
-        clinic.setClinic("อายุรกรรมทั่วไป");
-        clinicRepository.saveAndFlush(clinic);
-
-        Demeanor demeanor = new Demeanor();
-        demeanor.setDemeanor("งดดื่มแอลกอฮอล์ อย่างน้อย 24 ชั่วโมงก่อนการตรวจ");
-        demeanorRepository.saveAndFlush(demeanor);
-
-        Reason reason = new Reason();
-        reason.setReason("ตรวจโรค");
-        reasonRepository.saveAndFlush(reason);
-
-        Doctor doctor = new Doctor();
-        doctor.setName("นอนน้อย นอนนะ");
-        doctorRepository.saveAndFlush(doctor);
-
         Appointment appoint = new Appointment();
         appoint.setDiagnose(diagnose);
         appoint.setAppointDate("12-02-2563");
@@ -399,27 +325,6 @@ public class AppointmentTest {
     // เหตุผลห้ามเป็น null
     @Test
     void B5905188_testReasonMustNotBeNull() {
-        Diagnose diagnose = new Diagnose();
-        
-        diagnose.setNote("แพ้ยาพารา");
-        diagnoseRepository.saveAndFlush(diagnose);
-
-        Clinic clinic = new Clinic();
-        clinic.setClinic("อายุรกรรมทั่วไป");
-        clinicRepository.saveAndFlush(clinic);
-
-        Demeanor demeanor = new Demeanor();
-        demeanor.setDemeanor("งดดื่มแอลกอฮอล์ อย่างน้อย 24 ชั่วโมงก่อนการตรวจ");
-        demeanorRepository.saveAndFlush(demeanor);
-
-        Reason reason = new Reason();
-        reason.setReason("ตรวจโรค");
-        reasonRepository.saveAndFlush(reason);
-
-        Doctor doctor = new Doctor();
-        doctor.setName("นอนน้อย นอนนะ");
-        doctorRepository.saveAndFlush(doctor);
-
         Appointment appoint = new Appointment();
         appoint.setDiagnose(diagnose);
         appoint.setAppointDate("12-02-2563");
@@ -443,27 +348,6 @@ public class AppointmentTest {
     // แพทย์ห้ามเป็น null
     @Test
     void B5905188_testDoctorMustNotBeNull() {
-        Diagnose diagnose = new Diagnose();
-        
-        diagnose.setNote("แพ้ยาพารา");
-        diagnoseRepository.saveAndFlush(diagnose);
-
-        Clinic clinic = new Clinic();
-        clinic.setClinic("อายุรกรรมทั่วไป");
-        clinicRepository.saveAndFlush(clinic);
-
-        Demeanor demeanor = new Demeanor();
-        demeanor.setDemeanor("งดดื่มแอลกอฮอล์ อย่างน้อย 24 ชั่วโมงก่อนการตรวจ");
-        demeanorRepository.saveAndFlush(demeanor);
-
-        Reason reason = new Reason();
-        reason.setReason("ตรวจโรค");
-        reasonRepository.saveAndFlush(reason);
-
-        Doctor doctor = new Doctor();
-        doctor.setName("นอนน้อย นอนนะ");
-        doctorRepository.saveAndFlush(doctor);
-
         Appointment appoint = new Appointment();
         appoint.setDiagnose(diagnose);
         appoint.setAppointDate("12-02-2563");
@@ -487,27 +371,6 @@ public class AppointmentTest {
     // ชื่อผู้ป่วยห้ามเป็น null
     @Test
     void B5905188_testDiagnoseMustNotBeNull() {
-        Diagnose diagnose = new Diagnose();
-        
-        diagnose.setNote("แพ้ยาพารา");
-        diagnoseRepository.saveAndFlush(diagnose);
-
-        Clinic clinic = new Clinic();
-        clinic.setClinic("อายุรกรรมทั่วไป");
-        clinicRepository.saveAndFlush(clinic);
-
-        Demeanor demeanor = new Demeanor();
-        demeanor.setDemeanor("งดดื่มแอลกอฮอล์ อย่างน้อย 24 ชั่วโมงก่อนการตรวจ");
-        demeanorRepository.saveAndFlush(demeanor);
-
-        Reason reason = new Reason();
-        reason.setReason("ตรวจโรค");
-        reasonRepository.saveAndFlush(reason);
-
-        Doctor doctor = new Doctor();
-        doctor.setName("นอนน้อย นอนนะ");
-        doctorRepository.saveAndFlush(doctor);
-
         Appointment appoint = new Appointment();
         appoint.setDiagnose(null);
         appoint.setAppointDate("12-02-2563");
