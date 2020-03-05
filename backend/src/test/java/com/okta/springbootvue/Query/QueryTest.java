@@ -12,8 +12,8 @@ import javax.validation.ValidatorFactory;
 
 import com.okta.springbootvue.Query.Entity.*;
 import com.okta.springbootvue.Query.Repository.*;
-import com.okta.springbootvue.Registerpatient.Entity.Registerpatient;
-import com.okta.springbootvue.Registerpatient.Repository.RegisterpatientRepository;
+import com.okta.springbootvue.Registerpatient.Entity.*;
+import com.okta.springbootvue.Registerpatient.Repository.*;
 
 import java.util.Optional;
 import java.util.Set;
@@ -40,6 +40,15 @@ public class QueryTest {
     @Autowired
     RegisterpatientRepository registerpatientRepository;
 
+    @Autowired
+    private GenderRepository genderRepository;
+
+    @Autowired
+    private NameTitleRepository nameTitleRepository;
+
+    @Autowired
+    private ProvinceRepository provinceRepository;
+
     @BeforeEach
     public void setup() {
         ValidatorFactory factory = Validation.buildDefaultValidatorFactory();
@@ -55,6 +64,18 @@ public class QueryTest {
         congenitalDisease.setCongenitalDiseaseId(1L);
         congenitalDisease = congenitalDiseaseRepository.saveAndFlush(congenitalDisease);
 
+        Gender gender = new Gender();
+        gender.setGender("หญิง");
+        genderRepository.saveAndFlush(gender);
+
+        NameTitle nameTitle = new NameTitle();
+        nameTitle.setNametitle("นางสาว");
+        nameTitleRepository.saveAndFlush(nameTitle);
+
+        Province province = new Province();
+        province.setProvince("เชียงใหม่");
+        provinceRepository.saveAndFlush(province);
+
         registerPatient = new Registerpatient();
         registerPatient.setAddressDetail("addressDetail");
         registerPatient.setAge(23);
@@ -64,6 +85,9 @@ public class QueryTest {
         registerPatient.setMobilePhone("0812345678");
         registerPatient.setWeight(45);
         registerPatient.setRegisterId(1L);
+        registerPatient.setGender(gender);
+        registerPatient.setNameTitle(nameTitle);
+        registerPatient.setProvince(province);
         registerPatient = registerpatientRepository.saveAndFlush(registerPatient);
     }
 
