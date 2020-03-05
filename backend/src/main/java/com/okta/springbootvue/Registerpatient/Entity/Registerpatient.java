@@ -9,6 +9,7 @@ import javax.validation.constraints.Size;
 
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import lombok.NonNull;
 
 @Data
 @Entity
@@ -19,7 +20,7 @@ public class Registerpatient {
 	@SequenceGenerator(name="REGISTERPATIENT_seq",sequenceName="REGISTERPATIENT_seq")
     @GeneratedValue(strategy=GenerationType.SEQUENCE, generator="REGISTERPATIENT_seq")
 	@Column(name="REGISTERPATIENT_ID",unique = true, nullable = true)
-    private Long registerId;
+    private @NonNull Long registerId;
 
     @Size(max=30,min=5)
     private @NotNull String firstName;

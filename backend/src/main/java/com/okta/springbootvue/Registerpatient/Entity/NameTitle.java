@@ -5,6 +5,7 @@ import javax.validation.constraints.NotNull;
 
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import lombok.NonNull;
 
 
 @Data
@@ -15,14 +16,14 @@ public class NameTitle {
     @SequenceGenerator(name="NAMETITLE_SEQ",sequenceName="NAMETITLE_SEQ")
     @GeneratedValue(strategy=GenerationType.SEQUENCE, generator="NAMETITLE_SEQ")
     @Column(name="NAMETITLE_ID",unique = true, nullable = false)
-    private Long nameTitleId;
+    private @NonNull Long nameTitleId;
     private @NotNull String nametitle;
 
     public Long getNameTitleId() {
         return nameTitleId;
     }
 
-    public void setNameTitleId(Long nameTitleId) {
+    public void setNameTitleId(final Long nameTitleId) {
         this.nameTitleId = nameTitleId;
     }
 
@@ -30,10 +31,10 @@ public class NameTitle {
         return nametitle;
     }
 
-    public void setNametitle(String nametitle) {
+    public void setNametitle(final String nametitle) {
         this.nametitle = nametitle;
     }
-    public NameTitle(String nameTitle) {
+    public NameTitle(final String nameTitle) {
         this.nametitle = nameTitle;
     }
 

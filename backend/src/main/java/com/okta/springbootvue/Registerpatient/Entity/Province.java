@@ -5,6 +5,7 @@ import javax.validation.constraints.NotNull;
 
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import lombok.NonNull;
 
 @Data
 @Entity
@@ -14,7 +15,7 @@ public class Province {
     @SequenceGenerator(name="PROVINCE_SEQ",sequenceName="PROVINCE_SEQ")
     @GeneratedValue(strategy=GenerationType.SEQUENCE, generator="PROVINCE_SEQ")
     @Column(name="PROVINCE_ID",unique = true, nullable = false)
-    private Long provinceId;
+    private @NonNull Long provinceId;
     private @NotNull String province;
 
     public Long getProvinceId() {
