@@ -47,15 +47,15 @@ public class Registerpatient {
 
     @ManyToOne(fetch = FetchType.EAGER, targetEntity = Gender.class)
     @JoinColumn(name = "GENDER_ID", insertable = true)
-    private Gender gender;  
+    private @NotNull Gender gender;  
 
     @ManyToOne(fetch = FetchType.EAGER, targetEntity = Province.class)
     @JoinColumn(name = "PROVINCE_ID", insertable = true)
-    private Province province;
+    private @NotNull Province province;
 
     @ManyToOne(fetch = FetchType.EAGER, targetEntity = NameTitle.class)
     @JoinColumn(name = "NAMETITLE_ID", insertable = true)
-    private NameTitle nameTitle;    
+    private @NotNull NameTitle nameTitle;    
 
     public Long getRegisterId() {
         return registerId;
