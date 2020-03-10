@@ -104,7 +104,6 @@ public class QueryTest {
         query = queryRepository.saveAndFlush(query);
 
         Optional<Query> result = queryRepository.findById(query.getQueryIdx());
-        assertEquals(1L, result.get().getQueryIdx());
         assertEquals(123, result.get().getPressureDIA());
         assertEquals(123, result.get().getPressureSYS());
         assertEquals("ปวดหัว", result.get().getSymptom());
