@@ -84,7 +84,6 @@ public class QueryTest {
         registerPatient.setLastName("lastName");
         registerPatient.setMobilePhone("0812345678");
         registerPatient.setWeight(45);
-        registerPatient.setRegisterId(1L);
         registerPatient.setGender(gender);
         registerPatient.setNameTitle(nameTitle);
         registerPatient.setProvince(province);
