@@ -8,7 +8,7 @@
 <body>
 <table cellpadding="1" cellspacing="1" border="1">
 <thead>
-<tr><td rowspan="1" colspan="3">success</td></tr>
+<tr><td rowspan="1" colspan="3">sprint1-success</td></tr>
 </thead>
 <tbody>
 <tr><td>open</td><td>http://localhost:8080/registerpatient<datalist><option>http://localhost:8080/registerpatient</option></datalist></td><td></td>
@@ -63,16 +63,10 @@
 </tr>
 <tr><td>assertText</td><td>//div[@id='app']/div[4]/div/div[7]/div/div<datalist><option>//div[@id='app']/div[4]/div/div[7]/div/div</option><option>//div[4]/div/div[7]/div/div</option><option>css=div.v-snack__content</option></datalist></td><td>สำเร็จ ปิด</td>
 </tr>
-<tr><td>click</td><td>//div[@id='app']/div[4]/div/div[6]/button/span<datalist><option>//div[@id='app']/div[4]/div/div[6]/button/span</option><option>//div[6]/button/span</option></datalist></td><td></td>
-</tr>
-<tr><td>click</td><td>//div[@id='app']/div/div/div/h2<datalist><option>//div[@id='app']/div/div/div/h2</option><option>//h2</option><option>css=h2.font-weight-black.text-uppercase.display-3.light-green.accent-3.text-center</option></datalist></td><td></td>
-</tr>
-<tr><td>assertText</td><td>//div[@id='app']/div/div/div/h2<datalist><option>//div[@id='app']/div/div/div/h2</option><option>//h2</option><option>css=h2.font-weight-black.text-uppercase.display-3.light-green.accent-3.text-center</option></datalist></td><td>แสดงข้อมูลลงทะเบียนผู้ป่วย</td>
-</tr>
 </tbody></table>
 <table cellpadding="1" cellspacing="1" border="1">
 <thead>
-<tr><td rowspan="1" colspan="3">fail</td></tr>
+<tr><td rowspan="1" colspan="3">sprint1-fail</td></tr>
 </thead>
 <tbody>
 <tr><td>open</td><td>http://localhost:8080/registerpatient<datalist><option>http://localhost:8080/registerpatient</option></datalist></td><td></td>
@@ -127,7 +121,29 @@
 </tr>
 <tr><td>assertText</td><td>//div[@id='app']/div[4]/div/div[7]/div/div<datalist><option>//div[@id='app']/div[4]/div/div[7]/div/div</option><option>//div[4]/div/div[7]/div/div</option><option>css=div.v-snack__content</option></datalist></td><td>ไม่สำเร็จ! ปิด</td>
 </tr>
-<tr><td>click</td><td>//div[@id='app']/div[4]/div/div[6]/button/span<datalist><option>//div[@id='app']/div[4]/div/div[6]/button/span</option><option>//div[6]/button/span</option></datalist></td><td></td>
+</tbody></table>
+<table cellpadding="1" cellspacing="1" border="1">
+<thead>
+<tr><td rowspan="1" colspan="3">sprint2-success</td></tr>
+</thead>
+<tbody>
+<tr><td>open</td><td>http://localhost:8080/registerpatient<datalist><option>http://localhost:8080/registerpatient</option></datalist></td><td></td>
+</tr>
+<tr><td>click</td><td>//div[@id='app']/div/div/div[6]/button/span<datalist><option>//div[@id='app']/div/div/div[6]/button/span</option><option>//div[6]/button/span</option></datalist></td><td></td>
+</tr>
+<tr><td>click</td><td>//div[@id='app']/div/div/div/h2<datalist><option>//div[@id='app']/div/div/div/h2</option><option>//h2</option><option>css=h2.font-weight-black.text-uppercase.display-3.light-green.accent-3.text-center</option></datalist></td><td></td>
+</tr>
+<tr><td>assertText</td><td>//div[@id='app']/div/div/div/h2<datalist><option>//div[@id='app']/div/div/div/h2</option><option>//h2</option><option>css=h2.font-weight-black.text-uppercase.display-3.light-green.accent-3.text-center</option></datalist></td><td>แสดงข้อมูลลงทะเบียนผู้ป่วย</td>
+</tr>
+</tbody></table>
+<table cellpadding="1" cellspacing="1" border="1">
+<thead>
+<tr><td rowspan="1" colspan="3">sprint2-fail</td></tr>
+</thead>
+<tbody>
+<tr><td>open</td><td>http://localhost:8080/registerpatient<datalist><option>http://localhost:8080/registerpatient</option></datalist></td><td></td>
+</tr>
+<tr><td>click</td><td>//div[@id='app']/div/div/div[6]/button/span<datalist><option>//div[@id='app']/div/div/div[6]/button/span</option><option>//div[6]/button/span</option></datalist></td><td></td>
 </tr>
 <tr><td>click</td><td>//div[@id='app']/div/div/div[2]/div/div/div/table/tbody/tr/td<datalist><option>//div[@id='app']/div/div/div[2]/div/div/div/table/tbody/tr/td</option><option>//td</option><option>css=td</option></datalist></td><td></td>
 </tr>
