@@ -2,77 +2,63 @@
   <v-container class="grey lighten-5">
     <v-flex>
       <h2
-        class="font-weight-black text-uppercase display-3 light-blue accent-3 text-center"
+        class="font-weight-black text-uppercase display-3 light-green accent-3 text-center"
       >แสดงข้อมูลลงทะเบียนผู้เสียชีวิต</h2>
     </v-flex>
-    <v-row no-gutters>
-      <v-col v-for="item in items" :key="item.registerdeathId" cols="12" sm="4" class="my-2">
-        <v-card  max-width="344">
-          <v-card-text>
-            
-            <div class="text--primary">คนที่ {{item.registerdeathId}}</div>
-            <div class="text--primary">
-              ชื่อ: {{item.firstName}}
-              <br />
-              นามสกุล:{{item.lastName}}
-            </div>
+    <br />
 
-          </v-card-text>
-          <v-card-actions>
-            <v-btn text color="deep-purple accent-4" v-on:click="showDetail(item)">แสดง</v-btn>
-            <v-btn text color="deep-purple accent-4" v-on:click="cancel(item)">ย้อนกลับ</v-btn>
-          </v-card-actions>
-        </v-card>
+    <v-row justify="center">
+      <v-col cols="16">
+        <v-data-table :headers="headers" :items="items" :items-per-page="5" class="elevation-1"></v-data-table>
       </v-col>
     </v-row>
+
+    <div class="text-center">
+      <v-btn class="ma-5" tile color="indigo" dark v-on:click="RegisterDeaths">ย้อนกลับ</v-btn>
+    </div>
   </v-container>
 </template>
 
 <script>
-import axios from "axios";
-//เอาไว้เรียกใช้apiเชื่อมต่อหน้าบ้านหลังบ้าน'
-
+import http from "../http-common"
 export default {
-  /* eslint-disable */
-  //ช่วยให้โค้ดในโปรเจคอ่านง่ายขึ้น และช่วยลดข้อผิดพลาดต่างๆ
-
+  name: "RegisterDeaths",
   data() {
     return {
-      items: {
-        firstName: "",
-        lastName: "",
-        age: "",
-        born: "",
-        death: "",
-        addressDetail: "",
-        mobilePhone: "",
-        province: "",
-        nameTitle: "",
-        genderId: "",
-        causeofDeath: "",
-        place: ""
-      }
-    };
+      headers: [
+        { text: "ID", value: "registerdeathId" },
+        { text: "คำนำหน้าชื่อ", value: "nameTitle.nametitle" },
+        { text: "ชื่อ", value: "firstName" },
+        { text: "นามสกุล", value: "lastName" },
+        { text: "เพศ", value: "gender.gender" },
+        { text: "อายุ", value: "age" },
+        { text: "น้ำหนัก", value: "born" },
+        { text: "ส่วนสูง", value: "death" },
+        { text: "เบอร์โทรศัพท์", value: "mobilePhone" },
+        { text: "ที่อยู่", value: "addressDetail" },
+        { text: "จังหวัด", value: "province.province" },
+        { text: "สาเหตุการเสียชีวิต", value: "causeofDeath.causeofDeath" },
+        { text: "สถานที่เสียชีวิต", value: "place.place" },
+      ],
+      items: []
+    }
   },
-
   methods: {
-    cancel() {
-      this.$router.push("/registerdeaths");
+    /* eslint-disable no-console */
+    RegisterDeaths() {
+        this.$router.push("RegisterDeaths")
     },
-    showDetail(item){
-      this.$router.push({name: 'showregisterdeathsDetail', params: {item}});
-    },
+    getRegisterDeath() {
+      http.get("/RegisterDeath").then(results => {
+        this.items = results.data
+        console.log(results.data)
+      }).catch(error => {
+          console.log(error)
+      })
+    }
   },
   mounted() {
-    axios
-      .get("http://localhost:9000/RegisterDeath")
-      .then(response => {
-        console.log(response.data);
-        this.items = response.data;
-      })
-      .catch(e => {
-        console.log(e);
-      });
+    this.getRegisterDeath();
   }
-};
+}
 </script>
