@@ -50,11 +50,47 @@
       </v-col>
 
       <v-col cols="2">
-        <v-text-field label="วันที่เกิด" prepend-icon="sentiment_satisfied" v-model="myform.born"></v-text-field>
+        <v-menu
+          v-model="date"
+          :close-on-content-click="false"
+          :nudge-right="40"
+          transition="scale-transition"
+          offset-y
+          min-width="290px"
+          >
+            <template v-slot:activator="{ on }">
+              <v-text-field
+                v-model="myform.born"
+                label="วันที่เกิด"
+                prepend-icon="sentiment_satisfied"
+                readonly
+                v-on="on"
+              ></v-text-field>
+            </template>
+            <v-date-picker v-model="myform.born" @input="date = false"></v-date-picker>
+        </v-menu>
       </v-col>
 
       <v-col cols="2">
-        <v-text-field label="วันที่เสียชีวิต" prepend-icon="accessibility" v-model="myform.death"></v-text-field>
+        <v-menu
+          v-model="date2"
+          :close-on-content-click="false"
+          :nudge-right="40"
+          transition="scale-transition"
+          offset-y
+          min-width="290px"
+          >
+            <template v-slot:activator="{ on }">
+              <v-text-field
+                v-model="myform.death"
+                label="วันที่ตาย"
+                prepend-icon="accessibility"
+                readonly
+                v-on="on"
+              ></v-text-field>
+            </template>
+            <v-date-picker v-model="myform.death" @input="date2 = false" locale="th"></v-date-picker>
+        </v-menu>
       </v-col>
 
       <v-col cols="4">
@@ -143,8 +179,10 @@ export default {
         firstName: "",
         lastName: "",
         age: "",
-        born: "",
-        death: "",
+        born: new Date().toISOString().substr(0, 10),
+        death: new Date().toISOString().substr(0, 10),
+        date: false,
+        date2: false,
         addressDetail: "",
         mobilePhone: "",
         provinceId: "",
