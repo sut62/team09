@@ -8,7 +8,7 @@
 <body>
 <table cellpadding="1" cellspacing="1" border="1">
 <thead>
-<tr><td rowspan="1" colspan="3">success</td></tr>
+<tr><td rowspan="1" colspan="3">sprint1-success</td></tr>
 </thead>
 <tbody>
 <tr><td>open</td><td>http://localhost:8080/diagnose<datalist><option>http://localhost:8080/diagnose</option></datalist></td><td></td>
@@ -39,16 +39,10 @@
 </tr>
 <tr><td>assertText</td><td>//div[@id='app']/div[4]/div/div[2]/div/div[10]/div/div<datalist><option>//div[@id='app']/div[4]/div/div[2]/div/div[10]/div/div</option><option>//div[10]/div/div</option><option>css=div.v-snack__content</option></datalist></td><td>สำเร็จ ปิด</td>
 </tr>
-<tr><td>click</td><td>//div[@id='app']/div[4]/div/div[2]/div/div[9]/button/span<datalist><option>//div[@id='app']/div[4]/div/div[2]/div/div[9]/button/span</option><option>//div[9]/button/span</option><option>css=button.v-btn.v-btn--contained.theme--dark.v-size--default.blue-grey.darken-3 &gt; span.v-btn__content</option></datalist></td><td></td>
-</tr>
-<tr><td>click</td><td>//div[@id='app']/div/div/div/h2<datalist><option>//div[@id='app']/div/div/div/h2</option><option>//h2</option><option>css=h2.font-weight-black.text-uppercase.display-3.lime.accent-1.text-center</option></datalist></td><td></td>
-</tr>
-<tr><td>assertText</td><td>//div[@id='app']/div/div/div/h2<datalist><option>//div[@id='app']/div/div/div/h2</option><option>//h2</option><option>css=h2.font-weight-black.text-uppercase.display-3.lime.accent-1.text-center</option></datalist></td><td>ข้อมูลการวินิจฉัยโรค</td>
-</tr>
 </tbody></table>
 <table cellpadding="1" cellspacing="1" border="1">
 <thead>
-<tr><td rowspan="1" colspan="3">fail</td></tr>
+<tr><td rowspan="1" colspan="3">sprint1-fail</td></tr>
 </thead>
 <tbody>
 <tr><td>open</td><td>http://localhost:8080/diagnose<datalist><option>http://localhost:8080/diagnose</option></datalist></td><td></td>
@@ -79,7 +73,29 @@
 </tr>
 <tr><td>assertText</td><td>//div[@id='app']/div[4]/div/div[2]/div/div[10]/div/div<datalist><option>//div[@id='app']/div[4]/div/div[2]/div/div[10]/div/div</option><option>//div[10]/div/div</option><option>css=div.v-snack__content</option></datalist></td><td>ไม่สำเร็จ! ปิด</td>
 </tr>
-<tr><td>click</td><td>//div[@id='app']/div[4]/div/div[2]/div/div[9]/button/span<datalist><option>//div[@id='app']/div[4]/div/div[2]/div/div[9]/button/span</option><option>//div[9]/button/span</option><option>css=button.v-btn.v-btn--contained.theme--dark.v-size--default.blue-grey.darken-3 &gt; span.v-btn__content</option></datalist></td><td></td>
+</tbody></table>
+<table cellpadding="1" cellspacing="1" border="1">
+<thead>
+<tr><td rowspan="1" colspan="3">sprint2-success</td></tr>
+</thead>
+<tbody>
+<tr><td>open</td><td>http://localhost:8080/diagnose<datalist><option>http://localhost:8080/diagnose</option></datalist></td><td></td>
+</tr>
+<tr><td>click</td><td>//div[@id='app']/div/div/div[2]/div/div[9]/button/span<datalist><option>//div[@id='app']/div/div/div[2]/div/div[9]/button/span</option><option>//div[9]/button/span</option><option>css=button.v-btn.v-btn--contained.theme--dark.v-size--default.blue-grey.darken-3 &gt; span.v-btn__content</option></datalist></td><td></td>
+</tr>
+<tr><td>click</td><td>//div[@id='app']/div/div/div/h2<datalist><option>//div[@id='app']/div/div/div/h2</option><option>//h2</option><option>css=h2.font-weight-black.text-uppercase.display-3.lime.accent-1.text-center</option></datalist></td><td></td>
+</tr>
+<tr><td>assertText</td><td>//div[@id='app']/div/div/div/h2<datalist><option>//div[@id='app']/div/div/div/h2</option><option>//h2</option><option>css=h2.font-weight-black.text-uppercase.display-3.lime.accent-1.text-center</option></datalist></td><td>ข้อมูลการวินิจฉัยโรค</td>
+</tr>
+</tbody></table>
+<table cellpadding="1" cellspacing="1" border="1">
+<thead>
+<tr><td rowspan="1" colspan="3">sprint2-fail</td></tr>
+</thead>
+<tbody>
+<tr><td>open</td><td>http://localhost:8080/diagnose<datalist><option>http://localhost:8080/diagnose</option></datalist></td><td></td>
+</tr>
+<tr><td>click</td><td>//div[@id='app']/div/div/div[2]/div/div[9]/button/span<datalist><option>//div[@id='app']/div/div/div[2]/div/div[9]/button/span</option><option>//div[9]/button/span</option><option>css=button.v-btn.v-btn--contained.theme--dark.v-size--default.blue-grey.darken-3 &gt; span.v-btn__content</option></datalist></td><td></td>
 </tr>
 <tr><td>click</td><td>//div[@id='app']/div/div/div[2]/div/div/div/table/tbody/tr/td<datalist><option>//div[@id='app']/div/div/div[2]/div/div/div/table/tbody/tr/td</option><option>//td</option><option>css=td</option></datalist></td><td></td>
 </tr>
