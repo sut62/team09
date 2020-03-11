@@ -41,17 +41,17 @@ public class PlaceTest {
         assertEquals("บ้าน", result.get().getPlace());
     }
 
-	 @Test
+	@Test
      void B5905836_testPlaceMustNotBeNull() {
-         Place place = new Place();
-          place.setPlace("บ้าน");
+        Place place = new Place();
+        place.setPlace(null);
+        place.setPlaceId(1L);
 
 	 	Set<ConstraintViolation<Place>> result = validator.validate(place);
+        assertEquals( 1 , result.size());
 		
-	 	assertEquals(1, result.size());
-		
-         ConstraintViolation<Place> v = result.iterator().next();
-         assertEquals("must not be null", v.getMessage());
-         assertEquals("placeId", v.getPropertyPath().toString());
+        ConstraintViolation<Place> v = result.iterator().next();
+        assertEquals("must not be null", v.getMessage());
+        assertEquals("place", v.getPropertyPath().toString());
      }
 }
