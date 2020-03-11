@@ -8,7 +8,6 @@ import javax.persistence.Table;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.validation.constraints.NotNull;
-import java.util.Optional;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;

@@ -7,12 +7,17 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 import javax.validation.constraints.Max;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
+
+import java.util.Date;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -22,6 +27,8 @@ import javax.validation.constraints.NotNull;
 import com.okta.springbootvue.Registerpatient.Entity.Gender;
 import com.okta.springbootvue.Registerpatient.Entity.NameTitle;
 import com.okta.springbootvue.Registerpatient.Entity.Province;
+
+import org.springframework.format.annotation.DateTimeFormat;
 
 
 @Data
@@ -46,8 +53,12 @@ public class RegisterDeaths {
     @Max(150)
     private @NotNull Integer age;
 
-    private @NonNull String born;
-    private @NonNull String death;
+    @Temporal(TemporalType.DATE)
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
+    private @NonNull Date born;
+    @Temporal(TemporalType.DATE)
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
+    private @NonNull Date death;
 
     @Size(max=50,min=5)
     private @NotNull String addressDetail;
@@ -128,19 +139,19 @@ public class RegisterDeaths {
         this.age = age;
     }
 
-    public String getBorn() {
+    public Date getBorn() {
         return born;
     }
 
-    public void setBorn(String born) {
+    public void setBorn(Date born) {
         this.born = born;
     }
 
-    public String getDeath() {
+    public Date getDeath() {
         return death;
     }
 
-    public void setDeath(String death) {
+    public void setDeath(Date death) {
         this.death = death;
     }
 
