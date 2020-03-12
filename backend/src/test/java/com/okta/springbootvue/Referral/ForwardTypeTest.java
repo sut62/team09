@@ -46,7 +46,7 @@ public class ForwardTypeTest {
     }
 
     @Test
-    void B5903191_testForwardIdTypeMustNotBeNull() {
+    void B5903191_testForwardTypeIdMustNotBeNull() {
         ForwardType ForwardType = new ForwardType();
 		ForwardType.setForwardTypeId(null);
 		ForwardType.setForwardType("ส่งในจังหวัด");
