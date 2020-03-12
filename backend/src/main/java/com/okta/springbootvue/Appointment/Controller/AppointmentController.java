@@ -7,7 +7,11 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.bind.annotation.CrossOrigin;
 
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Collection;
+import java.util.Date;
 import java.util.stream.Collectors;
 
 import com.okta.springbootvue.Appointment.Entity.*;
@@ -48,9 +52,9 @@ public class AppointmentController {
     }
 
     @PostMapping("/appointment/{clinicId}/{appointDate}/{appointTime}/{demeanorId}/{reasonId}/{diagnoseId}/{doctorId}")
-    public Appointment newAppointment(@PathVariable final long diagnoseId, @PathVariable final long clinicId,
-            @PathVariable final long demeanorId, @PathVariable final long reasonId, @PathVariable final long doctorId,
-            @PathVariable final String appointDate, @PathVariable final String appointTime) {
+    public Appointment newAppointment(@PathVariable long diagnoseId, @PathVariable long clinicId,
+            @PathVariable long demeanorId, @PathVariable long reasonId, @PathVariable long doctorId,
+            @PathVariable String appointDate, @PathVariable String appointTime) throws ParseException {
 
         Appointment newAppointment = new Appointment();
 
@@ -61,13 +65,16 @@ public class AppointmentController {
         Reason r = reasonRepository.findById(reasonId);
         Doctor doctor = doctorRepository.findById(doctorId);
 
+        DateFormat newappointDate = new SimpleDateFormat("yyyy-MM-dd");
+        Date nd = newappointDate.parse(appointDate);
+
         // set
         newAppointment.setDiagnose(diagnose);
         newAppointment.setClinic(c);
         newAppointment.setDemeanor(d);
         newAppointment.setReason(r);
         newAppointment.setDoctor(doctor);
-        newAppointment.setAppointDate(appointDate);
+        newAppointment.setAppointDate(nd);
         newAppointment.setAppointTime(appointTime);
 
         return appointmentRepository.save(newAppointment); // save
