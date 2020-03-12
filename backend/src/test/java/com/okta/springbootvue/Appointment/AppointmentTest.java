@@ -18,6 +18,8 @@ import javax.validation.ConstraintViolation;
 import javax.validation.Validation;
 import javax.validation.Validator;
 import javax.validation.ValidatorFactory;
+
+import java.util.Date;
 import java.util.Optional;
 import java.util.Set;
 
@@ -62,6 +64,7 @@ public class AppointmentTest {
     Demeanor demeanor = new Demeanor();
     Reason reason = new Reason();
     Doctor doctor = new Doctor();
+    Date Date = new Date();
     
 
     @BeforeEach
@@ -142,7 +145,7 @@ public class AppointmentTest {
     void B5905188_testAppointmentSuccess() {
         Appointment appoint = new Appointment();
         appoint.setDiagnose(diagnose);
-        appoint.setAppointDate("12-02-2563");
+        appoint.setAppointDate(Date);
         appoint.setAppointTime("10:30");
         appoint.setClinic(clinic);
         appoint.setDemeanor(demeanor);
@@ -153,7 +156,7 @@ public class AppointmentTest {
 
         Optional<Appointment> found = appointmentRepository.findById(appoint.getAppointmentId());
         assertEquals(diagnose, found.get().getDiagnose());
-        assertEquals("12-02-2563", found.get().getAppointDate());
+        assertEquals(Date, found.get().getAppointDate());
         assertEquals("10:30", found.get().getAppointTime());
         assertEquals(clinic, found.get().getClinic());
         assertEquals(demeanor, found.get().getDemeanor());
@@ -189,7 +192,7 @@ public class AppointmentTest {
     void B5905188_testAppointTimeMustNotBeNull() {
         Appointment appoint = new Appointment();
         appoint.setDiagnose(diagnose);
-        appoint.setAppointDate("12-02-2563");
+        appoint.setAppointDate(Date);
         appoint.setAppointTime(null);
         appoint.setClinic(clinic);
         appoint.setDemeanor(demeanor);
@@ -207,35 +210,12 @@ public class AppointmentTest {
         assertEquals("appointTime", found.getPropertyPath().toString());
     }
 
-    // รูปแบบวันที่ต้องมี - คั่นระหว่างวันที่กับเดือนกับปี
-    @Test
-    void B5905188_testAppointDateMustNotMatchPattern() {
-        Appointment appoint = new Appointment();
-        appoint.setDiagnose(diagnose);
-        appoint.setAppointDate("12.02.2563");
-        appoint.setAppointTime("10:30");
-        appoint.setClinic(clinic);
-        appoint.setDemeanor(demeanor);
-        appoint.setReason(reason);        
-        appoint.setDoctor(doctor);
-
-        Set<ConstraintViolation<Appointment>> result = validator.validate(appoint);
-
-        // result ต้องมี error 1 ค่าเท่านั้น
-        assertEquals(1, result.size());
-
-        // error message ตรงชนิด และถูก field
-        ConstraintViolation<Appointment> found = result.iterator().next();
-        assertEquals("must match \"^\\d{2}-\\d{2}-\\d{4}$\"", found.getMessage());
-        assertEquals("appointDate", found.getPropertyPath().toString());
-    }
-
     // รูปแบบเวลาต้องมี : คั่นระหว่างชั่วโมงกับนาที
     @Test
     void B5905188_testAppointTimeMustNotMatchPattern() {
         Appointment appoint = new Appointment();
         appoint.setDiagnose(diagnose);
-        appoint.setAppointDate("12-02-2563");
+        appoint.setAppointDate(Date);
         appoint.setAppointTime("10.30");
         appoint.setClinic(clinic);
         appoint.setDemeanor(demeanor);
@@ -258,7 +238,7 @@ public class AppointmentTest {
     void B5905188_testAppointTimeMustNotLessThan5() {
         Appointment appoint = new Appointment();
         appoint.setDiagnose(diagnose);
-        appoint.setAppointDate("12-02-2563");
+        appoint.setAppointDate(Date);
         appoint.setAppointTime("9:30");
         appoint.setClinic(clinic);
         appoint.setDemeanor(demeanor);
@@ -281,7 +261,7 @@ public class AppointmentTest {
     void B5905188_testClinicMustNotBeNull() {
         Appointment appoint = new Appointment();
         appoint.setDiagnose(diagnose);
-        appoint.setAppointDate("12-02-2563");
+        appoint.setAppointDate(Date);
         appoint.setAppointTime("10:30");
         appoint.setClinic(null);
         appoint.setDemeanor(demeanor);
@@ -304,7 +284,7 @@ public class AppointmentTest {
     void B5905188_testDemeanorMustNotBeNull() {
         Appointment appoint = new Appointment();
         appoint.setDiagnose(diagnose);
-        appoint.setAppointDate("12-02-2563");
+        appoint.setAppointDate(Date);
         appoint.setAppointTime("10:30");
         appoint.setClinic(clinic);
         appoint.setDemeanor(null);
@@ -327,7 +307,7 @@ public class AppointmentTest {
     void B5905188_testReasonMustNotBeNull() {
         Appointment appoint = new Appointment();
         appoint.setDiagnose(diagnose);
-        appoint.setAppointDate("12-02-2563");
+        appoint.setAppointDate(Date);
         appoint.setAppointTime("10:30");
         appoint.setClinic(clinic);
         appoint.setDemeanor(demeanor);
@@ -350,7 +330,7 @@ public class AppointmentTest {
     void B5905188_testDoctorMustNotBeNull() {
         Appointment appoint = new Appointment();
         appoint.setDiagnose(diagnose);
-        appoint.setAppointDate("12-02-2563");
+        appoint.setAppointDate(Date);
         appoint.setAppointTime("10:30");
         appoint.setClinic(clinic);
         appoint.setDemeanor(demeanor);
@@ -373,7 +353,7 @@ public class AppointmentTest {
     void B5905188_testDiagnoseMustNotBeNull() {
         Appointment appoint = new Appointment();
         appoint.setDiagnose(null);
-        appoint.setAppointDate("12-02-2563");
+        appoint.setAppointDate(Date);
         appoint.setAppointTime("10:30");
         appoint.setClinic(clinic);
         appoint.setDemeanor(demeanor);
