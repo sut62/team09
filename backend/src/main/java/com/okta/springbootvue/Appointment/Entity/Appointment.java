@@ -7,17 +7,23 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 
 import com.okta.springbootvue.Diagnose.entity.Diagnose;
 import com.okta.springbootvue.Diagnose.entity.Doctor;
 
+import org.springframework.format.annotation.DateTimeFormat;
+
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
+
+import java.util.Date;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 
-import javax.validation.constraints.Size;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
 
@@ -37,8 +43,9 @@ public class Appointment {
     private @NonNull Long appointmentId;
 
     @NotNull
-    @Pattern (regexp = "^\\d{2}-\\d{2}-\\d{4}$")
-    private String appointDate;
+    @Temporal(TemporalType.DATE)
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
+    private Date appointDate;
 
     
     @NotNull
@@ -113,10 +120,10 @@ public class Appointment {
         return reason;
     }
   
-    public String getAppointDate() {
+    public Date getAppointDate() {
         return appointDate;
     }
-    public void setAppointDate(String appointDate) {
+    public void setAppointDate(Date appointDate) {
         this.appointDate = appointDate;
     }
 
