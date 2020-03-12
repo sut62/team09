@@ -2,6 +2,7 @@ import Vue from "vue";
 import Router from "vue-router";
 import RegisterPatient from "../components/Registerpatient";
 import Appointment from "../components/Appointment";
+import ShowAppointment from "../components/ShowAppointment";
 import PrintAppointment from "../components/PrintAppointment";
 import Diagnose from "../components/DiagnoseUI";
 import ShowDiagnose from "../components/ShowDiagnose"
@@ -51,6 +52,11 @@ export default new Router({
       component: Appointment
     },
     {
+      path: "/showappointment",
+      name: "showappointment",
+      component: ShowAppointment
+    },
+    {
       path: "/printappointment",
       name: "printappointment",
       component: PrintAppointment
@@ -81,11 +87,11 @@ export default new Router({
       component: RegisterDeaths
     },
     {
-       path: "/showregisterdeaths",
-       name: "showregisterdeaths",
-       component: ShowRegisterDeaths
-   },
-   {
+      path: "/showregisterdeaths",
+      name: "showregisterdeaths",
+      component: ShowRegisterDeaths
+    },
+    {
       path: "/referraldata",
       name: "referraldata",
       component: ReferralData
