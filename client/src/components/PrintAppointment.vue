@@ -14,7 +14,7 @@
           </v-row>
             
             <v-row>
-              <v-col><p class="title">ชื่อ : {{item.diagnose.query.registerpatient.nameTitle.nametitle}}{{item.diagnose.nameRegister}} {{item.diagnose.query.lastName}}</p></v-col>
+              <v-col><p class="title">ชื่อ : {{item.diagnose.query.registerpatient.nameTitle.nametitle}}{{item.diagnose.query.registerpatient.firstName}} {{item.diagnose.query.registerpatient.lastName}}</p></v-col>
               <v-col><p class="title">อายุ : {{item.diagnose.query.registerpatient.age}} ปี</p></v-col>
             </v-row>
             <v-row>
@@ -96,7 +96,7 @@ export default {
       .get("http://localhost:9000/appointments")
       .then(response => {
         console.log(response.data);
-        this.items.push(response.data[response.data.length - 1]);
+        this.items = response.data
         console.log(this.items);
       })
       .catch(e => {

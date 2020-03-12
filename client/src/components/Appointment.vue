@@ -16,7 +16,7 @@
               :items="diagnose"
               v-model="selectdiagnose"
               label="Patient"
-              item-text="nameRegister"
+              item-text="query.registerpatient.firstName"
               item-value="diagnoseId"
               prepend-icon="people_alt"
               required
@@ -25,12 +25,30 @@
         </v-row>
         <!-- ///////////End Select Patient Combobox -->
 
-        <!-- Text วันที่นัด  -->
+        <!-- วันที่นัด  -->
         <v-row centered>
           <v-col cols="5">
-            <v-text-field prepend-icon="event_note" label="วันที่นัด" v-model="myform.appointDate"></v-text-field>
+            <v-menu
+              v-model="date"
+              :close-on-content-click="false"
+              :nudge-right="40"
+              transition="scale-transition"
+              offset-y
+              min-width="290px"
+            >
+              <template v-slot:activator="{ on }">
+                <v-text-field
+                  v-model="myform.appointDate"
+                  label="วันที่นัด"
+                  prepend-icon="event"
+                  readonly
+                  v-on="on"
+                ></v-text-field>
+              </template>
+              <v-date-picker v-model="myform.appointDate" @input="date = false"></v-date-picker>
+            </v-menu>
           </v-col>
-          <!-- ///////////End Text วันที่นัด  -->
+          <!-- ///////////End วันที่นัด  -->
 
           <!-- Text เวลาที่นัด  -->
           <v-col cols="5">
@@ -126,7 +144,8 @@ export default {
   data() {
     return {
       myform: {
-        appointDate: "",
+        appointDate: new Date().toISOString().substr(0, 10),
+        date: false,
         appointTime: "",
       },
       selectdiagnose: "",
@@ -147,7 +166,7 @@ export default {
       this.$router.push("/home")
     },
     print(){
-      this.$router.push("/printappointment");
+      this.$router.push("/showappointment");
     },
     save() {
       //@PostMapping("/appointment/{diagnoseId}/{clinicId}/{demeanorId}/{reasonId}/{doctorId}/{appointDate}/{appointTime}")
