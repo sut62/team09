@@ -6,7 +6,7 @@
           <v-row >
             <v-col cols="2" sm="2"></v-col>
             <v-col class="text-center" cols="3" sm="3">
-              <v-img src="https://lh3.googleusercontent.com/proxy/4SdnEUBgv3f3pKdIFWDP0i_I0Ce_tF3G7s02Mr7wokxnyYQw_Vm9IIay7sYTxW5TGOvF6YJ2DweaBg9aQuRi4--e7mmQpwoYaHyIwqUtuzo"></v-img>
+              <v-img src="../assets/logoEPISUTH.png"></v-img>
             </v-col>
             <v-col class="text-center" cols="5" sm="">
               <p class="display-1 font-weight-bold text-center">ใบนัดหมายผู้ป่วย</p>
@@ -48,7 +48,7 @@
         <div>
             <v-row>
               <v-col><p class="title"><u>แพทย์ผู้นัด</u></p>
-                <p class="title">{{item.diagnose.doctor.name}}</p></v-col>
+                <p class="title">{{item.doctor.name}}</p></v-col>
             </v-row>
             <v-row>
               <v-col><p class="text-right body-1">ลงชื่อ..................................</p></v-col>
@@ -76,7 +76,6 @@ import axios from "axios";
 export default {
   /* eslint-disable */
   //ช่วยให้โค้ดในโปรเจคอ่านง่ายขึ้น และช่วยลดข้อผิดพลาดต่างๆ
-
   data() {
     return {
       items: []
@@ -96,7 +95,7 @@ export default {
       .get("http://localhost:9000/appointments")
       .then(response => {
         console.log(response.data);
-        this.items = response.data
+        this.items.push(response.data[response.data.length - 1]);
         console.log(this.items);
       })
       .catch(e => {

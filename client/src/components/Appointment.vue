@@ -166,7 +166,7 @@ export default {
       this.$router.push("/home")
     },
     print(){
-      this.$router.push("/showappointment");
+      this.$router.push("/printappointment");
     },
     save() {
       //@PostMapping("/appointment/{diagnoseId}/{clinicId}/{demeanorId}/{reasonId}/{doctorId}/{appointDate}/{appointTime}")
